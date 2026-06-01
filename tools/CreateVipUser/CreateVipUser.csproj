@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CourseManagement.DataAccess\CourseManagement.DataAccess.csproj" />
+    <ProjectReference Include="..\..\CourseManagement.Model\CourseManagement.Model.csproj" />
+  </ItemGroup>
+
+</Project>

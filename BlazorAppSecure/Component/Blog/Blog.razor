@@ -1,0 +1,723 @@
+@page "/blogs"
+@using AntDesign
+@using BlazorAppSecure.Model
+@using BlazorAppSecure.Services.Blog
+@using Microsoft.AspNetCore.Authorization
+@using BlazorAppSecure.Sevices.Blog
+@using BlazorAppSecure.Sevices.Category
+@using CourseManagement.Model.ViewModel
+@using CourseManagement.Model.Constant
+
+
+@attribute [Authorize(Roles = "Admin")]
+@inject NavigationManager NavigationManager
+@inject IBlogService BlogService
+@inject ICategoryService CategoryService
+@inject IAppNotificationService _mess
+@inject IJSRuntime JSRuntime
+@inject ModalService ModelService
+@inject IJSRuntime JS
+
+<PageTitle>Blog List</PageTitle>
+
+<div class="mb-2">
+    <Breadcrumb>
+        <BreadcrumbItem Href="">
+            Home
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+            Blog Management
+        </BreadcrumbItem>
+    </Breadcrumb>
+</div>
+
+<Form Model="@searchForm" Layout="FormLayout.Horizontal">
+    <Row Gutter="16">
+        <Col Span="8">
+            <FormItem>
+                <Text>Search</Text>
+                <Input TValue="string" Value="@searchTerm"
+                @oninput="@((ChangeEventArgs e) => searchTerm = e.Value.ToString())"
+                placeholder="Search by title"
+                Style="width: 100%;" />
+            </FormItem>
+            @* <FormItem>
+            <Text>Search</Text>
+            <Input @bind-Value="searchTerm"
+                   placeholder="Search by title"
+                   Style="width: 100%;" />
+        </FormItem> *@
+        </Col>
+        <Col Span="6">
+            <FormItem>
+                <Text>Status</Text>
+                <Select Mode="SelectMode.Multiple"
+                Style="width: 100%;"
+                Placeholder="Please select status"
+                @bind-Values="@selectedStatuses"
+                TItemValue="int"
+                TItem="string"
+                EnableSearch
+                AllowClear>
+                    <SelectOptions>
+                        @foreach (var status in Enum.GetValues(typeof(BlogStatus)))
+                        {
+                            <SelectOption TItemValue="int" TItem="string"
+                            Value="@((int)status)"
+                            Label="@status.ToString()" />
+                        }
+                    </SelectOptions>
+                </Select>
+            </FormItem>
+        </Col>
+        <Col Span="4" Style="display: flex; align-items: center;">
+            <div style="margin-top: 22px">
+                <FormItem>
+                    <Button Icon="@IconType.Outline.Clear" @onclick="HandleResetSearchForm">Clear</Button>
+                </FormItem>
+            </div>
+        </Col>
+    </Row>
+</Form>
+
+<div class="d-flex justify-content-between align-items-center">
+    <div class="total-course">
+        <h6>Total course: @blogList?.Count()</h6>
+    </div>
+    <div class="mb-2">
+        <Button Icon="@IconType.Outline.Download" OnClick="ExportToExcel">Export to Excel</Button>
+        <Button Icon="@IconType.Outline.Reload" OnClick="@ReloadBlogs">Reload</Button>
+        <Tooltip Title="Add new blog">
+            <Button Icon="@IconType.Outline.PlusCircle" OnClick="@ShowCreateModal">Add new blog</Button>
+        </Tooltip>
+    </div>
+</div>
+
+<Table DataSource="@FilteredBlogs" PageSize="10" ScrollX="1000" AutoHeight Loading="@loadingBlogs" Bordered Striped="false">
+    <ColumnDefinitions>
+        <PropertyColumn Property="c=>c.Id" Title="#" Width="50" Fixed="ColumnFixPlacement.Left" Align="ColumnAlign.Center" class="index-col">
+            @(context.Id + 1)
+        </PropertyColumn>
+        <PropertyColumn Property="b => b.Title" Title="Title" Width="270" Fixed="ColumnFixPlacement.Left" Class="title-col">
+            @context.Title
+        </PropertyColumn>
+        <PropertyColumn Property="b => b.UrlImage" Width="250" Title="Image">
+            <Image Src="@(string.IsNullOrEmpty(context.UrlImage) ? defaultImageUrl : context.UrlImage)" Fallback="@errorImageUrl" />
+        </PropertyColumn>
+        @* <PropertyColumn Property="b => b.Content" Width="350" Title="Content">
+            @(string.IsNullOrEmpty(context.Content) ? "No Content" : context.Content.Substring(0, Math.Min(context.Content.Length, 50)) + "...")
+        </PropertyColumn> *@
+        <PropertyColumn Property="b => b.CreatedAt" Title="Created At" Width="160" />
+        <PropertyColumn Property="b => b.Categories" Width="250" Title="Categories">
+            <Tag>
+                @(context.Categories != null && context.Categories.Any() ? string.Join(", ", context.Categories.Select(c => c.Name)) : "No Category")
+            </Tag>
+        </PropertyColumn>
+        <PropertyColumn Property="b => b.ViewCount" Title="Views" Width="150" Align="ColumnAlign.Center" />
+        <PropertyColumn Property="b => b.Status" Title="Status" Width="150">
+            @if (context.Status == BlogStatus.Draft)
+            {
+                <Tag Color="TagColor.Yellow">Draft</Tag>
+            }
+            else if (context.Status == BlogStatus.Published)
+            {
+                <Tag Color="TagColor.Green">Published</Tag>
+            }
+        </PropertyColumn>
+        <ActionColumn Title="Action" Width="150" Align="ColumnAlign.Center" Fixed="ColumnFixPlacement.Right">
+            <CellRender Context="cellData">
+                <Button Type="@ButtonType.Text" Icon="@IconType.Outline.Edit" @onclick="e => ShowEditModal(context.Id)" Class="ant-btn-edit"></Button>
+                <Button Type="@ButtonType.Text" Icon="@IconType.Outline.Eye" @onclick="e => NavigateToBlogDetail(context.Id, e)" Class="ant-btn-eye"></Button>
+                <Button Type="@ButtonType.Text" Icon="@IconType.Outline.Delete" @onclick="() => HandleDelete(context.Id)" Class="ant-btn-delete"></Button>
+            </CellRender>
+        </ActionColumn>
+    </ColumnDefinitions>
+</Table>
+
+<Drawer Closable="true"
+@bind-Visible="isCreateModalVisible"
+Placement="DrawerPlacement.Right"
+Title='("Add new blog")'
+Width="500"
+OnClose="@CloseCreateModal">
+    <Form Model="@newBlog" OnFinish="@HandleCreate" Layout="FormLayout.Vertical">
+        <FormItem Label="Title" Required>
+            <Input @bind-Value="@newBlog.Title" Placeholder="Enter blog title" />
+            <ValidationMessage For="@(() => newBlog.Title)" />
+        </FormItem>
+        <FormItem Label="Content" Required>
+            <div>
+                <BlazoredTextEditor @ref="@richEditor">
+                    <ToolbarContent>
+                        @((MarkupString)toolbar)
+                    </ToolbarContent>
+                    <EditorContent>
+                        @((MarkupString)body)
+                    </EditorContent>
+                </BlazoredTextEditor>
+            </div>
+            <ValidationMessage For="@(() => newBlog.Content)" Style="color: #ff4d4f;" />
+        </FormItem>
+        <FormItem Label="Preview Image">
+            <Input Placeholder="Please enter preview image url" TValue="string" @bind-Value="@newBlog.UrlImage"></Input>
+            @if (!string.IsNullOrEmpty(newBlog.UrlImage))
+            {
+                <Image class="mt-2" Src="@(string.IsNullOrEmpty(newBlog.UrlImage) ? defaultImageUrl : newBlog.UrlImage)" Fallback="@errorImageUrl" />
+            }
+        </FormItem>
+        <FormItem Label="Categories">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <Select Mode="SelectMode.Multiple"
+                Placeholder="Please select category"
+                @bind-Values="@newBlog.CategoryIds"
+                TItemValue="int"
+                TItem="string"
+                EnableSearch
+                AllowClear
+                Style="width: 200px;">
+                    <SelectOptions>
+                        @if (categoryList != null)
+                        {
+                            @foreach (var c in categoryList)
+                            {
+                                <SelectOption TItemValue="int" TItem="string" Value="@c.Id" Label="@c.Name" />
+                            }
+                        }
+                    </SelectOptions>
+                </Select>
+                <Tooltip Title="Add new category">
+                    <Button Icon="@IconType.Outline.PlusCircle" @onclick="HandleOpenAddCategoryModel" />
+                </Tooltip>
+            </div>
+        </FormItem>
+        <div style="display: flex; justify-content: flex-end; margin-top: 16px; gap: 8px;">
+            <Button OnClick="@CloseCreateModal">Cancel</Button>
+            <Button Type="@ButtonType.Primary" HtmlType="submit" Loading="@isSubmitting">Save</Button>
+        </div>
+    </Form>
+</Drawer>
+
+<Drawer Closable="true"
+@bind-Visible="isEditModalVisible"
+Placement="DrawerPlacement.Right"
+Title='("Edit blog")'
+Width="500"
+OnClose="@CloseEditModal">
+    <Form Model="@editBlog" OnFinish="@HandleEdit" Layout="FormLayout.Vertical">
+        <FormItem Label="Title" Required>
+            <Input @bind-Value="@editBlog.Title" Placeholder="Enter blog title" />
+            <ValidationMessage For="@(() => editBlog.Title)" />
+        </FormItem>
+        <FormItem Label="Content" Required>
+            <div>
+                <BlazoredTextEditor @ref="@richEditor">
+                    <ToolbarContent>
+                        @((MarkupString)toolbar)
+                    </ToolbarContent>
+                    <EditorContent>
+                        @((MarkupString)body)
+                    </EditorContent>
+                </BlazoredTextEditor>
+            </div>
+            <ValidationMessage For="@(() => editBlog.Content)" Style="color: #ff4d4f;" />
+        </FormItem>
+        <FormItem Label="Preview Image">
+            <Input Placeholder="Please enter preview image url" TValue="string" @bind-Value="@editBlog.UrlImage"></Input>
+            @if (!string.IsNullOrEmpty(editBlog.UrlImage))
+            {
+                <Image class="mt-2" Src="@(string.IsNullOrEmpty(editBlog.UrlImage) ? defaultImageUrl : editBlog.UrlImage)" Fallback="@errorImageUrl" />
+            }
+        </FormItem>
+        <FormItem Label="Categories">
+            <Select Mode="SelectMode.Multiple"
+            Placeholder="Please select category"
+            @bind-Values="@editBlog.CategoryIds"
+            TItemValue="int"
+            TItem="string"
+            EnableSearch
+            AllowClear>
+                <SelectOptions>
+                    @if (categoryList != null)
+                    {
+                        @foreach (var c in categoryList)
+                        {
+                            <SelectOption TItemValue="int" TItem="string" Value="@c.Id" Label="@c.Name" />
+                        }
+                    }
+                </SelectOptions>
+            </Select>
+        </FormItem>
+        <FormItem Label="Status">
+            <Select @bind-Value="@editBlog.Status"
+            Placeholder="Select status"
+            TItemValue="BlogStatus"
+            TItem="string">
+                <SelectOptions>
+                    @foreach (BlogStatus status in Enum.GetValues(typeof(BlogStatus)))
+                    {
+                        <SelectOption TItemValue="BlogStatus" TItem="string"
+                        Value="@status"
+                        Label="@status.ToString()" />
+                    }
+                </SelectOptions>
+            </Select>
+        </FormItem>
+        <div style="display: flex; justify-content: flex-end; margin-top: 16px; gap: 8px;">
+            <Button OnClick="@CloseEditModal">Cancel</Button>
+            <Button Type="@ButtonType.Primary" HtmlType="submit" Loading="@isSubmitting">Save</Button>
+        </div>
+    </Form>
+</Drawer>
+
+@code {
+    BlazoredTextEditor richEditor = default!;
+    string toolbar = """"...markup here..."""";
+    string body = """"...markup here..."""";
+
+    private bool loadingBlogs = false;
+    private bool loadingListCategory = false;
+    private bool isCreateModalVisible = false;
+    private bool isEditModalVisible = false;
+    private bool isSubmitting = false;
+
+
+    private BlogVm newBlog = new(); 
+    private BlogEditModel editBlog = new(); 
+    private List<CategoiesModel> categoryList = new();
+    CategoryModel categoryModel = new();
+    private List<BlogModel> blogList = new();
+    private string defaultImageUrl = "https://placehold.co/200x150?text=No+Image";
+    private string errorImageUrl = "https://placehold.co/200x150?text=Error+Image";
+    private string searchTerm = string.Empty;
+    private IEnumerable<int> selectedStatuses = new List<int>();
+    private BlogSearchModel searchForm = new();
+
+
+
+    bool visibleAddNewCategoryModal = false;
+
+    private Form<CategoryModel> _form;
+
+    RenderFragment FormTemplate()
+    {
+        return
+    @<Form Model="@categoryModel" OnFinish="SubmitNewCategory" @ref="@_form">
+            <Row Gutter="16">
+                <AntDesign.Col Span="24">
+                    <Text>Title</Text>
+                    <FormItem >
+                        <Input Placeholder="Please enter name" TValue="string" @bind-Value="@context.Name"></Input>
+
+                    </FormItem>
+
+            </AntDesign.Col>
+            </Row>
+            <Row Gutter="16">
+                <AntDesign.Col Span="24">
+                    <Text>Description</Text>
+                <FormItem >
+                        <TextArea Placeholder="Please enter description" AutoSize="true" @bind-Value="@context.Description" />
+                    </FormItem>
+                </AntDesign.Col>
+            </Row>
+        </Form>
+    ;
+    }
+
+    private IEnumerable<BlogModel> FilteredBlogs => blogList
+        .Where(b => string.IsNullOrWhiteSpace(searchTerm) || b.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+        .Where(b => !selectedStatuses.Any() || selectedStatuses.Contains((int)b.Status));
+
+    protected override async Task OnInitializedAsync()
+    {
+        toolbar = """"
+            <select class="ql-header">
+                <option selected=""></option>
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5"></option>
+            </select>
+            <span class="ql-formats">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-strike"></button>
+            </span>
+            <span class="ql-formats">
+                <select class="ql-color"></select>
+                <select class="ql-background"></select>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-list" value="ordered"></button>
+                <button class="ql-list" value="bullet"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-link"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-code-block"></button>
+            </span>
+            """";
+
+        body = "<h3>Write something in here</h3>";
+
+        await LoadBlogs();
+        await LoadCategories();
+    }
+
+    private async Task HandleResetSearchForm()
+    {
+        searchTerm = string.Empty;
+        selectedStatuses = new List<int>();
+        await LoadBlogs();
+        StateHasChanged();
+    }
+
+    private async Task LoadBlogs()
+    {
+        loadingBlogs = true;
+        try
+        {
+            blogList = await BlogService.GetBlogList() ?? new List<BlogModel>();
+        }
+        catch (Exception ex)
+        {
+            await _mess.Error($"Error loading blogs: {ex.Message}");
+        }
+        finally
+        {
+            loadingBlogs = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task HandleDelete(int blogId)
+    {
+        var confirmed = await ModelService.ConfirmAsync(new() { Content = "Are you sure you want to delete this blog?" });
+        if (confirmed)
+        {
+            try
+            {
+                await BlogService.DeleteBlog(blogId);
+                blogList.RemoveAll(b => b.Id == blogId);
+                _mess.Success("Blog deleted successfully!");
+            }
+            catch (Exception ex)
+            {
+                _mess.Error($"Error deleting blog: {ex.Message}");
+            }
+        }
+    }
+
+    private void NavigateToBlogDetail(int blogId)
+    {
+        NavigationManager.NavigateTo($"/blogs/detail/{blogId}");
+    }
+
+    private async Task LoadCategories()
+    {
+        loadingListCategory = true;
+        try
+        {
+            categoryList = await CategoryService.GetCategoryList() ?? new List<CategoiesModel>();
+        }
+        catch (Exception ex)
+        {
+            _mess.Error($"Error loading categories: {ex.Message}");
+        }
+        finally
+        {
+            loadingListCategory = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task ShowCreateModal()
+    {
+        await richEditor.LoadHTMLContent("<h3>Write content in here</h3>");
+        newBlog = new BlogVm { CategoryIds = new List<int>() };
+        isCreateModalVisible = true;
+        StateHasChanged();
+        await Task.Delay(100);
+        if (richEditor != null) {
+            await richEditor.LoadHTMLContent("<h3>Write content in here</h3>");
+        }
+    }
+
+    private async Task CloseCreateModal()
+    {
+        isCreateModalVisible = false;
+        StateHasChanged();
+    }
+
+    private async Task HandleCreate()
+    {
+        if (string.IsNullOrWhiteSpace(newBlog.Title))
+        {
+            _mess.Error("Title is required!");
+            return;
+        }
+
+        string htmlContent = await richEditor.GetHTML();
+
+        if (string.IsNullOrWhiteSpace(htmlContent)) {
+            _mess.Error("Content is required!");
+            return;
+        }
+
+        try
+        {
+            isSubmitting = true;
+
+            newBlog.Content = htmlContent;
+
+            var result = await BlogService.AddBlog(newBlog);
+            if (result)
+            {
+                await LoadBlogs();
+                await CloseCreateModal();
+                _mess.Success("Blog created successfully!");
+            }
+            else
+            {
+                _mess.Error("Failed to create blog.");
+            }
+        }
+        catch (Exception ex)
+        {
+            _mess.Error($"Error creating blog: {ex.Message}");
+        }
+        finally
+        {
+            isSubmitting = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task SubmitNewCategory()
+    {
+        try
+        {
+            bool success = await CategoryService.AddCategory(categoryModel);
+            if (success)
+            {
+                await LoadCategories();
+                _mess.Success("Category added successfully");
+            }
+            else
+            {
+                _mess.Error("Failed to add category");
+            }
+        }
+        catch (Exception ex)
+        {
+            _mess.Error($"Error: {ex.Message}");
+        }
+        finally
+        {
+            StateHasChanged(); 
+        }
+    }
+    private async Task ShowEditModal(int blogId)
+    {
+        try
+        {
+            var blogToEdit = blogList.FirstOrDefault(b => b.Id == blogId);
+            if (blogToEdit != null)
+            {
+                editBlog = new BlogEditModel
+                    {
+                        Id = blogToEdit.Id,
+                        Title = blogToEdit.Title,
+                        Content = blogToEdit.Content,
+                        UrlImage = blogToEdit.UrlImage,
+                        Status = blogToEdit.Status,
+                        CategoryIds = blogToEdit.Categories?.Select(c => c.Id).ToList() ?? new List<int>()
+                    };
+                isEditModalVisible = true;
+                StateHasChanged();
+                await Task.Delay(100);
+                if (richEditor != null) {
+                    await richEditor.LoadHTMLContent(blogToEdit.Content);
+                }
+            }
+            else
+            {
+                _mess.Error("Blog not found!");
+            }
+        }
+        catch (Exception ex)
+        {
+            _mess.Error($"Error loading blog: {ex.Message}");
+        }
+    }
+
+    private async Task CloseEditModal()
+    {
+        isEditModalVisible = false;
+        StateHasChanged();
+    }
+
+    private async Task HandleEdit()
+    {
+        if (string.IsNullOrWhiteSpace(editBlog.Title))
+        {
+            _mess.Error("Title is required!");
+            return;
+        }
+
+        string htmlContent = await richEditor.GetHTML();
+
+        if (string.IsNullOrWhiteSpace(htmlContent)) {
+            _mess.Error("Content is required!");
+            return;
+        }
+
+        try
+        {
+            isSubmitting = true;
+            editBlog.Content = htmlContent;
+            await BlogService.UpdateBlog(editBlog.Id, editBlog);
+            await LoadBlogs();
+            await CloseEditModal();
+            _mess.Success("Blog updated successfully!");
+        }
+        catch (Exception ex)
+        {
+            await _mess.Error($"Error updating blog: {ex.Message}");
+        }
+        finally
+        {
+            isSubmitting = false;
+            StateHasChanged();
+        }
+    }
+
+    private void NavigateToBlogDetail(int blogId, MouseEventArgs e)
+    {
+        NavigationManager.NavigateTo($"/blogs/detail/{blogId}");
+    }
+
+    private async Task ReloadBlogs()
+    {
+        searchTerm = string.Empty;
+        selectedStatuses = new List<int>();
+        await LoadBlogs();
+    }
+
+    void HandleOpenAddCategoryModel()
+    {
+        ModalRef modalRef = default;
+        modalRef = ModelService.CreateModal(new()
+            {
+                Title = "Create new cateogry",
+                Content = FormTemplate(),
+                OnOk = async e =>
+                {
+                    modalRef?.SetConfirmLoading(true);
+                    if (!_form.Validate())
+                    {
+                        modalRef?.SetConfirmLoading(false);
+                        return;
+                    }
+
+                    _form.Submit();
+
+                    await modalRef.CloseAsync();
+
+                    _form.Reset();
+                },
+                OnCancel = async e =>
+                {
+                    if (!_form.IsModified || await ModelService.ConfirmAsync(new() { Content = "Are you sure you want to discard the entries?" }))
+                    {
+                        await modalRef.CloseAsync();
+                        _form.Reset();
+                    }
+                },
+            });
+    }
+    async void ExportToExcel()
+    {
+        using var package = new OfficeOpenXml.ExcelPackage();
+        var worksheet = package.Workbook.Worksheets.Add("Users");
+
+        // Header Row Styling
+        using (var headerRange = worksheet.Cells["A1:G1"])
+        {
+            headerRange.Style.Font.Bold = true;
+            headerRange.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+            headerRange.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightBlue);
+            headerRange.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+            headerRange.Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+            headerRange.Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Medium);
+        }
+
+        // Thêm tiêu d? c?t
+        worksheet.Cells[1, 1].Value = "Title";
+        worksheet.Cells[1, 2].Value = "Image";
+        worksheet.Cells[1, 3].Value = "Content";
+        worksheet.Cells[1, 4].Value = "Created At";
+        worksheet.Cells[1, 5].Value = "Categories";
+        worksheet.Cells[1, 6].Value = "View";
+        worksheet.Cells[1, 7].Value = "Status";
+
+        // Thêm d? li?u t? danh sách userList
+        int row = 2;
+        foreach (var blog in blogList)
+        {
+            worksheet.Cells[row, 1].Value = blog.Title;
+            worksheet.Cells[row, 2].Value = blog.UrlImage ?? "N/A";
+            worksheet.Cells[row, 3].Value = blog.Content;
+            worksheet.Cells[row, 4].Value = blog.CreatedAt;
+            worksheet.Cells[row, 4].Style.Numberformat.Format = "yyyy-MM-dd HH:mm:ss";
+            worksheet.Cells[row, 5].Value = blog.Categories != null && blog.Categories.Any() ? string.Join(", ", blog.Categories.Select(c => c.Name)) : "No Category";
+            worksheet.Cells[row, 6].Value = blog.ViewCount;
+            worksheet.Cells[row, 7].Value = blog.Status == 0 ? "Draft" : "Published";
+
+            // Alternating row colors for readability
+            if (row % 2 == 0)
+            {
+                using (var rowRange = worksheet.Cells[$"A{row}:G{row}"])
+                {
+                    rowRange.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                    rowRange.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
+                }
+            }
+
+            // Add borders to each cell
+            using (var cellRange = worksheet.Cells[$"A{row}:G{row}"])
+            {
+                cellRange.Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+            }
+
+            row++;
+        }
+
+        // AutoFit Columns
+        worksheet.Cells.AutoFitColumns();
+
+        // Xu?t file
+        var fileContent = package.GetAsByteArray();
+        var fileName = "BlogsList.xlsx";
+        if (fileContent == null || fileContent.Length == 0)
+        {
+            _mess.Error("File generation failed!");
+            return;
+        }
+
+        var base64 = Convert.ToBase64String(fileContent);
+
+        // Convert byte[] thành Base64 d? t?i v?
+        await JS.InvokeVoidAsync("saveAsFile", fileName, base64);
+    }
+
+}
+
+<style>
+    .total-course h6 {
+        color: darkorange
+    }
+</style>

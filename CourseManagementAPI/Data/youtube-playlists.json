@@ -1,0 +1,3341 @@
+{
+  "javascript": {
+    "listId": "PL_-VfJajZj0VgpFpEVFzS5Z-lkXtBe-x5",
+    "title": "Javascript Cơ Bản",
+    "count": 117,
+    "videos": [
+      {
+        "index": 1,
+        "title": "Javascript có thể làm được gì? Giới thiệu về trang F8 | Học lập trình Javascript cơ bản",
+        "videoId": "0SJE9dYdpps",
+        "url": "https://www.youtube.com/watch?v=0SJE9dYdpps",
+        "duration": "7:53"
+      },
+      {
+        "index": 2,
+        "title": "Lời khuyên trước khóa học | Lộ trình khóa học JavaScript cơ bản tại F8",
+        "videoId": "-jV06pqjUUc",
+        "url": "https://www.youtube.com/watch?v=-jV06pqjUUc",
+        "duration": "4:20"
+      },
+      {
+        "index": 3,
+        "title": "Cài đặt môi trường, công cụ phù hợp để học JavaScript",
+        "videoId": "efI98nT8Ffo",
+        "url": "https://www.youtube.com/watch?v=efI98nT8Ffo",
+        "duration": "2:08"
+      },
+      {
+        "index": 4,
+        "title": "Cách sử dụng JS trong file HTML | Visual Studio Code",
+        "videoId": "W0vEUmyvthQ",
+        "url": "https://www.youtube.com/watch?v=W0vEUmyvthQ",
+        "duration": "4:33"
+      },
+      {
+        "index": 5,
+        "title": "Khai báo biến | Làm quen với cú pháp trong JavaScript",
+        "videoId": "CLbx37dqYEI",
+        "url": "https://www.youtube.com/watch?v=CLbx37dqYEI",
+        "duration": "4:06"
+      },
+      {
+        "index": 6,
+        "title": "Sử dụng Comments trong JavaScript | Mục đích sử dụng Comments",
+        "videoId": "xRpXBEq6TOY",
+        "url": "https://www.youtube.com/watch?v=xRpXBEq6TOY",
+        "duration": "5:36"
+      },
+      {
+        "index": 7,
+        "title": "Một số hàm built-in trong JavaScript | Built-in functions",
+        "videoId": "rSV33HGotgE",
+        "url": "https://www.youtube.com/watch?v=rSV33HGotgE",
+        "duration": "7:47"
+      },
+      {
+        "index": 8,
+        "title": "Làm quen với toán tử trong JavaScript | Các loại toán tử JS",
+        "videoId": "SZb-N7TfPlw",
+        "url": "https://www.youtube.com/watch?v=SZb-N7TfPlw",
+        "duration": "5:24"
+      },
+      {
+        "index": 9,
+        "title": "Toán tử số học trong JavaScript | Các loại toán tử số học JS",
+        "videoId": "m_h7-dgKnMU",
+        "url": "https://www.youtube.com/watch?v=m_h7-dgKnMU",
+        "duration": "5:34"
+      },
+      {
+        "index": 10,
+        "title": "++ Operator -- with Prefix & Postfix in JavaScript",
+        "videoId": "aM-DUx6Qnc8",
+        "url": "https://www.youtube.com/watch?v=aM-DUx6Qnc8",
+        "duration": "11:45"
+      },
+      {
+        "index": 11,
+        "title": "Toán tử gán trong JavaScript | Cách sử dụng toán tử gán",
+        "videoId": "ncRmjazgsE8",
+        "url": "https://www.youtube.com/watch?v=ncRmjazgsE8",
+        "duration": "5:25"
+      },
+      {
+        "index": 12,
+        "title": "Toán tử chuỗi (String Operator) trong JavaScript | khi nào sử dụng toán tử chỗi",
+        "videoId": "QCLVU6cZU_E",
+        "url": "https://www.youtube.com/watch?v=QCLVU6cZU_E",
+        "duration": "4:09"
+      },
+      {
+        "index": 13,
+        "title": "Toán tử so sánh trong Javascript (phần 1)",
+        "videoId": "rWM2lXtS-d8",
+        "url": "https://www.youtube.com/watch?v=rWM2lXtS-d8",
+        "duration": "4:26"
+      },
+      {
+        "index": 14,
+        "title": "Kiểu dữ liệu Boolean (Boolean data type) trong JavaScript",
+        "videoId": "9cZEG1SSSQc",
+        "url": "https://www.youtube.com/watch?v=9cZEG1SSSQc",
+        "duration": "3:39"
+      },
+      {
+        "index": 15,
+        "title": "Câu lệnh điều kiện If - Else trong JavaScript",
+        "videoId": "9MpHrdWBdxg",
+        "url": "https://www.youtube.com/watch?v=9MpHrdWBdxg",
+        "duration": "6:29"
+      },
+      {
+        "index": 16,
+        "title": "Toán tử logical trong JavaScript | Cách hoạt động của toán tử",
+        "videoId": "O_-SQ-aVR3E",
+        "url": "https://www.youtube.com/watch?v=O_-SQ-aVR3E",
+        "duration": "5:36"
+      },
+      {
+        "index": 17,
+        "title": "Kiểu dữ liệu trong JavaScript | Các kiểu dữ liệu JS",
+        "videoId": "P-fMQ3elxSE",
+        "url": "https://www.youtube.com/watch?v=P-fMQ3elxSE",
+        "duration": "21:00"
+      },
+      {
+        "index": 18,
+        "title": "Toán tử so sánh trong JavaScript (phần 2)",
+        "videoId": "meCXeMeyFdE",
+        "url": "https://www.youtube.com/watch?v=meCXeMeyFdE",
+        "duration": "4:07"
+      },
+      {
+        "index": 19,
+        "title": "Toán tử logical và câu lệnh điều kiện If trong JavaScript",
+        "videoId": "j1PbSq5kJKY",
+        "url": "https://www.youtube.com/watch?v=j1PbSq5kJKY",
+        "duration": "13:13"
+      },
+      {
+        "index": 20,
+        "title": "Chuỗi trong JavaScript | JavaScript String",
+        "videoId": "6F_dajRCC9Q",
+        "url": "https://www.youtube.com/watch?v=6F_dajRCC9Q",
+        "duration": "10:49"
+      },
+      {
+        "index": 21,
+        "title": "Làm việc với chuỗi trong JavaScript | Javascript string methods",
+        "videoId": "b4YivuRmcEw",
+        "url": "https://www.youtube.com/watch?v=b4YivuRmcEw",
+        "duration": "18:40"
+      },
+      {
+        "index": 22,
+        "title": "Số và làm việc với kiểu số trong JavaScript | JavaScript number methods",
+        "videoId": "varb35t44v0",
+        "url": "https://www.youtube.com/watch?v=varb35t44v0",
+        "duration": "10:18"
+      },
+      {
+        "index": 23,
+        "title": "Mảng trong JavaScript | JavaScript array",
+        "videoId": "YzO65uOJNMg",
+        "url": "https://www.youtube.com/watch?v=YzO65uOJNMg",
+        "duration": "10:08"
+      },
+      {
+        "index": 24,
+        "title": "Làm việc với mảng trong JavaScript | JavaScript array",
+        "videoId": "KrYacXScNQk",
+        "url": "https://www.youtube.com/watch?v=KrYacXScNQk",
+        "duration": "18:03"
+      },
+      {
+        "index": 25,
+        "title": "Hàm trong JavaScript | JavaScript function",
+        "videoId": "4g9ENVc2KLA",
+        "url": "https://www.youtube.com/watch?v=4g9ENVc2KLA",
+        "duration": "7:10"
+      },
+      {
+        "index": 26,
+        "title": "Tham số trong hàm | JavaScript function",
+        "videoId": "jE6UPl17Nvo",
+        "url": "https://www.youtube.com/watch?v=jE6UPl17Nvo",
+        "duration": "16:14"
+      },
+      {
+        "index": 27,
+        "title": "Return trong hàm JS | JavaScript function",
+        "videoId": "OOoeAIrn69M",
+        "url": "https://www.youtube.com/watch?v=OOoeAIrn69M",
+        "duration": "6:10"
+      },
+      {
+        "index": 28,
+        "title": "Hiểu hơn về function trong JavaScript | Một số điều cần biết về function",
+        "videoId": "aTQojRq0N4c",
+        "url": "https://www.youtube.com/watch?v=aTQojRq0N4c",
+        "duration": "5:44"
+      },
+      {
+        "index": 29,
+        "title": "Các loại function trong JavaScript | Khái niệm function",
+        "videoId": "scwab9DMNtM",
+        "url": "https://www.youtube.com/watch?v=scwab9DMNtM",
+        "duration": "6:03"
+      },
+      {
+        "index": 30,
+        "title": "What is Polyfill? | Concept of polyfill in JavaScript",
+        "videoId": "zFO-sSfReFs",
+        "url": "https://www.youtube.com/watch?v=zFO-sSfReFs",
+        "duration": "7:21"
+      },
+      {
+        "index": 31,
+        "title": "Object trong JavaScript | Khái niệm object",
+        "videoId": "orIXdOPFWeM",
+        "url": "https://www.youtube.com/watch?v=orIXdOPFWeM",
+        "duration": "11:38"
+      },
+      {
+        "index": 32,
+        "title": "Object constructor trong JavaScript",
+        "videoId": "FO1OMbT_k2w",
+        "url": "https://www.youtube.com/watch?v=FO1OMbT_k2w",
+        "duration": "13:39"
+      },
+      {
+        "index": 33,
+        "title": "Object prototype(cơ bản) trong JavaScript",
+        "videoId": "Wi-khBYt658",
+        "url": "https://www.youtube.com/watch?v=Wi-khBYt658",
+        "duration": "7:41"
+      },
+      {
+        "index": 34,
+        "title": "Date object trong JavaScript | Đối tượng date",
+        "videoId": "cufyZUUIXjw",
+        "url": "https://www.youtube.com/watch?v=cufyZUUIXjw",
+        "duration": "6:50"
+      },
+      {
+        "index": 35,
+        "title": "Câu lệnh rẽ nhánh If, else | JavaScript if-else",
+        "videoId": "X9OA4308oIY",
+        "url": "https://www.youtube.com/watch?v=X9OA4308oIY",
+        "duration": "4:48"
+      },
+      {
+        "index": 36,
+        "title": "Câu lệnh rẽ nhánh Switch trong JavaScript",
+        "videoId": "24lIiJ4xVQE",
+        "url": "https://www.youtube.com/watch?v=24lIiJ4xVQE",
+        "duration": "9:25"
+      },
+      {
+        "index": 37,
+        "title": "Toán tử 3 ngôi(ternary operator) trong JavaScript",
+        "videoId": "L9pPv8pp71s",
+        "url": "https://www.youtube.com/watch?v=L9pPv8pp71s",
+        "duration": "5:20"
+      },
+      {
+        "index": 38,
+        "title": "Vòng lặp trong JavaScript | JavaScript Loop",
+        "videoId": "1zeMUJeBkeA",
+        "url": "https://www.youtube.com/watch?v=1zeMUJeBkeA",
+        "duration": "2:29"
+      },
+      {
+        "index": 39,
+        "title": "Vòng lặp For trong JavaScript | For loop",
+        "videoId": "tzaq2ay3Q0w",
+        "url": "https://www.youtube.com/watch?v=tzaq2ay3Q0w",
+        "duration": "4:58"
+      },
+      {
+        "index": 40,
+        "title": "Vòng lặp For trong JavaScript | For loop phần 2",
+        "videoId": "L0a9ZgIEjW8",
+        "url": "https://www.youtube.com/watch?v=L0a9ZgIEjW8",
+        "duration": "4:42"
+      },
+      {
+        "index": 41,
+        "title": "Vòng lặp For trong JavaScript | For loop phần 3",
+        "videoId": "LAlvupZV5iU",
+        "url": "https://www.youtube.com/watch?v=LAlvupZV5iU",
+        "duration": "6:21"
+      },
+      {
+        "index": 42,
+        "title": "Vòng lặp For/in trong JavaScript | For...in loop",
+        "videoId": "stbbeMsgldc",
+        "url": "https://www.youtube.com/watch?v=stbbeMsgldc",
+        "duration": "5:11"
+      },
+      {
+        "index": 43,
+        "title": "Vòng lặp For/of trong JavaScript | For...of loop",
+        "videoId": "qhShGK5Y10U",
+        "url": "https://www.youtube.com/watch?v=qhShGK5Y10U",
+        "duration": "4:30"
+      },
+      {
+        "index": 44,
+        "title": "Vòng lặp While trong JavaScript | JavaScript while loop",
+        "videoId": "rdH9Dm7IVxU",
+        "url": "https://www.youtube.com/watch?v=rdH9Dm7IVxU",
+        "duration": "2:59"
+      },
+      {
+        "index": 45,
+        "title": "Vòng lặp Do/while trong JavaScript | Do...while loop",
+        "videoId": "Or48jZzowUk",
+        "url": "https://www.youtube.com/watch?v=Or48jZzowUk",
+        "duration": "5:48"
+      },
+      {
+        "index": 46,
+        "title": "Break và Continue trong vòng lặp | JavaScript Break and Continue",
+        "videoId": "zSHt_S7W2a8",
+        "url": "https://www.youtube.com/watch?v=zSHt_S7W2a8",
+        "duration": "2:48"
+      },
+      {
+        "index": 47,
+        "title": "Vòng lặp lồng nhau (Nested loop) | JavaScript nested loop",
+        "videoId": "hRaSotOvTjY",
+        "url": "https://www.youtube.com/watch?v=hRaSotOvTjY",
+        "duration": "3:49"
+      },
+      {
+        "index": 48,
+        "title": "Ví dụ mở rộng về vòng lặp | JavaScript Loops",
+        "videoId": "MY-eJLzbSZc",
+        "url": "https://www.youtube.com/watch?v=MY-eJLzbSZc",
+        "duration": "2:20"
+      },
+      {
+        "index": 49,
+        "title": "Làm việc với mảng trong JavaScript | Array methods (Phần 2)",
+        "videoId": "AT-yhX26_Ao",
+        "url": "https://www.youtube.com/watch?v=AT-yhX26_Ao",
+        "duration": "14:34"
+      },
+      {
+        "index": 50,
+        "title": "Array map method trong JavaScript | Làm việc với mảng",
+        "videoId": "-xZkVmkDwbU",
+        "url": "https://www.youtube.com/watch?v=-xZkVmkDwbU",
+        "duration": "12:06"
+      },
+      {
+        "index": 51,
+        "title": "Phương thức reduce khi làm việc với array | JavaScript array reduce() method",
+        "videoId": "-JMh3A556cw",
+        "url": "https://www.youtube.com/watch?v=-JMh3A556cw",
+        "duration": "23:42"
+      },
+      {
+        "index": 52,
+        "title": "Phương thức reduce khi làm việc với array - phần 2 | JavaScript array reduce() method",
+        "videoId": "gLIXXBIySZ8",
+        "url": "https://www.youtube.com/watch?v=gLIXXBIySZ8",
+        "duration": "17:46"
+      },
+      {
+        "index": 53,
+        "title": "Phương thức includes | JavaScript String/Array includes() method",
+        "videoId": "PozYw4lVgl0",
+        "url": "https://www.youtube.com/watch?v=PozYw4lVgl0",
+        "duration": "5:51"
+      },
+      {
+        "index": 54,
+        "title": "Đối tượng math | JavaScript math object",
+        "videoId": "WGsNbFwt0H4",
+        "url": "https://www.youtube.com/watch?v=WGsNbFwt0H4",
+        "duration": "7:44"
+      },
+      {
+        "index": 55,
+        "title": "Hiểu về Javascript Callback Functions | Callback Trong Javascript | Javascript Callback",
+        "videoId": "W8vJ-yOtSbE",
+        "url": "https://www.youtube.com/watch?v=W8vJ-yOtSbE",
+        "duration": "5:11"
+      },
+      {
+        "index": 56,
+        "title": "Callback trong JavaScript | Callback functions phần 2",
+        "videoId": "LUt36WnREm0",
+        "url": "https://www.youtube.com/watch?v=LUt36WnREm0",
+        "duration": "13:18"
+      },
+      {
+        "index": 57,
+        "title": "Build a method to work with array | Array empty element?",
+        "videoId": "sQBlrbbqEak",
+        "url": "https://www.youtube.com/watch?v=sQBlrbbqEak",
+        "duration": "7:46"
+      },
+      {
+        "index": 58,
+        "title": "Xây dựng phương thức forEach | JavaScript Array forEach() Method",
+        "videoId": "zfEBuHWif4Q",
+        "url": "https://www.youtube.com/watch?v=zfEBuHWif4Q",
+        "duration": "15:54"
+      },
+      {
+        "index": 59,
+        "title": "Build a filter method | JavaScript Array filter() method",
+        "videoId": "eRM7ekb1iQU",
+        "url": "https://www.youtube.com/watch?v=eRM7ekb1iQU",
+        "duration": "6:43"
+      },
+      {
+        "index": 60,
+        "title": "Build the `some` method | JavaScript Array `some()` method",
+        "videoId": "kUObhKJ-RoU",
+        "url": "https://www.youtube.com/watch?v=kUObhKJ-RoU",
+        "duration": "6:39"
+      },
+      {
+        "index": 61,
+        "title": "Building the every method | JavaScript Array every() method",
+        "videoId": "mmxZ6buXHN4",
+        "url": "https://www.youtube.com/watch?v=mmxZ6buXHN4",
+        "duration": "4:57"
+      },
+      {
+        "index": 62,
+        "title": "What is Recursion? Learn about Recursion in JavaScript | Recursive Function",
+        "videoId": "ZwbBiGf35V4",
+        "url": "https://www.youtube.com/watch?v=ZwbBiGf35V4",
+        "duration": "27:03"
+      },
+      {
+        "index": 63,
+        "title": "What is HTML DOM? | JavaScript HTML DOM",
+        "videoId": "TsTr-tKCREc",
+        "url": "https://www.youtube.com/watch?v=TsTr-tKCREc",
+        "duration": "16:17"
+      },
+      {
+        "index": 64,
+        "title": "What is HTML DOM and DOM API? | JavaScript HTML DOM",
+        "videoId": "82KhrbZ7LvA",
+        "url": "https://www.youtube.com/watch?v=82KhrbZ7LvA",
+        "duration": "7:30"
+      },
+      {
+        "index": 65,
+        "title": "DOM Document Object trong JavaScript | HTML DOM",
+        "videoId": "ZS2v9B9DRm8",
+        "url": "https://www.youtube.com/watch?v=ZS2v9B9DRm8",
+        "duration": "4:59"
+      },
+      {
+        "index": 66,
+        "title": "Lấy element trong DOM | Get element methods",
+        "videoId": "gETNXKi3l_U",
+        "url": "https://www.youtube.com/watch?v=gETNXKi3l_U",
+        "duration": "25:09"
+      },
+      {
+        "index": 67,
+        "title": "Get element in DOM | Get element methods - part 2",
+        "videoId": "OQkUwdVvul8",
+        "url": "https://www.youtube.com/watch?v=OQkUwdVvul8",
+        "duration": "8:03"
+      },
+      {
+        "index": 68,
+        "title": "Get element in DOM | Get element methods - part 3",
+        "videoId": "-4u0Gg1YFQw",
+        "url": "https://www.youtube.com/watch?v=-4u0Gg1YFQw",
+        "duration": "18:17"
+      },
+      {
+        "index": 69,
+        "title": "Attribute node and Text node in HTML DOM",
+        "videoId": "8S1L12Ttu-U",
+        "url": "https://www.youtube.com/watch?v=8S1L12Ttu-U",
+        "duration": "4:03"
+      },
+      {
+        "index": 70,
+        "title": "DOM attribute | Add, edit, delete attribute",
+        "videoId": "ViPTAlLPnV4",
+        "url": "https://www.youtube.com/watch?v=ViPTAlLPnV4",
+        "duration": "13:11"
+      },
+      {
+        "index": 71,
+        "title": "InnerText & textContent Property | Text node in Dom",
+        "videoId": "xwcQl75iSNc",
+        "url": "https://www.youtube.com/watch?v=xwcQl75iSNc",
+        "duration": "18:45"
+      },
+      {
+        "index": 72,
+        "title": "Thêm element vào element trong DOM | InnerHTML property | OuterHTML property",
+        "videoId": "SXW4QSjk4Js",
+        "url": "https://www.youtube.com/watch?v=SXW4QSjk4Js",
+        "duration": "12:04"
+      },
+      {
+        "index": 73,
+        "title": "Node properties | HTML DOM",
+        "videoId": "YWTO5hO7d8A",
+        "url": "https://www.youtube.com/watch?v=YWTO5hO7d8A",
+        "duration": "30:58"
+      },
+      {
+        "index": 74,
+        "title": "DOM style object in Element node | DOM CSS",
+        "videoId": "79gnz1TttHw",
+        "url": "https://www.youtube.com/watch?v=79gnz1TttHw",
+        "duration": "7:42"
+      },
+      {
+        "index": 75,
+        "title": "ClassList Property",
+        "videoId": "xr2d_1h4U0Y",
+        "url": "https://www.youtube.com/watch?v=xr2d_1h4U0Y",
+        "duration": "14:20"
+      },
+      {
+        "index": 76,
+        "title": "DOM events",
+        "videoId": "AA3WWZAMv_0",
+        "url": "https://www.youtube.com/watch?v=AA3WWZAMv_0",
+        "duration": "26:58"
+      },
+      {
+        "index": 77,
+        "title": "DOM events example | JavaScript HTML DOM Events",
+        "videoId": "Ze4b9x7zgas",
+        "url": "https://www.youtube.com/watch?v=Ze4b9x7zgas",
+        "duration": "18:14"
+      },
+      {
+        "index": 78,
+        "title": "PreventDefault & StopPropagation | DOM events",
+        "videoId": "4ZnQur6rewg",
+        "url": "https://www.youtube.com/watch?v=4ZnQur6rewg",
+        "duration": "19:37"
+      },
+      {
+        "index": 79,
+        "title": "Event listener | add & removeEventListener",
+        "videoId": "U624VLOxiTo",
+        "url": "https://www.youtube.com/watch?v=U624VLOxiTo",
+        "duration": "16:53"
+      },
+      {
+        "index": 80,
+        "title": "Form validation - Phần 1 | Thực hành HTML DOM",
+        "videoId": "ZdvRm1bfGAk",
+        "url": "https://www.youtube.com/watch?v=ZdvRm1bfGAk",
+        "duration": "41:18"
+      },
+      {
+        "index": 81,
+        "title": "Form Validation - Part 2 | HTML DOM Practice",
+        "videoId": "scybnB9vYVQ",
+        "url": "https://www.youtube.com/watch?v=scybnB9vYVQ",
+        "duration": "40:11"
+      },
+      {
+        "index": 82,
+        "title": "Form Validation - Part 3 | HTML DOM Practice",
+        "videoId": "LpgoBaULw30",
+        "url": "https://www.youtube.com/watch?v=LpgoBaULw30",
+        "duration": "24:24"
+      },
+      {
+        "index": 83,
+        "title": "Form validation - Phần 4 | Thực hành HTML DOM",
+        "videoId": "jRnBvlMUvK0",
+        "url": "https://www.youtube.com/watch?v=jRnBvlMUvK0",
+        "duration": "25:10"
+      },
+      {
+        "index": 84,
+        "title": "Form validation - Thành quả đạt được | Vanilla JS form validation",
+        "videoId": "wMH2bHlpWco",
+        "url": "https://www.youtube.com/watch?v=wMH2bHlpWco",
+        "duration": "3:02"
+      },
+      {
+        "index": 85,
+        "title": "Form validation - Cách làm 2 | Thực hành HTML DOM",
+        "videoId": "jhvEPY8cEu0",
+        "url": "https://www.youtube.com/watch?v=jhvEPY8cEu0",
+        "duration": "1:01:27"
+      },
+      {
+        "index": 86,
+        "title": "Form validation - Cách làm 2 (hoàn thiện) | Thực hành HTML DOM",
+        "videoId": "V88PFJNlE-I",
+        "url": "https://www.youtube.com/watch?v=V88PFJNlE-I",
+        "duration": "9:26"
+      },
+      {
+        "index": 87,
+        "title": "JSON là gì? JSON được sử dụng như thế nào trong JavaScript?",
+        "videoId": "Uph14HYkgEQ",
+        "url": "https://www.youtube.com/watch?v=Uph14HYkgEQ",
+        "duration": "17:15"
+      },
+      {
+        "index": 88,
+        "title": "Promise (sync async) trong JavaScript | Khái niệm promise",
+        "videoId": "QJmNEqy0zV0",
+        "url": "https://www.youtube.com/watch?v=QJmNEqy0zV0",
+        "duration": "13:37"
+      },
+      {
+        "index": 89,
+        "title": "Promise (pain) | Promise javascript | Learn promise in Javascript",
+        "videoId": "bgSbjJIwrj0",
+        "url": "https://www.youtube.com/watch?v=bgSbjJIwrj0",
+        "duration": "5:47"
+      },
+      {
+        "index": 90,
+        "title": "Promise trong Javascript | Cách sử dụng Promise | JavaScript Promise",
+        "videoId": "_4F8ihblZFU",
+        "url": "https://www.youtube.com/watch?v=_4F8ihblZFU",
+        "duration": "15:03"
+      },
+      {
+        "index": 91,
+        "title": "Promise chain | How Promises work | JavaScript Promise",
+        "videoId": "Ldl571DAlXI",
+        "url": "https://www.youtube.com/watch?v=Ldl571DAlXI",
+        "duration": "14:48"
+      },
+      {
+        "index": 92,
+        "title": "Promise methods (resolve, reject, all) | JavaScript Promise",
+        "videoId": "pxyxbaq8i8c",
+        "url": "https://www.youtube.com/watch?v=pxyxbaq8i8c",
+        "duration": "15:30"
+      },
+      {
+        "index": 93,
+        "title": "Learn JavaScript ECMAScript 6 | ES6",
+        "videoId": "MFDXxCNqjKQ",
+        "url": "https://www.youtube.com/watch?v=MFDXxCNqjKQ",
+        "duration": "2:54"
+      },
+      {
+        "index": 94,
+        "title": "Let & Const keyword | JavaScript ES6",
+        "videoId": "tCPTBPua1Xo",
+        "url": "https://www.youtube.com/watch?v=tCPTBPua1Xo",
+        "duration": "11:29"
+      },
+      {
+        "index": 95,
+        "title": "Arrow function in JavaScript ES6 | Arrow function concept",
+        "videoId": "9QeNLypIiZs",
+        "url": "https://www.youtube.com/watch?v=9QeNLypIiZs",
+        "duration": "8:37"
+      },
+      {
+        "index": 96,
+        "title": "Template literals (Template string) trong javascript ES6",
+        "videoId": "7Ls-fa8iVXA",
+        "url": "https://www.youtube.com/watch?v=7Ls-fa8iVXA",
+        "duration": "5:22"
+      },
+      {
+        "index": 97,
+        "title": "Classes trong JavaScript ES6",
+        "videoId": "jSvViDjWXaE",
+        "url": "https://www.youtube.com/watch?v=jSvViDjWXaE",
+        "duration": "6:13"
+      },
+      {
+        "index": 98,
+        "title": "Enhanced object literals trong javascript ES6",
+        "videoId": "WB6FQdp41hs",
+        "url": "https://www.youtube.com/watch?v=WB6FQdp41hs",
+        "duration": "5:15"
+      },
+      {
+        "index": 99,
+        "title": "Default parameter values trong JavaScript ES6",
+        "videoId": "451KRGBBRJY",
+        "url": "https://www.youtube.com/watch?v=451KRGBBRJY",
+        "duration": "4:30"
+      },
+      {
+        "index": 100,
+        "title": "Destructuring trong JavaScript ES6",
+        "videoId": "J1m4vLDUhEI",
+        "url": "https://www.youtube.com/watch?v=J1m4vLDUhEI",
+        "duration": "13:20"
+      },
+      {
+        "index": 101,
+        "title": "Spread trong JavaScript ES6",
+        "videoId": "MJZICS7nQk8",
+        "url": "https://www.youtube.com/watch?v=MJZICS7nQk8",
+        "duration": "13:57"
+      },
+      {
+        "index": 102,
+        "title": "Khái niệm tagged template literals (ít người biết) | JavaScript ES6",
+        "videoId": "XV0d0A37sd8",
+        "url": "https://www.youtube.com/watch?v=XV0d0A37sd8",
+        "duration": "14:30"
+      },
+      {
+        "index": 103,
+        "title": "Module trong JavaScript ES6",
+        "videoId": "08lWi4T2Bfg",
+        "url": "https://www.youtube.com/watch?v=08lWi4T2Bfg",
+        "duration": "14:50"
+      },
+      {
+        "index": 104,
+        "title": "Khái niệm Optional chaining | ECMAScript 6+",
+        "videoId": "kxX7kKjXXKs",
+        "url": "https://www.youtube.com/watch?v=kxX7kKjXXKs",
+        "duration": "9:49"
+      },
+      {
+        "index": 105,
+        "title": "Building a Toast Message UI using BEM",
+        "videoId": "7c7ABhaQJGM",
+        "url": "https://www.youtube.com/watch?v=7c7ABhaQJGM",
+        "duration": "35:49"
+      },
+      {
+        "index": 106,
+        "title": "Promise example | Example of using Promise in JavaScript",
+        "videoId": "XN2mt1i1kjk",
+        "url": "https://www.youtube.com/watch?v=XN2mt1i1kjk",
+        "duration": "22:50"
+      },
+      {
+        "index": 107,
+        "title": "Fetch | Fetch Concept in JavaScript",
+        "videoId": "8KkM6JFjJZA",
+        "url": "https://www.youtube.com/watch?v=8KkM6JFjJZA",
+        "duration": "22:20"
+      },
+      {
+        "index": 108,
+        "title": "JSON server | Cài đặt thư viện JSON server",
+        "videoId": "5UJGRHNZc9M",
+        "url": "https://www.youtube.com/watch?v=5UJGRHNZc9M",
+        "duration": "14:15"
+      },
+      {
+        "index": 109,
+        "title": "Using Postman to work with REST API",
+        "videoId": "CvX_5uyUXSs",
+        "url": "https://www.youtube.com/watch?v=CvX_5uyUXSs",
+        "duration": "17:48"
+      },
+      {
+        "index": 110,
+        "title": "Add/edit/delete courses with Fetch and REST API",
+        "videoId": "TRjVXmk8q8I",
+        "url": "https://www.youtube.com/watch?v=TRjVXmk8q8I",
+        "duration": "32:02"
+      },
+      {
+        "index": 111,
+        "title": "Xây dựng Tabs UI với JavaScript cơ bản",
+        "videoId": "oYC6wGu-sWo",
+        "url": "https://www.youtube.com/watch?v=oYC6wGu-sWo",
+        "duration": "13:45"
+      },
+      {
+        "index": 112,
+        "title": "Phương thức reduce có logic như thế nào? | JavaScript reduce",
+        "videoId": "y8ZkHEpF9zM",
+        "url": "https://www.youtube.com/watch?v=y8ZkHEpF9zM",
+        "duration": "13:45"
+      },
+      {
+        "index": 113,
+        "title": "Code Music Player Xịn Xò Từ A-Z | Thực hành JavaScript | Code trình phát nhạc",
+        "videoId": "vAecGPWxzFE",
+        "url": "https://www.youtube.com/watch?v=vAecGPWxzFE",
+        "duration": "1:51:41"
+      },
+      {
+        "index": 114,
+        "title": "Make a Library With Only ~30 Lines of Code That Works Like React+Redux | Basic JavaScript Practice",
+        "videoId": "RClK-ltP-Bg",
+        "url": "https://www.youtube.com/watch?v=RClK-ltP-Bg",
+        "duration": "53:54"
+      },
+      {
+        "index": 115,
+        "title": "Code Todo List Bằng Library Xịn Xò Của Chúng Ta | Todo List App | Thực hành JavaScript cơ bản",
+        "videoId": "UajBbcr8sfc",
+        "url": "https://www.youtube.com/watch?v=UajBbcr8sfc",
+        "duration": "1:14:01"
+      },
+      {
+        "index": 116,
+        "title": "\"After learning\" JavaScript, can you solve Children's Code? | 300 Children's Code Challenge",
+        "videoId": "utF5vj7Ljuo",
+        "url": "https://www.youtube.com/watch?v=utF5vj7Ljuo",
+        "duration": "38:00"
+      },
+      {
+        "index": 117,
+        "title": "Tạo Hàm Đọc Số Tiền Bằng Chữ JavaScript Ngày Bão",
+        "videoId": "On24_XdhXq8",
+        "url": "https://www.youtube.com/watch?v=On24_XdhXq8",
+        "duration": "50:50"
+      }
+    ]
+  },
+  "java": {
+    "listId": "PLPt6-BtUI22rxpe6PZc5H6XAgPusA6fDQ",
+    "title": "Lập trình java | Tự học java siêu tốc | Java cho người mới từ con số 0 | Java 2023 tutorial full course",
+    "count": 77,
+    "videos": [
+      {
+        "index": 1,
+        "title": "1.Tự học java siêu tốc dễ hiểu cho người mới Cài đặt intellij idea | java 2023 tutorial",
+        "videoId": "9tQ-GGE010s",
+        "url": "https://www.youtube.com/watch?v=9tQ-GGE010s",
+        "duration": "17:14"
+      },
+      {
+        "index": 2,
+        "title": "2. Hướng dẫn nhập và xuất dữ liệu java trong 5 phút - chi tiết dễ hiểu cho người mới",
+        "videoId": "kUKIClQ8tR8",
+        "url": "https://www.youtube.com/watch?v=kUKIClQ8tR8",
+        "duration": "8:56"
+      },
+      {
+        "index": 3,
+        "title": "3. Ghi chú trong java - tự học lập trình java cơ bản new tutorial",
+        "videoId": "Qbl4gS3IqiY",
+        "url": "https://www.youtube.com/watch?v=Qbl4gS3IqiY",
+        "duration": "3:58"
+      },
+      {
+        "index": 4,
+        "title": "4. Data types in java - basic java for beginners",
+        "videoId": "qgu6HwbXzB8",
+        "url": "https://www.youtube.com/watch?v=qgu6HwbXzB8",
+        "duration": "7:53"
+      },
+      {
+        "index": 5,
+        "title": "5. Declaring variables in java - quick and easy guide to java variables in 8 minutes",
+        "videoId": "279x-6u5ebY",
+        "url": "https://www.youtube.com/watch?v=279x-6u5ebY",
+        "duration": "8:24"
+      },
+      {
+        "index": 6,
+        "title": "6. Data type conversion in java - short guide to converting java data types in under 10 minutes",
+        "videoId": "lDbEG7PWrHc",
+        "url": "https://www.youtube.com/watch?v=lDbEG7PWrHc",
+        "duration": "9:07"
+      },
+      {
+        "index": 7,
+        "title": "7. Basic math operations in java - get familiar with java math operations in just 7 minutes",
+        "videoId": "7D2pqd2QBW4",
+        "url": "https://www.youtube.com/watch?v=7D2pqd2QBW4",
+        "duration": "6:54"
+      },
+      {
+        "index": 8,
+        "title": "8.Java assignment operators, comparisons - java exercises 01 -java 2023",
+        "videoId": "TFSv9M53kWI",
+        "url": "https://www.youtube.com/watch?v=TFSv9M53kWI",
+        "duration": "10:13"
+      },
+      {
+        "index": 9,
+        "title": "9. Toán tử logic java, Toán tử tiền tố , hậu tố (prefix, postfix) - java tutorial 2023 chi tiết.mp4",
+        "videoId": "Kbc6L8f0pJI",
+        "url": "https://www.youtube.com/watch?v=Kbc6L8f0pJI",
+        "duration": "12:52"
+      },
+      {
+        "index": 10,
+        "title": "10. Scanner java - Nhập dữ liệu từ bàn phím, bài tập java 01-02 - học java 2023",
+        "videoId": "rBsW0G1zhOc",
+        "url": "https://www.youtube.com/watch?v=rBsW0G1zhOc",
+        "duration": "18:49"
+      },
+      {
+        "index": 11,
+        "title": "11.  câu lệnh if else java - bài giảng java 2023 - bài tập java 04-09",
+        "videoId": "qpqz3XYPoy4",
+        "url": "https://www.youtube.com/watch?v=qpqz3XYPoy4",
+        "duration": "16:51"
+      },
+      {
+        "index": 12,
+        "title": "11.1 giải bài tập java 04 - Câu lệnh if else java - seri hướng dẫn java 2023",
+        "videoId": "_datNK03WJo",
+        "url": "https://www.youtube.com/watch?v=_datNK03WJo",
+        "duration": "4:41"
+      },
+      {
+        "index": 13,
+        "title": "11.2 java exercise 05 - if else java exercise - java tutorial series 2023",
+        "videoId": "QoHVTIQUh8Q",
+        "url": "https://www.youtube.com/watch?v=QoHVTIQUh8Q",
+        "duration": "7:39"
+      },
+      {
+        "index": 14,
+        "title": "11.3 giải bài tập java 06 - hướng dẫn giải bài tập if else java - java new tutorial 2023",
+        "videoId": "18P9USR-oHA",
+        "url": "https://www.youtube.com/watch?v=18P9USR-oHA",
+        "duration": "4:28"
+      },
+      {
+        "index": 15,
+        "title": "11.4 Giải bài tập java 07 - hướng dẫn giải bài tập if else java - java 2023 tutorial",
+        "videoId": "FelhNICBAoI",
+        "url": "https://www.youtube.com/watch?v=FelhNICBAoI",
+        "duration": "8:01"
+      },
+      {
+        "index": 16,
+        "title": "11.5 Giải bài tập java 08 -hướng dẫn giải bài tập java chi tiết cho người mới học",
+        "videoId": "RLP1GGCSnVI",
+        "url": "https://www.youtube.com/watch?v=RLP1GGCSnVI",
+        "duration": "7:20"
+      },
+      {
+        "index": 17,
+        "title": "11.6 Solve java exercises 09 - learn java programming for beginners - java 2023 new version",
+        "videoId": "YkdTgSkXuho",
+        "url": "https://www.youtube.com/watch?v=YkdTgSkXuho",
+        "duration": "4:25"
+      },
+      {
+        "index": 18,
+        "title": "12.  Toán tử 3 ngôi java - bài tập java 10 - seri tự học java 2023 cho người mới bắt đầu",
+        "videoId": "zzVgLdmPlKM",
+        "url": "https://www.youtube.com/watch?v=zzVgLdmPlKM",
+        "duration": "7:35"
+      },
+      {
+        "index": 19,
+        "title": "12.1 Giải bài tập java 10- bài tập vận dụng java cơ bản toán tử 3 ngôi trong java",
+        "videoId": "iAdFXy6HmJU",
+        "url": "https://www.youtube.com/watch?v=iAdFXy6HmJU",
+        "duration": "7:28"
+      },
+      {
+        "index": 20,
+        "title": "13.  Switch case java - seri java cơ bản cho người mới - bài tập java 11",
+        "videoId": "Hsvi35Mueqo",
+        "url": "https://www.youtube.com/watch?v=Hsvi35Mueqo",
+        "duration": "10:07"
+      },
+      {
+        "index": 21,
+        "title": "13.1 Solve java exercises 11 - Switch Case java application - detailed java series 2023 for begin...",
+        "videoId": "C2dfFxLhDc0",
+        "url": "https://www.youtube.com/watch?v=C2dfFxLhDc0",
+        "duration": "5:29"
+      },
+      {
+        "index": 22,
+        "title": "14. while loop java - vòng lặp while java - java chi tiết cho người mới",
+        "videoId": "8hFI4NtaP9M",
+        "url": "https://www.youtube.com/watch?v=8hFI4NtaP9M",
+        "duration": "8:59"
+      },
+      {
+        "index": 23,
+        "title": "15.  vòng lặp do while java, while true java - java 2023 full tutorial",
+        "videoId": "H-cWkt5Nwaw",
+        "url": "https://www.youtube.com/watch?v=H-cWkt5Nwaw",
+        "duration": "8:48"
+      },
+      {
+        "index": 24,
+        "title": "16. Java for Loop - How to Use and Detailed Explanation for Beginners",
+        "videoId": "5kYfskIHfLk",
+        "url": "https://www.youtube.com/watch?v=5kYfskIHfLk",
+        "duration": "13:59"
+      },
+      {
+        "index": 25,
+        "title": "17.  break, continue trong java - giải thích chi tiết dễ hiểu cho người mới",
+        "videoId": "D9gTwz6GrGc",
+        "url": "https://www.youtube.com/watch?v=D9gTwz6GrGc",
+        "duration": "9:42"
+      },
+      {
+        "index": 26,
+        "title": "17.1 java 12 exercise solution break, continue in java - detailed java programming explanation 2023",
+        "videoId": "MjdjKIQS9xI",
+        "url": "https://www.youtube.com/watch?v=MjdjKIQS9xI",
+        "duration": "11:47"
+      },
+      {
+        "index": 27,
+        "title": "17.2 giải bài tập java 13 break, continue trong java- java 2023 chi tiết cho người mới",
+        "videoId": "5mQ2sE9XWZI",
+        "url": "https://www.youtube.com/watch?v=5mQ2sE9XWZI",
+        "duration": "7:04"
+      },
+      {
+        "index": 28,
+        "title": "17.3 java exercise 14 break, continue in java - easiest java to understand for beginners",
+        "videoId": "XyRohwqJGJ0",
+        "url": "https://www.youtube.com/watch?v=XyRohwqJGJ0",
+        "duration": "6:47"
+      },
+      {
+        "index": 29,
+        "title": "17.4 giải bài tập java 15 break, continue trong java -lập trình java dễ hiểu nhất cho người mới",
+        "videoId": "8gkp7uolGM4",
+        "url": "https://www.youtube.com/watch?v=8gkp7uolGM4",
+        "duration": "3:35"
+      },
+      {
+        "index": 30,
+        "title": "17.5 giải bài tập java 16 break, continue trong java -học lập trình java online",
+        "videoId": "3CWXNabWYNg",
+        "url": "https://www.youtube.com/watch?v=3CWXNabWYNg",
+        "duration": "5:14"
+      },
+      {
+        "index": 31,
+        "title": "17.6 java exercise 17 break, continue in java - basic java for beginners",
+        "videoId": "vVP3d_LaGfU",
+        "url": "https://www.youtube.com/watch?v=vVP3d_LaGfU",
+        "duration": "7:52"
+      },
+      {
+        "index": 32,
+        "title": "17.7 Java exercise solutions 18 break, continue in Java - self-study Java programming in the most...",
+        "videoId": "GG6H95hvYL8",
+        "url": "https://www.youtube.com/watch?v=GG6H95hvYL8",
+        "duration": "10:20"
+      },
+      {
+        "index": 33,
+        "title": "18.  for lồng nhau java - hướng dẫn chi tiết dễ hiểu java 2023",
+        "videoId": "6eNHAr2AdBk",
+        "url": "https://www.youtube.com/watch?v=6eNHAr2AdBk",
+        "duration": "18:28"
+      },
+      {
+        "index": 34,
+        "title": "19. các lỗi thường gặp khi học lập trình java - giải thích lập trình java dễ hiểu",
+        "videoId": "rStyvKGHSW0",
+        "url": "https://www.youtube.com/watch?v=rStyvKGHSW0",
+        "duration": "5:11"
+      },
+      {
+        "index": 35,
+        "title": "20. xử lý biệt lệ java -cách sử dụng try catch java,lập trình java 2023 dễ hiểu cho người mới",
+        "videoId": "NZxzGwpdGoM",
+        "url": "https://www.youtube.com/watch?v=NZxzGwpdGoM",
+        "duration": "10:55"
+      },
+      {
+        "index": 36,
+        "title": "21. Cách Tạo Hàm và Sử dụng hàm trong Java - java function- bài tập java 19",
+        "videoId": "uW19Lzwvv0g",
+        "url": "https://www.youtube.com/watch?v=uW19Lzwvv0g",
+        "duration": "29:54"
+      },
+      {
+        "index": 37,
+        "title": "21.2 Solve java exercises 19 - 21. Functions and Using functions in Java - java function",
+        "videoId": "vm2_jJomhqM",
+        "url": "https://www.youtube.com/watch?v=vm2_jJomhqM",
+        "duration": "10:26"
+      },
+      {
+        "index": 38,
+        "title": "22.Thư viện date time java  - Làm việc với ngày tháng trong java - tự học lập trình java",
+        "videoId": "7ZSNWOZGNaU",
+        "url": "https://www.youtube.com/watch?v=7ZSNWOZGNaU",
+        "duration": "22:39"
+      },
+      {
+        "index": 39,
+        "title": "23. Java math library - Working with Math java - java math functions",
+        "videoId": "Il8dMZ_nevk",
+        "url": "https://www.youtube.com/watch?v=Il8dMZ_nevk",
+        "duration": "5:33"
+      },
+      {
+        "index": 40,
+        "title": "24. Random Java - Learn about Java random numbers - Working with Java random numbers",
+        "videoId": "Q02-0cmwQZw",
+        "url": "https://www.youtube.com/watch?v=Q02-0cmwQZw",
+        "duration": "4:23"
+      },
+      {
+        "index": 41,
+        "title": "25. The char Data Type in Java - basic explanation of characters",
+        "videoId": "5VukdZ8jXWk",
+        "url": "https://www.youtube.com/watch?v=5VukdZ8jXWk",
+        "duration": "14:10"
+      },
+      {
+        "index": 42,
+        "title": "26.1 String java  - Giới thiệu Java String - append, insert, delete, length string java",
+        "videoId": "-KsuRkmhwlI",
+        "url": "https://www.youtube.com/watch?v=-KsuRkmhwlI",
+        "duration": "10:09"
+      },
+      {
+        "index": 43,
+        "title": "26.2 String java - các phương thức lớp string java -  Xử lý chuỗi trong lập trình Java",
+        "videoId": "fSjncMWXMRY",
+        "url": "https://www.youtube.com/watch?v=fSjncMWXMRY",
+        "duration": "23:38"
+      },
+      {
+        "index": 44,
+        "title": "26.3 String java - compareTo , split, lowercase, uppercase ,toCharArray, reverse java",
+        "videoId": "5633aOJwVBo",
+        "url": "https://www.youtube.com/watch?v=5633aOJwVBo",
+        "duration": "18:14"
+      },
+      {
+        "index": 45,
+        "title": "26.4 Example of using string java - Easy to understand string java - String java exercises 19-26",
+        "videoId": "gP8Q6u_MmdM",
+        "url": "https://www.youtube.com/watch?v=gP8Q6u_MmdM",
+        "duration": "14:47"
+      },
+      {
+        "index": 46,
+        "title": "26.5 Java string exercise 19 - String data type in Java",
+        "videoId": "Tes_0aQ6Qi8",
+        "url": "https://www.youtube.com/watch?v=Tes_0aQ6Qi8",
+        "duration": "15:21"
+      },
+      {
+        "index": 47,
+        "title": "26.6 giải bài tập string java 20 - các phương thức của lớp String",
+        "videoId": "uD4eVBg_Hlw",
+        "url": "https://www.youtube.com/watch?v=uD4eVBg_Hlw",
+        "duration": "25:06"
+      },
+      {
+        "index": 48,
+        "title": "26.7 giải bài tập string java 21 - Giới thiệu Java String - học lập trình java cơ bản",
+        "videoId": "CRomajBtmgo",
+        "url": "https://www.youtube.com/watch?v=CRomajBtmgo",
+        "duration": "11:36"
+      },
+      {
+        "index": 49,
+        "title": "26.8 giải bài tập string java 22 - bài tập string ngôn ngữ lập trình java",
+        "videoId": "9n2ED7cW730",
+        "url": "https://www.youtube.com/watch?v=9n2ED7cW730",
+        "duration": "6:30"
+      },
+      {
+        "index": 50,
+        "title": "26.9 giải bài tập string java 23 - lập trình java cơ bản cho người mới",
+        "videoId": "BoQ0h4fcyiw",
+        "url": "https://www.youtube.com/watch?v=BoQ0h4fcyiw",
+        "duration": "7:15"
+      },
+      {
+        "index": 51,
+        "title": "26.10 java string exercises 24 - self-study detailed java string programming",
+        "videoId": "AzWq0NNEnok",
+        "url": "https://www.youtube.com/watch?v=AzWq0NNEnok",
+        "duration": "6:24"
+      },
+      {
+        "index": 52,
+        "title": "26.11 Java String Exercise Solution 25 - Basic Java Programming Course",
+        "videoId": "U2F6jdVGyso",
+        "url": "https://www.youtube.com/watch?v=U2F6jdVGyso",
+        "duration": "5:00"
+      },
+      {
+        "index": 53,
+        "title": "26.12 Java String Exercises - Basic Java Programming with tuhoc.cc",
+        "videoId": "McLlnDL-eNs",
+        "url": "https://www.youtube.com/watch?v=McLlnDL-eNs",
+        "duration": "13:54"
+      },
+      {
+        "index": 54,
+        "title": "27.1 Mảng java  - array  java - Giới thiệu về mảng trong lập trình Java",
+        "videoId": "VhPE8CrqQ-E",
+        "url": "https://www.youtube.com/watch?v=VhPE8CrqQ-E",
+        "duration": "24:45"
+      },
+      {
+        "index": 55,
+        "title": "27.2 Mảng java  - Mảng một chiều java - array trong java",
+        "videoId": "7p4P4eQmKAU",
+        "url": "https://www.youtube.com/watch?v=7p4P4eQmKAU",
+        "duration": "27:43"
+      },
+      {
+        "index": 56,
+        "title": "27.3 Giải bài tập mảng java 27 -giải bài tập array trong java",
+        "videoId": "4SLKcuWKqvk",
+        "url": "https://www.youtube.com/watch?v=4SLKcuWKqvk",
+        "duration": "26:32"
+      },
+      {
+        "index": 57,
+        "title": "28.1 Collection java  - arrayList và HashMap - Giới thiệu về Java Collections trong Java",
+        "videoId": "qGyU-p_8zRA",
+        "url": "https://www.youtube.com/watch?v=qGyU-p_8zRA",
+        "duration": "16:31"
+      },
+      {
+        "index": 58,
+        "title": "28.2 Java Collections - ArrayList and HashMap - Understanding Collections Advanced Java Programmi...",
+        "videoId": "FvK5HO3oWDo",
+        "url": "https://www.youtube.com/watch?v=FvK5HO3oWDo",
+        "duration": "11:03"
+      },
+      {
+        "index": 59,
+        "title": "28.3 Giải bài tập java 28 Collection java  - bài tập về tập hợp (Collection) java",
+        "videoId": "WUj4bJ5B1v4",
+        "url": "https://www.youtube.com/watch?v=WUj4bJ5B1v4",
+        "duration": "6:27"
+      },
+      {
+        "index": 60,
+        "title": "28.4 Giải bài tập java 29 Collection java  - arrayList và HashMap",
+        "videoId": "k67MrD4UMP4",
+        "url": "https://www.youtube.com/watch?v=k67MrD4UMP4",
+        "duration": "7:34"
+      },
+      {
+        "index": 61,
+        "title": "28.5 Giải bài tập java 30 Collection java  - arrayList và HashMap",
+        "videoId": "oSp9SaksDyk",
+        "url": "https://www.youtube.com/watch?v=oSp9SaksDyk",
+        "duration": "12:03"
+      },
+      {
+        "index": 62,
+        "title": "28.6 Giải bài tập java 31 Collection java  - arrayList và HashMap",
+        "videoId": "EmD_ciH1744",
+        "url": "https://www.youtube.com/watch?v=EmD_ciH1744",
+        "duration": "8:46"
+      },
+      {
+        "index": 63,
+        "title": "28.7 Java Exercise 32 Solution: Java Collections - ArrayList and HashMap",
+        "videoId": "2BjbLKvmTNc",
+        "url": "https://www.youtube.com/watch?v=2BjbLKvmTNc",
+        "duration": "7:59"
+      },
+      {
+        "index": 64,
+        "title": "29 Hasmap java  - Collection in java - Java Nâng Cao tìm hiểu về Map - HashMap",
+        "videoId": "hU2X5w060TE",
+        "url": "https://www.youtube.com/watch?v=hU2X5w060TE",
+        "duration": "13:26"
+      },
+      {
+        "index": 65,
+        "title": "29.2 Giải bài tập java 33 Hasmap java  - Collection in java",
+        "videoId": "CCdwx9ddhAk",
+        "url": "https://www.youtube.com/watch?v=CCdwx9ddhAk",
+        "duration": "13:10"
+      },
+      {
+        "index": 66,
+        "title": "30.1 Thuộc tính trong java - lập trình hướng đối tượng java - oop java chi tiết part 1",
+        "videoId": "hE0gV2DuGLY",
+        "url": "https://www.youtube.com/watch?v=hE0gV2DuGLY",
+        "duration": "14:37"
+      },
+      {
+        "index": 67,
+        "title": "30.2 Constructor in java - object oriented programming java - oop java easiest to understand part 2",
+        "videoId": "OkjuAM3jMvE",
+        "url": "https://www.youtube.com/watch?v=OkjuAM3jMvE",
+        "duration": "18:09"
+      },
+      {
+        "index": 68,
+        "title": "30.3 Get - Set oop java - lập trình hướng đối tượng java căn bản chi tiết part 3",
+        "videoId": "-v1pg8ADgL0",
+        "url": "https://www.youtube.com/watch?v=-v1pg8ADgL0",
+        "duration": "6:15"
+      },
+      {
+        "index": 69,
+        "title": "30.4 method oop java - lập trình hướng đối tượng java part 4",
+        "videoId": "dGaWQRuIBVM",
+        "url": "https://www.youtube.com/watch?v=dGaWQRuIBVM",
+        "duration": "14:29"
+      },
+      {
+        "index": 70,
+        "title": "30.5 Overloading Method java - Parameter List Method - object oriented java",
+        "videoId": "AmPTjiCD2iY",
+        "url": "https://www.youtube.com/watch?v=AmPTjiCD2iY",
+        "duration": "10:42"
+      },
+      {
+        "index": 71,
+        "title": "30.6 Tham chiếu This - Local variable java and Instance variable java",
+        "videoId": "WJCT2IAdj88",
+        "url": "https://www.youtube.com/watch?v=WJCT2IAdj88",
+        "duration": "6:17"
+      },
+      {
+        "index": 72,
+        "title": "30.7 Kế thừa trong java - inheritance in java - lập trình hướng đối tượng java",
+        "videoId": "LhsRwMQ6wgY",
+        "url": "https://www.youtube.com/watch?v=LhsRwMQ6wgY",
+        "duration": "22:42"
+      },
+      {
+        "index": 73,
+        "title": "30.8 Overriding method in java - OOP in Java in detail for beginners",
+        "videoId": "BUUSsED2Hxo",
+        "url": "https://www.youtube.com/watch?v=BUUSsED2Hxo",
+        "duration": "9:17"
+      },
+      {
+        "index": 74,
+        "title": "30.9 Kế thừa từ interface  trong java - OOP trong Java giải thích dễ hiểu",
+        "videoId": "TDBL-KMU-9A",
+        "url": "https://www.youtube.com/watch?v=TDBL-KMU-9A",
+        "duration": "16:15"
+      },
+      {
+        "index": 75,
+        "title": "30.10 Polymorphism in java - java object oriented programming explained in detail",
+        "videoId": "LlmGDo8XjIg",
+        "url": "https://www.youtube.com/watch?v=LlmGDo8XjIg",
+        "duration": "14:31"
+      },
+      {
+        "index": 76,
+        "title": "30.11 Sắp xếp các đối tượng dựa vào interface trong java -oop java căn bản",
+        "videoId": "apV2eoEs0dY",
+        "url": "https://www.youtube.com/watch?v=apV2eoEs0dY",
+        "duration": "15:36"
+      },
+      {
+        "index": 77,
+        "title": "30.12 Enum trong java - giải thích chi tiết lập trình hướng đối tượng java chi tiết cho người mới",
+        "videoId": "5FkKHrwE82E",
+        "url": "https://www.youtube.com/watch?v=5FkKHrwE82E",
+        "duration": "17:51"
+      }
+    ]
+  },
+  "react": {
+    "listId": "NclbvXqvnyA",
+    "title": "1. React JS là gì? Học React từ cơ bản đến nâng cao cho người mới - React JS Gà Lại Lập Trình",
+    "count": 68,
+    "videos": [
+      {
+        "index": 1,
+        "title": "1. React JS là gì? Học React từ cơ bản đến nâng cao cho người mới - React JS Gà Lại Lập Trình",
+        "videoId": "NclbvXqvnyA",
+        "url": "https://www.youtube.com/watch?v=NclbvXqvnyA",
+        "duration": "10:56"
+      },
+      {
+        "index": 2,
+        "title": "3. Hướng Dẫn Tạo Dự Án React CodeSandbox vs Local Project using VScode - React Cho Người Mới",
+        "videoId": "O79-D0bSx3M",
+        "url": "https://www.youtube.com/watch?v=O79-D0bSx3M",
+        "duration": "12:41"
+      },
+      {
+        "index": 3,
+        "title": "11. React js - Cách Sử Dụng JSX Trong React Tất Tần Tật Cho Người Mới Bắt Đầu",
+        "videoId": "vqQ5R4mQs7E",
+        "url": "https://www.youtube.com/watch?v=vqQ5R4mQs7E",
+        "duration": "12:43"
+      },
+      {
+        "index": 4,
+        "title": "12. React js - Component trong React - Tạo ứng dụng React cơ bản nhanh chóng",
+        "videoId": "nFDpu-ill-8",
+        "url": "https://www.youtube.com/watch?v=nFDpu-ill-8",
+        "duration": "10:03"
+      },
+      {
+        "index": 5,
+        "title": "13.1 React js _ Render Hình Ảnh, Dữ Liệu động - Cách Sử Dụng JSX để Hiển Thị Dữ Liệu Linh Hoạt",
+        "videoId": "5dRajnHyB8o",
+        "url": "https://www.youtube.com/watch?v=5dRajnHyB8o",
+        "duration": "12:57"
+      },
+      {
+        "index": 6,
+        "title": "13.2 React js (tiếp)  Render Hình Ảnh, Dữ Liệu động - Cách Sử Dụng JSX để Hiển Thị Dữ Liệu Linh Hoạt",
+        "videoId": "Vh8pHhFhils",
+        "url": "https://www.youtube.com/watch?v=Vh8pHhFhils",
+        "duration": "8:08"
+      },
+      {
+        "index": 7,
+        "title": "14.1 React js _ Props Trong React Là Gì_ Hướng Dẫn Chi Tiết Cho Người Mới - React js tuhoc.cc",
+        "videoId": "XhfRaoa_YmM",
+        "url": "https://www.youtube.com/watch?v=XhfRaoa_YmM",
+        "duration": "21:03"
+      },
+      {
+        "index": 8,
+        "title": "14.10 Bài tập React 01 - Ứng Dụng React useState- Hiển Thị Lời Chào Dựa Trên Thời Gian",
+        "videoId": "qgyCDiiEukQ",
+        "url": "https://www.youtube.com/watch?v=qgyCDiiEukQ",
+        "duration": "11:50"
+      },
+      {
+        "index": 9,
+        "title": "14.11 React js - Ứng Dụng State Để Hiển Thị Dữ Liệu Thực - react js by Gà Lại Lập Trình",
+        "videoId": "3XU-DgToIOI",
+        "url": "https://www.youtube.com/watch?v=3XU-DgToIOI",
+        "duration": "10:50"
+      },
+      {
+        "index": 10,
+        "title": "14.12 React js -Hiển Thị Nội Dung Theo Điều Kiện Trong React - useState và Ternary",
+        "videoId": "Jg1jW2uIl_I",
+        "url": "https://www.youtube.com/watch?v=Jg1jW2uIl_I",
+        "duration": "16:55"
+      },
+      {
+        "index": 11,
+        "title": "14.13 Bài tập React js 02 - Hiển Thị Hộp Cảnh Báo Có sử dụng useState Reactjs",
+        "videoId": "u0G1AeRRrj0",
+        "url": "https://www.youtube.com/watch?v=u0G1AeRRrj0",
+        "duration": "9:43"
+      },
+      {
+        "index": 12,
+        "title": "14.14 React js - Thêm Class Active Cho button - Cách Làm Nút Bấm Sáng Khi Được Chọn",
+        "videoId": "Fj-rcpSmUd8",
+        "url": "https://www.youtube.com/watch?v=Fj-rcpSmUd8",
+        "duration": "5:57"
+      },
+      {
+        "index": 13,
+        "title": "14.15 Bài tập React 03 -Học React JS qua bài tập thực tế Thêm class active cho phần tử",
+        "videoId": "hamAfmmZP4g",
+        "url": "https://www.youtube.com/watch?v=hamAfmmZP4g",
+        "duration": "6:01"
+      },
+      {
+        "index": 14,
+        "title": "14.16 map() in react - Tối ưu hóa mảng trong React Tránh lỗi phổ biến khi dùng chỉ số index",
+        "videoId": "aJe0YNfIQlk",
+        "url": "https://www.youtube.com/watch?v=aJe0YNfIQlk",
+        "duration": "9:39"
+      },
+      {
+        "index": 15,
+        "title": "14.17 Bài tập react 04 - Hiển thị danh sách dùng map in react",
+        "videoId": "qCMwRHhTbHQ",
+        "url": "https://www.youtube.com/watch?v=qCMwRHhTbHQ",
+        "duration": "8:22"
+      },
+      {
+        "index": 16,
+        "title": "14.18 React Optimization Tối ưu code với Section Component",
+        "videoId": "exaeRtxbY8c",
+        "url": "https://www.youtube.com/watch?v=exaeRtxbY8c",
+        "duration": "9:08"
+      },
+      {
+        "index": 17,
+        "title": "14.19 Forwarding Props trong React là gì Cách sử dụng ...props",
+        "videoId": "jsib7aE7A18",
+        "url": "https://www.youtube.com/watch?v=jsib7aE7A18",
+        "duration": "6:43"
+      },
+      {
+        "index": 18,
+        "title": "14.2 React js _ Tối ưu hoá code với Destructuring và Spread Operator - hướng dẫn chi tiết",
+        "videoId": "wL7eZju8n-c",
+        "url": "https://www.youtube.com/watch?v=wL7eZju8n-c",
+        "duration": "9:28"
+      },
+      {
+        "index": 19,
+        "title": "14.20 Tạo component Tabs Menu - Tối ưu hoá tăng hiệu quả và tái sử dụng trong ReactJS",
+        "videoId": "qCdusb3i1Ho",
+        "url": "https://www.youtube.com/watch?v=qCdusb3i1Ho",
+        "duration": "8:29"
+      },
+      {
+        "index": 20,
+        "title": "14.21 React Tips Tối ưu Tabs Menu cho ứng dụng lớn - Học React từ cơ bản đến nâng cao",
+        "videoId": "3TRmeQyWpJo",
+        "url": "https://www.youtube.com/watch?v=3TRmeQyWpJo",
+        "duration": "6:51"
+      },
+      {
+        "index": 21,
+        "title": "14.22 Default Props Trong React Hướng Dẫn Từng Bước - Hướng Dẫn React Cho Người Mới",
+        "videoId": "uayMpMVdxFc",
+        "url": "https://www.youtube.com/watch?v=uayMpMVdxFc",
+        "duration": "2:25"
+      },
+      {
+        "index": 22,
+        "title": "14.23 Tối ưu hóa App.js với các Component riêng - xây dựng App.js tối giản trong React",
+        "videoId": "hsM9pCCtDeM",
+        "url": "https://www.youtube.com/watch?v=hsM9pCCtDeM",
+        "duration": "11:07"
+      },
+      {
+        "index": 23,
+        "title": "14.3 React js _ Cách chia nhỏ dự án lập trình lớn để dễ quản lý và phát triển",
+        "videoId": "NASBca0ym7U",
+        "url": "https://www.youtube.com/watch?v=NASBca0ym7U",
+        "duration": "4:45"
+      },
+      {
+        "index": 24,
+        "title": "14.4 React js _ Cách tối ưu Component trong React – tuhoc.cc",
+        "videoId": "pkrTiRSuEEs",
+        "url": "https://www.youtube.com/watch?v=pkrTiRSuEEs",
+        "duration": "1:56"
+      },
+      {
+        "index": 25,
+        "title": "14.5 React js _ props.children_ Cách hoạt động và ứng dụng thực tế",
+        "videoId": "tI7ZF5N1y4s",
+        "url": "https://www.youtube.com/watch?v=tI7ZF5N1y4s",
+        "duration": "7:39"
+      },
+      {
+        "index": 26,
+        "title": "14.6 React js - React onClick -  Hướng Dẫn Cơ Bản Cho Người Mới Bắt Đầu bởi tuhoc.cc",
+        "videoId": "qP_mn4m1nXs",
+        "url": "https://www.youtube.com/watch?v=qP_mn4m1nXs",
+        "duration": "5:23"
+      },
+      {
+        "index": 27,
+        "title": "14.7 React js - Truyền hàm sự kiện từ Component cha vào Component con",
+        "videoId": "KIdsrdMP2no",
+        "url": "https://www.youtube.com/watch?v=KIdsrdMP2no",
+        "duration": "7:08"
+      },
+      {
+        "index": 28,
+        "title": "14.8 React js - Xử Lý Sự Kiện Trong React Dễ Dàng Hơn Với Arrow Function",
+        "videoId": "Tvs0XcEo5YA",
+        "url": "https://www.youtube.com/watch?v=Tvs0XcEo5YA",
+        "duration": "8:04"
+      },
+      {
+        "index": 29,
+        "title": "14.9 State React từ A-Z - Tìm hiểu về State và hook trong reactjs",
+        "videoId": "AFHpF265kbg",
+        "url": "https://www.youtube.com/watch?v=AFHpF265kbg",
+        "duration": "22:00"
+      },
+      {
+        "index": 30,
+        "title": "15. Sai Lầm Khi sử dụng useState Trong React – Bạn Có Đang Mắc Phải",
+        "videoId": "G63th0Db-hk",
+        "url": "https://www.youtube.com/watch?v=G63th0Db-hk",
+        "duration": "10:30"
+      },
+      {
+        "index": 31,
+        "title": "16.1 React State_ Hiểu Rõ One-Way Binding & Two-Way Binding - react js gà lại lập trình",
+        "videoId": "4Q7WXn4IvJY",
+        "url": "https://www.youtube.com/watch?v=4Q7WXn4IvJY",
+        "duration": "14:13"
+      },
+      {
+        "index": 32,
+        "title": "16.2 React State Two-Way Binding với nhiều trường input",
+        "videoId": "oHr92j0L2hA",
+        "url": "https://www.youtube.com/watch?v=oHr92j0L2hA",
+        "duration": "19:58"
+      },
+      {
+        "index": 33,
+        "title": "17.1 React CSS 01 - Dùng CSS toàn cục với Import CSS - React CSS cơ bản",
+        "videoId": "mqER5_FugPQ",
+        "url": "https://www.youtube.com/watch?v=mqER5_FugPQ",
+        "duration": "7:14"
+      },
+      {
+        "index": 34,
+        "title": "17.2 React CSS 02 -  Import CSS trong react buổi 2 - Thêm nhiều class đồng thời vào phần tử",
+        "videoId": "9SBesoBNyAI",
+        "url": "https://www.youtube.com/watch?v=9SBesoBNyAI",
+        "duration": "9:16"
+      },
+      {
+        "index": 35,
+        "title": "17.3 React CSS - Inline styling in Reactjs - CSS Inline trong React - Hướng dẫn React cho người mới",
+        "videoId": "Lny2GHuVUk4",
+        "url": "https://www.youtube.com/watch?v=Lny2GHuVUk4",
+        "duration": "9:00"
+      },
+      {
+        "index": 36,
+        "title": "18.1 Refs & Portals trong React -Giới thiệu dự án thực hành refs - protals react js, Ôn tập useState",
+        "videoId": "N_EOdhOF90Q",
+        "url": "https://www.youtube.com/watch?v=N_EOdhOF90Q",
+        "duration": "19:58"
+      },
+      {
+        "index": 37,
+        "title": "18.10 Xử lý thông báo thắng thua - Dự án thực hành refs, protals react js tuhoc.cc",
+        "videoId": "1TwcB26zUKI",
+        "url": "https://www.youtube.com/watch?v=1TwcB26zUKI",
+        "duration": "10:54"
+      },
+      {
+        "index": 38,
+        "title": "18.11 Hiển thị kết quả – Tính điểm khi dừng đúng thời gian - Dự án thực hành refs, protals react js",
+        "videoId": "Nd6Owfq9TPA",
+        "url": "https://www.youtube.com/watch?v=Nd6Owfq9TPA",
+        "duration": "4:51"
+      },
+      {
+        "index": 39,
+        "title": "18.12 Giải Thích Portals Trong React_ Dễ Hiểu & Ứng Dụng Thực Tế",
+        "videoId": "SZo2RIz3xEQ",
+        "url": "https://www.youtube.com/watch?v=SZo2RIz3xEQ",
+        "duration": "5:14"
+      },
+      {
+        "index": 40,
+        "title": "18.2 React useRef_ Làm Chủ .current để Điều Khiển Component",
+        "videoId": "xNl2S9l_ZdY",
+        "url": "https://www.youtube.com/watch?v=xNl2S9l_ZdY",
+        "duration": "8:29"
+      },
+      {
+        "index": 41,
+        "title": "18.5 Thêm useState Timer- Refs & Portals trong React - Dự án thực hành react refs và protals",
+        "videoId": "xQ-qCwatMGk",
+        "url": "https://www.youtube.com/watch?v=xQ-qCwatMGk",
+        "duration": "10:31"
+      },
+      {
+        "index": 42,
+        "title": "18.6 Sử dụng ref để xử lý Stop Timer - Refs & Portals trong React",
+        "videoId": "ZS1Gx0WgRy4",
+        "url": "https://www.youtube.com/watch?v=ZS1Gx0WgRy4",
+        "duration": "7:02"
+      },
+      {
+        "index": 43,
+        "title": "18.7 Thêm Modal Popup – Kết hợp useRef với dialog - Refs & Portals trong React",
+        "videoId": "6Fvcu0fTrL4",
+        "url": "https://www.youtube.com/watch?v=6Fvcu0fTrL4",
+        "duration": "12:54"
+      },
+      {
+        "index": 44,
+        "title": "18.8 useImperativeHandle Hook - Nâng cấp logic với useImperativeHandle trong react js",
+        "videoId": "lHQpiveIhNU",
+        "url": "https://www.youtube.com/watch?v=lHQpiveIhNU",
+        "duration": "8:31"
+      },
+      {
+        "index": 45,
+        "title": "19. useReducer trong React_ Cách quản lý state phức tạp với useReducer",
+        "videoId": "qKrwsWPfo7M",
+        "url": "https://www.youtube.com/watch?v=qKrwsWPfo7M",
+        "duration": "26:36"
+      },
+      {
+        "index": 46,
+        "title": "20.1 useContext React – Hạn chế của useState với cách truyền props drilling",
+        "videoId": "DOWpU5D3jQs",
+        "url": "https://www.youtube.com/watch?v=DOWpU5D3jQs",
+        "duration": "15:49"
+      },
+      {
+        "index": 47,
+        "title": "20.2 useContext React – Giải pháp tối ưu cho truyền dữ liệu nhiều tầng tránh props drilling",
+        "videoId": "uThJpDOGBH8",
+        "url": "https://www.youtube.com/watch?v=uThJpDOGBH8",
+        "duration": "12:12"
+      },
+      {
+        "index": 48,
+        "title": "21.1 React useEffect Là Gì_ Hướng Dẫn Toàn Tập Cho Người Mới Bắt Đầu",
+        "videoId": "Vjwbf98eHbY",
+        "url": "https://www.youtube.com/watch?v=Vjwbf98eHbY",
+        "duration": "17:57"
+      },
+      {
+        "index": 49,
+        "title": "21.2 Làm chủ useEffect trong ReactJS_ Thực hành call API và phân tích kết quả",
+        "videoId": "FkzgZM6t0C4",
+        "url": "https://www.youtube.com/watch?v=FkzgZM6t0C4",
+        "duration": "14:37"
+      },
+      {
+        "index": 50,
+        "title": "21.3 ReactJS useEffect_ Cách Unmount Component & Cleanup setInterval_setTimeout Trong React",
+        "videoId": "FddUKtPcbKY",
+        "url": "https://www.youtube.com/watch?v=FddUKtPcbKY",
+        "duration": "17:34"
+      },
+      {
+        "index": 51,
+        "title": "21.4 Hướng dẫn useEffect với event DOM_ Resize, Keydown trong ReactJS",
+        "videoId": "YuPlKhRrj5E",
+        "url": "https://www.youtube.com/watch?v=YuPlKhRrj5E",
+        "duration": "9:18"
+      },
+      {
+        "index": 52,
+        "title": "22. ReactJS useLayoutEffect_ Hiểu Rõ Khác Biệt với useEffect Qua Ví Dụ Thực Tế",
+        "videoId": "zSn2-FWyxRw",
+        "url": "https://www.youtube.com/watch?v=zSn2-FWyxRw",
+        "duration": "6:16"
+      },
+      {
+        "index": 53,
+        "title": "23. React.memo giải thích dễ hiểu – Khi nào nên dùng và lưu ý cho người mới",
+        "videoId": "bbcxNnaMN78",
+        "url": "https://www.youtube.com/watch?v=bbcxNnaMN78",
+        "duration": "10:10"
+      },
+      {
+        "index": 54,
+        "title": "24. React.memo & useCallback_ Cách Giảm Số Lần Render Component Con Hiệu Quả",
+        "videoId": "W9nB1py0BYk",
+        "url": "https://www.youtube.com/watch?v=W9nB1py0BYk",
+        "duration": "7:00"
+      },
+      {
+        "index": 55,
+        "title": "25  React useMemo  Cách tối ưu component với phép tính phức tạp",
+        "videoId": "re0PdyYWim4",
+        "url": "https://www.youtube.com/watch?v=re0PdyYWim4",
+        "duration": "10:43"
+      },
+      {
+        "index": 56,
+        "title": "26.1. Tự Học ReactJS Qua Dự Án – Hướng dẫn làm App trắc nghiệm (Quiz App)",
+        "videoId": "fbzfOmTkdWQ",
+        "url": "https://www.youtube.com/watch?v=fbzfOmTkdWQ",
+        "duration": "11:30"
+      },
+      {
+        "index": 57,
+        "title": "26.11. React key prop React useRef bị lưu dữ liệu cũ Giải thích & fix bằng key prop  tuhoc.cc",
+        "videoId": "y4dPO8zZYPY",
+        "url": "https://www.youtube.com/watch?v=y4dPO8zZYPY",
+        "duration": "16:00"
+      },
+      {
+        "index": 58,
+        "title": "26.12. React component Tách và gộp component React xử lý lỗi trùng key",
+        "videoId": "_d1slcn62tk",
+        "url": "https://www.youtube.com/watch?v=_d1slcn62tk",
+        "duration": "15:58"
+      },
+      {
+        "index": 59,
+        "title": "26.13. React Refactor Quiz Đặt lại trách nhiệm component - tuhoc.cc",
+        "videoId": "laK7oTHLQRg",
+        "url": "https://www.youtube.com/watch?v=laK7oTHLQRg",
+        "duration": "32:25"
+      },
+      {
+        "index": 60,
+        "title": "26.14. Vì Sao Progress Trong React Chạy Sai Thời Gian  tuhoc.cc",
+        "videoId": "g1CupGuabTI",
+        "url": "https://www.youtube.com/watch?v=g1CupGuabTI",
+        "duration": "21:07"
+      },
+      {
+        "index": 61,
+        "title": "26.15. React JS Tạo Component Summary - Trang Tổng Kết Kết Quả",
+        "videoId": "OH12ZtCvYH4",
+        "url": "https://www.youtube.com/watch?v=OH12ZtCvYH4",
+        "duration": "32:08"
+      },
+      {
+        "index": 62,
+        "title": "26.2. React JS Quiz App - Hiển thị câu hỏi trắc nghiệm và xử lý đáp án - component Quiz",
+        "videoId": "t6qJOmN1le8",
+        "url": "https://www.youtube.com/watch?v=t6qJOmN1le8",
+        "duration": "20:39"
+      },
+      {
+        "index": 63,
+        "title": "26.3. React JS Quiz App - Giải thích thuật toán shuffle trước khi áp dụng vào Quiz App",
+        "videoId": "DC431jVbOeg",
+        "url": "https://www.youtube.com/watch?v=DC431jVbOeg",
+        "duration": "18:51"
+      },
+      {
+        "index": 64,
+        "title": "26.4. React JS Quiz App - Thêm màn hình kết thúc và xáo trộn câu trả lời Quiz App",
+        "videoId": "9dzQPtjzSbI",
+        "url": "https://www.youtube.com/watch?v=9dzQPtjzSbI",
+        "duration": "12:16"
+      },
+      {
+        "index": 65,
+        "title": "26.5. React JS Quiz App - Thêm thanh tiến trình vào Quiz App  Progress Bar",
+        "videoId": "luZdJmvdNr4",
+        "url": "https://www.youtube.com/watch?v=luZdJmvdNr4",
+        "duration": "15:17"
+      },
+      {
+        "index": 66,
+        "title": "26.7. React JS Quiz App - Hiểu useCallback qua dự án Quiz App",
+        "videoId": "43aGZGXyf8A",
+        "url": "https://www.youtube.com/watch?v=43aGZGXyf8A",
+        "duration": "17:21"
+      },
+      {
+        "index": 67,
+        "title": "26.8. React JS Quiz App - Giải thích Key props qua ví dụ Quiz App",
+        "videoId": "dMmxZbaHCp4",
+        "url": "https://www.youtube.com/watch?v=dMmxZbaHCp4",
+        "duration": "9:02"
+      },
+      {
+        "index": 68,
+        "title": "26.9. React JS Quiz App - Xử lý đổi màu đáp án bằng state",
+        "videoId": "PXGLctWZMQc",
+        "url": "https://www.youtube.com/watch?v=PXGLctWZMQc",
+        "duration": "28:01"
+      }
+    ]
+  },
+  "dotnet": {
+    "listId": "-GHF0aAvKEI",
+    "title": "Học lập trình .NET - phần 1 - Cài đặt Visual Studio và viết chương trình .NET đầu tiên",
+    "count": 35,
+    "videos": [
+      {
+        "index": 1,
+        "title": "Learn .NET programming - part 1 - Install Visual Studio and write your first .NET program",
+        "videoId": "-GHF0aAvKEI",
+        "url": "https://www.youtube.com/watch?v=-GHF0aAvKEI",
+        "duration": "32:52"
+      },
+      {
+        "index": 2,
+        "title": "Học lập trình .NET - Phần 2 - Các kiểu dữ liệu trong .NET",
+        "videoId": "YfPjBME1jus",
+        "url": "https://www.youtube.com/watch?v=YfPjBME1jus",
+        "duration": "43:25"
+      },
+      {
+        "index": 3,
+        "title": "Learn .NET Programming - Part 3 - Array",
+        "videoId": "JsJNlJgSHr0",
+        "url": "https://www.youtube.com/watch?v=JsJNlJgSHr0",
+        "duration": "32:06"
+      },
+      {
+        "index": 4,
+        "title": "Learn .NET Programming - Part 5 - Methods",
+        "videoId": "Lg7n1nyrQTc",
+        "url": "https://www.youtube.com/watch?v=Lg7n1nyrQTc",
+        "duration": "34:55"
+      },
+      {
+        "index": 5,
+        "title": "Học lập trình .NET - Phần 6 - Làm việc với exception",
+        "videoId": "hCSSPlX5JJM",
+        "url": "https://www.youtube.com/watch?v=hCSSPlX5JJM",
+        "duration": "25:17"
+      },
+      {
+        "index": 6,
+        "title": "Học lập trình .NET - Phần 7 - Stream và File",
+        "videoId": "Rn9KEVEbLyE",
+        "url": "https://www.youtube.com/watch?v=Rn9KEVEbLyE",
+        "duration": "35:36"
+      },
+      {
+        "index": 7,
+        "title": "Học lập trình .NET - Phần 8 - Sử dụng Collection trong .NET",
+        "videoId": "5bYGm7XZDPw",
+        "url": "https://www.youtube.com/watch?v=5bYGm7XZDPw",
+        "duration": "24:05"
+      },
+      {
+        "index": 8,
+        "title": "Học lập trình .NET - Phần 9 - Biểu thức Lambda",
+        "videoId": "pL0FSKwJEJI",
+        "url": "https://www.youtube.com/watch?v=pL0FSKwJEJI",
+        "duration": "23:38"
+      },
+      {
+        "index": 9,
+        "title": "Học lập trình .NET - Phần 10 - LINQ",
+        "videoId": "rZFuA9FmDiU",
+        "url": "https://www.youtube.com/watch?v=rZFuA9FmDiU",
+        "duration": "49:08"
+      },
+      {
+        "index": 10,
+        "title": "Học lập trình .NET - Phần 11 - Lập trình hướng đối tượng trong .NET",
+        "videoId": "oiQIS1sFFi0",
+        "url": "https://www.youtube.com/watch?v=oiQIS1sFFi0",
+        "duration": "55:16"
+      },
+      {
+        "index": 11,
+        "title": "Học lập trình .NET - Phần 12 - Đa hình",
+        "videoId": "yhgaUBYNGpw",
+        "url": "https://www.youtube.com/watch?v=yhgaUBYNGpw",
+        "duration": "25:25"
+      },
+      {
+        "index": 12,
+        "title": "Học lập trình .NET - Phần 15 - Giải bài tập, unit test, abstract factory và decorator design pattern",
+        "videoId": "SJL664hxJ-4",
+        "url": "https://www.youtube.com/watch?v=SJL664hxJ-4",
+        "duration": "1:42:06"
+      },
+      {
+        "index": 13,
+        "title": "Học lập trình .NET - Phần 16 - Cài đặt SQL Server",
+        "videoId": "l6COMMwHU50",
+        "url": "https://www.youtube.com/watch?v=l6COMMwHU50",
+        "duration": "46:30"
+      },
+      {
+        "index": 14,
+        "title": "Học lập trình .NET - Phần 17 - Giới thiệu ADO.NET",
+        "videoId": "oJOk40gm984",
+        "url": "https://www.youtube.com/watch?v=oJOk40gm984",
+        "duration": "49:00"
+      },
+      {
+        "index": 15,
+        "title": "Học lập trình .NET - Phần 19 - Giải bài tập: chương trình xuất dữ liệu từ database ra file",
+        "videoId": "momdXqVUGtA",
+        "url": "https://www.youtube.com/watch?v=momdXqVUGtA",
+        "duration": "1:01:35"
+      },
+      {
+        "index": 16,
+        "title": "Learn .NET Programming - Part 20 - Using Repository pattern",
+        "videoId": "Z7yZ_CPhTdM",
+        "url": "https://www.youtube.com/watch?v=Z7yZ_CPhTdM",
+        "duration": "32:14"
+      },
+      {
+        "index": 17,
+        "title": "Học lập trình .NET - Phần 21 - Unit of Work",
+        "videoId": "PAVW4gXDeIA",
+        "url": "https://www.youtube.com/watch?v=PAVW4gXDeIA",
+        "duration": "28:56"
+      },
+      {
+        "index": 18,
+        "title": "Học lập trình .NET - Phần 22 - Sử dụng các chỉ dẫn tiền biên dịch",
+        "videoId": "xfqdMIgCd8k",
+        "url": "https://www.youtube.com/watch?v=xfqdMIgCd8k",
+        "duration": "27:19"
+      },
+      {
+        "index": 19,
+        "title": "Học lập trình .NET - Phần 23 - .NET Generic host",
+        "videoId": "S1u5j6KJ9q4",
+        "url": "https://www.youtube.com/watch?v=S1u5j6KJ9q4",
+        "duration": "18:47"
+      },
+      {
+        "index": 20,
+        "title": "Học lập trình .NET - Phần 24 - Logging",
+        "videoId": "V4c40a4crQM",
+        "url": "https://www.youtube.com/watch?v=V4c40a4crQM",
+        "duration": "37:08"
+      },
+      {
+        "index": 21,
+        "title": "Học lập trình .NET - Phần 25 - Attribute",
+        "videoId": "dHZo6Y2Vnng",
+        "url": "https://www.youtube.com/watch?v=dHZo6Y2Vnng",
+        "duration": "25:43"
+      },
+      {
+        "index": 22,
+        "title": "Học lập trình .NET - Phần 26 - Sử dụng Configuration",
+        "videoId": "iOZWVe_kbFg",
+        "url": "https://www.youtube.com/watch?v=iOZWVe_kbFg",
+        "duration": "34:25"
+      },
+      {
+        "index": 23,
+        "title": "Learn .NET Programming - Part 27 - Dependency Injection",
+        "videoId": "mWwKjyVEi1w",
+        "url": "https://www.youtube.com/watch?v=mWwKjyVEi1w",
+        "duration": "41:02"
+      },
+      {
+        "index": 24,
+        "title": "Học lập trình .NET - Phần 28 - Caching (và decorator design pattern)",
+        "videoId": "-q6ze5V1sLA",
+        "url": "https://www.youtube.com/watch?v=-q6ze5V1sLA",
+        "duration": "50:51"
+      },
+      {
+        "index": 25,
+        "title": "Học lập trình .NET - Phần 29 - Reflection",
+        "videoId": "JQx8E1Y_Bac",
+        "url": "https://www.youtube.com/watch?v=JQx8E1Y_Bac",
+        "duration": "1:07:07"
+      },
+      {
+        "index": 26,
+        "title": "Học lập trình .NET - Phần 30 - Làm quen với Thread",
+        "videoId": "eVXktAmwqf8",
+        "url": "https://www.youtube.com/watch?v=eVXktAmwqf8",
+        "duration": "48:35"
+      },
+      {
+        "index": 27,
+        "title": "Học lập trình .NET - Phần 32 - Sử dụng Semaphore",
+        "videoId": "gh4TrZTJIfA",
+        "url": "https://www.youtube.com/watch?v=gh4TrZTJIfA",
+        "duration": "39:44"
+      },
+      {
+        "index": 28,
+        "title": "Học lập trình .NET - Phần 33 -  Sử dụng lock, Monitor để kiểm soát các critical section",
+        "videoId": "cOMcUJw1u_Q",
+        "url": "https://www.youtube.com/watch?v=cOMcUJw1u_Q",
+        "duration": "20:38"
+      },
+      {
+        "index": 29,
+        "title": "Learn .NET programming - Part 34 - Asynchronous processing with async function",
+        "videoId": "J-V95HRPN_4",
+        "url": "https://www.youtube.com/watch?v=J-V95HRPN_4",
+        "duration": "31:10"
+      },
+      {
+        "index": 30,
+        "title": "Học lập trình .NET - Phần 36 - Lập trình mạng với Socket",
+        "videoId": "T6XJITMtm88",
+        "url": "https://www.youtube.com/watch?v=T6XJITMtm88",
+        "duration": "1:01:31"
+      },
+      {
+        "index": 31,
+        "title": "Học lập trình .NET - Phần 37 - Giải bài tập viết Web server (phần 1)",
+        "videoId": "v2s1FjkWReI",
+        "url": "https://www.youtube.com/watch?v=v2s1FjkWReI",
+        "duration": "1:00:22"
+      },
+      {
+        "index": 32,
+        "title": "Học lập trình .NET - Phần 38 - Giải bài tập viết Web server (phần 2)",
+        "videoId": "Ns7-MptWchg",
+        "url": "https://www.youtube.com/watch?v=Ns7-MptWchg",
+        "duration": "41:14"
+      },
+      {
+        "index": 33,
+        "title": "Học lập trình .NET - Phần 39 - Giải bài tập viết Web server (phần 3)",
+        "videoId": "QG9F0HUXnDE",
+        "url": "https://www.youtube.com/watch?v=QG9F0HUXnDE",
+        "duration": "35:59"
+      },
+      {
+        "index": 34,
+        "title": "Học lập trình .NET - Phần 40 - Giải bài tập viết Web server (phần 4)",
+        "videoId": "mfPNxCk7z_w",
+        "url": "https://www.youtube.com/watch?v=mfPNxCk7z_w",
+        "duration": "1:23:55"
+      },
+      {
+        "index": 35,
+        "title": "Học lập trình .NET - Phần 41 - Sử dụng thư viện HttpClient",
+        "videoId": "MVozXwLv3QI",
+        "url": "https://www.youtube.com/watch?v=MVozXwLv3QI",
+        "duration": "14:44"
+      }
+    ]
+  },
+  "nextjs": {
+    "listId": "PLFfVmM19UNqn1ZIWvxn1artfz-C6dgAFb",
+    "title": "[2024] Học Next.js 14 miễn phí | Khóa học NextJs TypeScript siêu chi tiết | Được Dev",
+    "count": 41,
+    "videos": [
+      {
+        "index": 1,
+        "title": "1. Next.js là gì? Giới thiệu về khóa học Next.js 14 Free",
+        "videoId": "ucdjfU_XKpw",
+        "url": "https://www.youtube.com/watch?v=ucdjfU_XKpw",
+        "duration": "23:11"
+      },
+      {
+        "index": 2,
+        "title": "Giới thiệu khóa học Next.js Super 2024 | Dự án Quản lý quán ăn, gọi món bằng QR Code",
+        "videoId": "b1D5V3vMFMo",
+        "url": "https://www.youtube.com/watch?v=b1D5V3vMFMo",
+        "duration": "39:14"
+      },
+      {
+        "index": 3,
+        "title": "2. Setup môi trường để code Next.js",
+        "videoId": "BQ7O3YV5a3c",
+        "url": "https://www.youtube.com/watch?v=BQ7O3YV5a3c",
+        "duration": "9:27"
+      },
+      {
+        "index": 4,
+        "title": "3. Cài đặt dự án Next.js",
+        "videoId": "G1ZxuK5McpA",
+        "url": "https://www.youtube.com/watch?v=G1ZxuK5McpA",
+        "duration": "8:14"
+      },
+      {
+        "index": 5,
+        "title": "4. Cấu trúc thư mục một dự án Next.js",
+        "videoId": "y5yUaJnGUlc",
+        "url": "https://www.youtube.com/watch?v=y5yUaJnGUlc",
+        "duration": "9:04"
+      },
+      {
+        "index": 6,
+        "title": "5. Hướng dẫn dùng thư viện ShadCn UI với Next.js",
+        "videoId": "BeZ8E0v8VAI",
+        "url": "https://www.youtube.com/watch?v=BeZ8E0v8VAI",
+        "duration": "23:46"
+      },
+      {
+        "index": 7,
+        "title": "6. CSS style trong Next.js",
+        "videoId": "sjm9W5MmGH4",
+        "url": "https://www.youtube.com/watch?v=sjm9W5MmGH4",
+        "duration": "15:03"
+      },
+      {
+        "index": 8,
+        "title": "7. Sử dụng Fonts trong Next.js (Google Fonts, Local Fonts, Tailwind CSS)",
+        "videoId": "F3iDXE8Y6Es",
+        "url": "https://www.youtube.com/watch?v=F3iDXE8Y6Es",
+        "duration": "21:11"
+      },
+      {
+        "index": 9,
+        "title": "8. Sử dụng Image trong Next.js (với next/image)",
+        "videoId": "lZ_iGLU_BZo",
+        "url": "https://www.youtube.com/watch?v=lZ_iGLU_BZo",
+        "duration": "15:24"
+      },
+      {
+        "index": 10,
+        "title": "9. Routing trong Next.js",
+        "videoId": "Eaz4c1VN7Yg",
+        "url": "https://www.youtube.com/watch?v=Eaz4c1VN7Yg",
+        "duration": "19:31"
+      },
+      {
+        "index": 11,
+        "title": "10. Reviewing rendering concepts",
+        "videoId": "VgDfNmftuSA",
+        "url": "https://www.youtube.com/watch?v=VgDfNmftuSA",
+        "duration": "3:11"
+      },
+      {
+        "index": 12,
+        "title": "11. Mọi thứ cần biết về Client Component Next.js",
+        "videoId": "WQCnZsncIBg",
+        "url": "https://www.youtube.com/watch?v=WQCnZsncIBg",
+        "duration": "20:01"
+      },
+      {
+        "index": 13,
+        "title": "12. Server Component Next.js, sự khác biệt giữa React truyền thống và Next.js",
+        "videoId": "DlEdEcIJtUQ",
+        "url": "https://www.youtube.com/watch?v=DlEdEcIJtUQ",
+        "duration": "13:59"
+      },
+      {
+        "index": 14,
+        "title": "13. Next.js render components của chúng ta như thế nào?",
+        "videoId": "iBH-ofQ5aI8",
+        "url": "https://www.youtube.com/watch?v=iBH-ofQ5aI8",
+        "duration": "9:53"
+      },
+      {
+        "index": 15,
+        "title": "14. Giới thiệu API dự án khóa học Next.js Free Được Dev",
+        "videoId": "BbpaYjp3ZCE",
+        "url": "https://www.youtube.com/watch?v=BbpaYjp3ZCE",
+        "duration": "28:15"
+      },
+      {
+        "index": 16,
+        "title": "15. Hướng dẫn chuyển Dark Light Mode với Shadcn UI Next.js",
+        "videoId": "IrqplNnI5QI",
+        "url": "https://www.youtube.com/watch?v=IrqplNnI5QI",
+        "duration": "12:40"
+      },
+      {
+        "index": 17,
+        "title": "16. Code trang Register với Next.js, Shadcn UI, React Hook Form, Zod",
+        "videoId": "tHb6nd48xqA",
+        "url": "https://www.youtube.com/watch?v=tHb6nd48xqA",
+        "duration": "51:43"
+      },
+      {
+        "index": 18,
+        "title": "17. Code trang Login với Next.js, Shadcn UI, React Hook Form, Zod",
+        "videoId": "OBDKZXYpFoA",
+        "url": "https://www.youtube.com/watch?v=OBDKZXYpFoA",
+        "duration": "20:21"
+      },
+      {
+        "index": 19,
+        "title": "18. Quản lý Authentication trong Next.js. Điều mà ít người nói với bạn!",
+        "videoId": "An20zqBLJvU",
+        "url": "https://www.youtube.com/watch?v=An20zqBLJvU",
+        "duration": "1:22:03"
+      },
+      {
+        "index": 20,
+        "title": "19. Tạo Http client với fetch để gọi API cho Next.js",
+        "videoId": "f3xfab2pl70",
+        "url": "https://www.youtube.com/watch?v=f3xfab2pl70",
+        "duration": "1:08:22"
+      },
+      {
+        "index": 21,
+        "title": "20. Xử lý lỗi từ API sao cho tiện | Khóa học Next.js Free từ Được Dev",
+        "videoId": "Ji-6jUcfjUU",
+        "url": "https://www.youtube.com/watch?v=Ji-6jUcfjUU",
+        "duration": "19:15"
+      },
+      {
+        "index": 22,
+        "title": "21. Xử lý logout với Next.js | Hiểu được flow authentication rồi thì làm quá dễ | Khóa học Next.js",
+        "videoId": "km9gFsauI9k",
+        "url": "https://www.youtube.com/watch?v=km9gFsauI9k",
+        "duration": "21:55"
+      },
+      {
+        "index": 23,
+        "title": "22. Tự động logout khi token hết hạn | Tư duy về Authentication Next.js | Khóa học Next.js",
+        "videoId": "-oA1BWgcdIM",
+        "url": "https://www.youtube.com/watch?v=-oA1BWgcdIM",
+        "duration": "57:56"
+      },
+      {
+        "index": 24,
+        "title": "23. Automatically renew session expiration time | Prevent logout while user is logged in | Next.j...",
+        "videoId": "aymRlPnnjSk",
+        "url": "https://www.youtube.com/watch?v=aymRlPnnjSk",
+        "duration": "45:41"
+      },
+      {
+        "index": 25,
+        "title": "24. Quản lý Access Token và Refresh Token trong Next.js | JWT Authentication Next | Khóa học Next.js",
+        "videoId": "WK0MYNCsZ_g",
+        "url": "https://www.youtube.com/watch?v=WK0MYNCsZ_g",
+        "duration": "11:35"
+      },
+      {
+        "index": 26,
+        "title": "25. Làm chức năng cập nhật Profile. Dùng router.refresh() để refresh route | Khóa học Next.js",
+        "videoId": "8tUOanO1rXo",
+        "url": "https://www.youtube.com/watch?v=8tUOanO1rXo",
+        "duration": "14:11"
+      },
+      {
+        "index": 27,
+        "title": "26. Upload hình ảnh và tạo sản phẩm | Khóa học Next.js",
+        "videoId": "XO8CDICPrC4",
+        "url": "https://www.youtube.com/watch?v=XO8CDICPrC4",
+        "duration": "44:04"
+      },
+      {
+        "index": 28,
+        "title": "27. Render trang danh sách sản phẩm bằng Server Component | Khóa học Next.js",
+        "videoId": "9-KnYvapbPg",
+        "url": "https://www.youtube.com/watch?v=9-KnYvapbPg",
+        "duration": "11:10"
+      },
+      {
+        "index": 29,
+        "title": "28. Tạo trang chi tiết sản phẩm | Khóa học Next.js",
+        "videoId": "jNlSZ3NDrv8",
+        "url": "https://www.youtube.com/watch?v=jNlSZ3NDrv8",
+        "duration": "14:08"
+      },
+      {
+        "index": 30,
+        "title": "29. Cập nhật sản phẩm. Biện pháp tránh caching API | Khóa học Next.js",
+        "videoId": "UZOaMtOPDs4",
+        "url": "https://www.youtube.com/watch?v=UZOaMtOPDs4",
+        "duration": "24:11"
+      },
+      {
+        "index": 31,
+        "title": "30. Xóa sản phẩm | Khóa học Next.js",
+        "videoId": "_PC3YbAYokw",
+        "url": "https://www.youtube.com/watch?v=_PC3YbAYokw",
+        "duration": "18:35"
+      },
+      {
+        "index": 32,
+        "title": "31. Fix bug caching sau khi thêm sản phẩm | Khóa học Next.js",
+        "videoId": "nCimFZTQ0zg",
+        "url": "https://www.youtube.com/watch?v=nCimFZTQ0zg",
+        "duration": "4:26"
+      },
+      {
+        "index": 33,
+        "title": "32. Tối ưu logic Server Component Header | Khóa học Next.js",
+        "videoId": "7XLkydjByuA",
+        "url": "https://www.youtube.com/watch?v=7XLkydjByuA",
+        "duration": "10:00"
+      },
+      {
+        "index": 34,
+        "title": "33. Share global state user với các component con thông qua Context API | Khóa học Next.js",
+        "videoId": "tgOwRbAGiQM",
+        "url": "https://www.youtube.com/watch?v=tgOwRbAGiQM",
+        "duration": "17:04"
+      },
+      {
+        "index": 35,
+        "title": "34. Code logic trang Product Detail dành cho khách | Khóa học Next.js",
+        "videoId": "tMRUlYrerc8",
+        "url": "https://www.youtube.com/watch?v=tMRUlYrerc8",
+        "duration": "17:35"
+      },
+      {
+        "index": 36,
+        "title": "35. SEO title và description | SEO cơ bản cho Next.js | Khóa học Next.js",
+        "videoId": "JMn8hARAjAs",
+        "url": "https://www.youtube.com/watch?v=JMn8hARAjAs",
+        "duration": "25:33"
+      },
+      {
+        "index": 37,
+        "title": "36. SEO Open Graph Next.js | Chia sẻ website NextJs trên Facebook đẹp hơn | Khóa học Next.js",
+        "videoId": "_DoyMUWmv6E",
+        "url": "https://www.youtube.com/watch?v=_DoyMUWmv6E",
+        "duration": "16:50"
+      },
+      {
+        "index": 38,
+        "title": "37. SEO Metadata file favicon.ico, robots.txt cho Next.js | Khóa học Next.js",
+        "videoId": "Juym2B1CyiI",
+        "url": "https://www.youtube.com/watch?v=Juym2B1CyiI",
+        "duration": "10:48"
+      },
+      {
+        "index": 39,
+        "title": "38. Tối ưu page khi build | Chuyển đổi Dynamic Rendering sang Static Rendering | Khóa học Next.js",
+        "videoId": "Zu-VkiNZNEw",
+        "url": "https://www.youtube.com/watch?v=Zu-VkiNZNEw",
+        "duration": "34:30"
+      },
+      {
+        "index": 40,
+        "title": "39. Chuyển đổi trang Products từ Dynamic Rendering sang Static Rendering | Khóa học Next.js",
+        "videoId": "304VLtRXX3Q",
+        "url": "https://www.youtube.com/watch?v=304VLtRXX3Q",
+        "duration": "42:51"
+      },
+      {
+        "index": 41,
+        "title": "Sài lầm này sẽ làm tăng bundle size website Next.js của bạn",
+        "videoId": "I0HVrVpzXjc",
+        "url": "https://www.youtube.com/watch?v=I0HVrVpzXjc",
+        "duration": "7:06"
+      }
+    ]
+  },
+  "python": {
+    "listId": "PL33lvabfss1xczCv2BA0SaNJHu_VXsFtg",
+    "title": "[Python] Lập trình Python cơ bản - Howkteam",
+    "count": 36,
+    "videos": [
+      {
+        "index": 1,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 1: Giới thiệu ngôn ngữ lập trình Python | HowKteam",
+        "videoId": "NZj6LI5a9vc",
+        "url": "https://www.youtube.com/watch?v=NZj6LI5a9vc",
+        "duration": "12:45"
+      },
+      {
+        "index": 2,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 2: Cài đặt môi trường Python | HowKteam",
+        "videoId": "jf-q_dG8WzI",
+        "url": "https://www.youtube.com/watch?v=jf-q_dG8WzI",
+        "duration": "6:16"
+      },
+      {
+        "index": 3,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 3: Chạy file Python | HowKteam",
+        "videoId": "QFxqY8qv42E",
+        "url": "https://www.youtube.com/watch?v=QFxqY8qv42E",
+        "duration": "13:23"
+      },
+      {
+        "index": 4,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 4: Comment trong Python | HowKteam",
+        "videoId": "t3dERE9T5yg",
+        "url": "https://www.youtube.com/watch?v=t3dERE9T5yg",
+        "duration": "9:54"
+      },
+      {
+        "index": 5,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 5: Biến(Variable) trong Python | HowKteam",
+        "videoId": "nclE18Yl-kA",
+        "url": "https://www.youtube.com/watch?v=nclE18Yl-kA",
+        "duration": "16:18"
+      },
+      {
+        "index": 6,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 6: Kiểu số trong Python | HowKteam",
+        "videoId": "IAVvgqDBiv0",
+        "url": "https://www.youtube.com/watch?v=IAVvgqDBiv0",
+        "duration": "38:35"
+      },
+      {
+        "index": 7,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 7: Kiểu chuỗi trong Python - Phần 1 | HowKteam",
+        "videoId": "Vb6XWSLPQfg",
+        "url": "https://www.youtube.com/watch?v=Vb6XWSLPQfg",
+        "duration": "26:31"
+      },
+      {
+        "index": 8,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 8: Kiểu chuỗi trong Python - Phần 2 | HowKteam",
+        "videoId": "gzWriEOVjU0",
+        "url": "https://www.youtube.com/watch?v=gzWriEOVjU0",
+        "duration": "29:36"
+      },
+      {
+        "index": 9,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 9: Kiểu chuỗi trong Python p3 | HowKteam",
+        "videoId": "LRUHnuHljPQ",
+        "url": "https://www.youtube.com/watch?v=LRUHnuHljPQ",
+        "duration": "40:32"
+      },
+      {
+        "index": 10,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 10: Kiểu chuỗi trong Python - Phần 4 | HowKteam",
+        "videoId": "q2TNJMBx6GE",
+        "url": "https://www.youtube.com/watch?v=q2TNJMBx6GE",
+        "duration": "29:15"
+      },
+      {
+        "index": 11,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 11: Kiểu chuỗi trong Python - Phần 5 | HowKteam",
+        "videoId": "u2Kd3weqPZE",
+        "url": "https://www.youtube.com/watch?v=u2Kd3weqPZE",
+        "duration": "15:52"
+      },
+      {
+        "index": 12,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 12: List trong Python - Phần 1 | HowKteam",
+        "videoId": "UzTE665WXb8",
+        "url": "https://www.youtube.com/watch?v=UzTE665WXb8",
+        "duration": "43:16"
+      },
+      {
+        "index": 13,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 13: List trong Python - Phần 2 | HowKteam",
+        "videoId": "9IH3EynbcpU",
+        "url": "https://www.youtube.com/watch?v=9IH3EynbcpU",
+        "duration": "18:39"
+      },
+      {
+        "index": 14,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 14: Tuple trong Python | HowKteam",
+        "videoId": "dDFFCbRGm3o",
+        "url": "https://www.youtube.com/watch?v=dDFFCbRGm3o",
+        "duration": "20:32"
+      },
+      {
+        "index": 15,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 15: Hashable và Unhashable trong Python | HowKteam",
+        "videoId": "gw9zbl2Q7r4",
+        "url": "https://www.youtube.com/watch?v=gw9zbl2Q7r4",
+        "duration": "24:35"
+      },
+      {
+        "index": 16,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 16: Set trong Python | HowKteam",
+        "videoId": "S-CWHkKiOBs",
+        "url": "https://www.youtube.com/watch?v=S-CWHkKiOBs",
+        "duration": "31:35"
+      },
+      {
+        "index": 17,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 17: Dict trong Python - Phần 1| HowKteam",
+        "videoId": "zFDTmZjJFws",
+        "url": "https://www.youtube.com/watch?v=zFDTmZjJFws",
+        "duration": "21:53"
+      },
+      {
+        "index": 18,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 18: Dict trong Python - Phần 2 | HowKteam",
+        "videoId": "jmwBKuJl2Zg",
+        "url": "https://www.youtube.com/watch?v=jmwBKuJl2Zg",
+        "duration": "18:13"
+      },
+      {
+        "index": 19,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 19: Xử lý File trong Python| HowKteam",
+        "videoId": "6J8-jkoRBXw",
+        "url": "https://www.youtube.com/watch?v=6J8-jkoRBXw",
+        "duration": "23:35"
+      },
+      {
+        "index": 20,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 20: Iteration trong Python| HowKteam",
+        "videoId": "GSUwh958k_A",
+        "url": "https://www.youtube.com/watch?v=GSUwh958k_A",
+        "duration": "20:56"
+      },
+      {
+        "index": 21,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 21: Hàm xuất trong Python| HowKteam",
+        "videoId": "rhOyCSIf1is",
+        "url": "https://www.youtube.com/watch?v=rhOyCSIf1is",
+        "duration": "22:12"
+      },
+      {
+        "index": 22,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 22: Hàm nhập trong Python| HowKteam",
+        "videoId": "rK4MphZVhDM",
+        "url": "https://www.youtube.com/watch?v=rK4MphZVhDM",
+        "duration": "16:41"
+      },
+      {
+        "index": 23,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 23: Kiểu Boolean trong python| HowKteam",
+        "videoId": "iB9EhSZvfFk",
+        "url": "https://www.youtube.com/watch?v=iB9EhSZvfFk",
+        "duration": "26:10"
+      },
+      {
+        "index": 24,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 24: Cấu trúc rẽ nhánh trong Python| HowKteam",
+        "videoId": "4_Jb1xZsDJ8",
+        "url": "https://www.youtube.com/watch?v=4_Jb1xZsDJ8",
+        "duration": "22:54"
+      },
+      {
+        "index": 25,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 25: While Loop trong Python| HowKteam",
+        "videoId": "wq7Th3nXyCQ",
+        "url": "https://www.youtube.com/watch?v=wq7Th3nXyCQ",
+        "duration": "18:36"
+      },
+      {
+        "index": 26,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 26: For Loop trong Python - Phần 1| HowKteam",
+        "videoId": "9TxJ71NNO64",
+        "url": "https://www.youtube.com/watch?v=9TxJ71NNO64",
+        "duration": "38:11"
+      },
+      {
+        "index": 27,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 27: For Loop trong Python - Phần 2| HowKteam",
+        "videoId": "LwC0n2A6QRQ",
+        "url": "https://www.youtube.com/watch?v=LwC0n2A6QRQ",
+        "duration": "34:27"
+      },
+      {
+        "index": 28,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 28: Function trong python - Sơ lược về hàm| HowKteam",
+        "videoId": "a6FnNvt3Fw4",
+        "url": "https://www.youtube.com/watch?v=a6FnNvt3Fw4",
+        "duration": "22:59"
+      },
+      {
+        "index": 29,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 29: Function trong python - Positional| HowKteam",
+        "videoId": "M77p3PB-qzM",
+        "url": "https://www.youtube.com/watch?v=M77p3PB-qzM",
+        "duration": "11:01"
+      },
+      {
+        "index": 30,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 30: Function trong Python - Packing và unpacking | HowKteam",
+        "videoId": "0Gf5MVTWuCY",
+        "url": "https://www.youtube.com/watch?v=0Gf5MVTWuCY",
+        "duration": "14:10"
+      },
+      {
+        "index": 31,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 31: Function trong Python - Locals và globals| HowKteam",
+        "videoId": "w7qnt6iIakM",
+        "url": "https://www.youtube.com/watch?v=w7qnt6iIakM",
+        "duration": "13:25"
+      },
+      {
+        "index": 32,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 32: Function trong Python - Return| HowKteam",
+        "videoId": "3bdMH8z50zE",
+        "url": "https://www.youtube.com/watch?v=3bdMH8z50zE",
+        "duration": "7:02"
+      },
+      {
+        "index": 33,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 33: Function trong Python - Yield| HowKteam",
+        "videoId": "aChGfj5h3UQ",
+        "url": "https://www.youtube.com/watch?v=aChGfj5h3UQ",
+        "duration": "14:07"
+      },
+      {
+        "index": 34,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 34: Function trong Python - Lambda| HowKteam",
+        "videoId": "7YTL1u5Ja5A",
+        "url": "https://www.youtube.com/watch?v=7YTL1u5Ja5A",
+        "duration": "15:16"
+      },
+      {
+        "index": 35,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 35: Function trong Python - Functional tools| HowKteam",
+        "videoId": "W5Xvw_2WPeg",
+        "url": "https://www.youtube.com/watch?v=W5Xvw_2WPeg",
+        "duration": "11:59"
+      },
+      {
+        "index": 36,
+        "title": "[Khóa học lập trình Python cơ bản] - Bài 36: Function trong Python - Đệ Quy| HowKteam",
+        "videoId": "AFNMgGmWcdQ",
+        "url": "https://www.youtube.com/watch?v=AFNMgGmWcdQ",
+        "duration": "10:09"
+      }
+    ]
+  },
+  "cpp": {
+    "listId": "",
+    "title": "cpp",
+    "count": 53,
+    "videos": [
+      {
+        "index": 1,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 0: Tổng quan về khóa học Lập trình C++ | HowKteam",
+        "videoId": "WS05AU6YYm4",
+        "url": "https://www.youtube.com/watch?v=WS05AU6YYm4",
+        "duration": "2:02"
+      },
+      {
+        "index": 2,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 1: Giới thiệu về C++ | HowKteam",
+        "videoId": "ILr_rU-lISk",
+        "url": "https://www.youtube.com/watch?v=ILr_rU-lISk",
+        "duration": "4:04"
+      },
+      {
+        "index": 3,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 1: Giới thiệu về C++ | HowKteam",
+        "videoId": "dTDKsRSoBhs",
+        "url": "https://www.youtube.com/watch?v=dTDKsRSoBhs",
+        "duration": "6:03"
+      },
+      {
+        "index": 4,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 6: Biến trong C++ (Variables in C++) | HowKteam",
+        "videoId": "i3nJyEt42Y8",
+        "url": "https://www.youtube.com/watch?v=i3nJyEt42Y8",
+        "duration": "13:53"
+      },
+      {
+        "index": 5,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 7: Số tự nhiên và Số chấm động trong C++ | HowKteam",
+        "videoId": "wE3WhKbExN8",
+        "url": "https://www.youtube.com/watch?v=wE3WhKbExN8",
+        "duration": "21:53"
+      },
+      {
+        "index": 6,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 9: Kiểu Boolean và Câu điều kiện If | HowKteam",
+        "videoId": "3-G-MLXj5n0",
+        "url": "https://www.youtube.com/watch?v=3-G-MLXj5n0",
+        "duration": "8:37"
+      },
+      {
+        "index": 7,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 10: Nhập, Xuất và Định dạng dữ liệu trong C++ | HowKteam",
+        "videoId": "Xh-gwtPCicU",
+        "url": "https://www.youtube.com/watch?v=Xh-gwtPCicU",
+        "duration": "12:15"
+      },
+      {
+        "index": 8,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 12: Toán tử số học, tăng giảm, gán số học trong C++ | HowKteam",
+        "videoId": "y3ZoBtxOYFI",
+        "url": "https://www.youtube.com/watch?v=y3ZoBtxOYFI",
+        "duration": "12:30"
+      },
+      {
+        "index": 9,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 13: Toán tử quan hệ, logic, bitwise, misc trong C++ | HowKteam",
+        "videoId": "wd0smCgRszw",
+        "url": "https://www.youtube.com/watch?v=wd0smCgRszw",
+        "duration": "20:10"
+      },
+      {
+        "index": 10,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 14: Cơ bản về chuỗi ký tự trong C++ |  HowKteam",
+        "videoId": "LJ0Ok2JUfgs",
+        "url": "https://www.youtube.com/watch?v=LJ0Ok2JUfgs",
+        "duration": "15:47"
+      },
+      {
+        "index": 11,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 15: Biến cục bộ trong C++ (Local variables in C++) |  HowKteam",
+        "videoId": "CKIAE8La4bE",
+        "url": "https://www.youtube.com/watch?v=CKIAE8La4bE",
+        "duration": "14:07"
+      },
+      {
+        "index": 12,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 16: Biến toàn cục trong C++ (Global variables in C++) HowKteam",
+        "videoId": "Jnv9SVJvSQ0",
+        "url": "https://www.youtube.com/watch?v=Jnv9SVJvSQ0",
+        "duration": "15:46"
+      },
+      {
+        "index": 13,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 17: Biến tĩnh trong C++ (Static variables in C++) | HowKteam",
+        "videoId": "PaBq0pg5M-g",
+        "url": "https://www.youtube.com/watch?v=PaBq0pg5M-g",
+        "duration": "9:22"
+      },
+      {
+        "index": 14,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 19: Ép kiểu tường minh (Explicit type conversion) | HowKteam",
+        "videoId": "-aSyKxmReh8",
+        "url": "https://www.youtube.com/watch?v=-aSyKxmReh8",
+        "duration": "9:42"
+      },
+      {
+        "index": 15,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 19: Ép kiểu tường minh (Explicit type conversion) | HowKteam",
+        "videoId": "-mGwam7b4es",
+        "url": "https://www.youtube.com/watch?v=-mGwam7b4es",
+        "duration": "9:42"
+      },
+      {
+        "index": 16,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 20: Cơ bản về Hàm và Giá trị trả về | Howkteam",
+        "videoId": "So2VJonE32U",
+        "url": "https://www.youtube.com/watch?v=So2VJonE32U",
+        "duration": "11:18"
+      },
+      {
+        "index": 17,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 21: Truyền Giá Trị cho Hàm trong C++ | HowKteam",
+        "videoId": "UZvv2lZGQ4s",
+        "url": "https://www.youtube.com/watch?v=UZvv2lZGQ4s",
+        "duration": "8:30"
+      },
+      {
+        "index": 18,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 22: Truyền Tham Chiếu cho Hàm trong C++ | HowKteam",
+        "videoId": "aMV7_i3XMj4",
+        "url": "https://www.youtube.com/watch?v=aMV7_i3XMj4",
+        "duration": "12:08"
+      },
+      {
+        "index": 19,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 23: Tiền khai báo và Định nghĩa Hàm | HowKteam",
+        "videoId": "FONC8ouPACE",
+        "url": "https://www.youtube.com/watch?v=FONC8ouPACE",
+        "duration": "8:52"
+      },
+      {
+        "index": 20,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 23: Tiền khai báo và Định nghĩa Hàm | HowKteam",
+        "videoId": "T7i2DgLGiUo",
+        "url": "https://www.youtube.com/watch?v=T7i2DgLGiUo",
+        "duration": "8:52"
+      },
+      {
+        "index": 21,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 24: Giới thiệu về cấu trúc điều khiển trong C++ | HowKteam",
+        "videoId": "4xgSxMuOzhg",
+        "url": "https://www.youtube.com/watch?v=4xgSxMuOzhg",
+        "duration": "5:03"
+      },
+      {
+        "index": 22,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 24: Giới thiệu về cấu trúc điều khiển trong C++ | HowKteam",
+        "videoId": "5-_4A3AhY-4",
+        "url": "https://www.youtube.com/watch?v=5-_4A3AhY-4",
+        "duration": "4:50"
+      },
+      {
+        "index": 23,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 25: Câu điều kiện If và Toán tử điều kiện | HowKteam",
+        "videoId": "QVfTsIEt5G4",
+        "url": "https://www.youtube.com/watch?v=QVfTsIEt5G4",
+        "duration": "9:44"
+      },
+      {
+        "index": 24,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 26: Câu điều kiện Switch (Switch statements) | HowKteam",
+        "videoId": "OqadiGNfluQ",
+        "url": "https://www.youtube.com/watch?v=OqadiGNfluQ",
+        "duration": "6:49"
+      },
+      {
+        "index": 25,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 27: Câu lệnh Goto trong C++ (Goto statements) | HowKteam",
+        "videoId": "SjnDi3kbnws",
+        "url": "https://www.youtube.com/watch?v=SjnDi3kbnws",
+        "duration": "8:24"
+      },
+      {
+        "index": 26,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 28: Vòng lặp While trong C++ (While statements) | HowKteam",
+        "videoId": "pEogowJbDJA",
+        "url": "https://www.youtube.com/watch?v=pEogowJbDJA",
+        "duration": "10:31"
+      },
+      {
+        "index": 27,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 29: Vòng lặp Do while (Do while statements) | HowKteam",
+        "videoId": "vuZUfzT0tQs",
+        "url": "https://www.youtube.com/watch?v=vuZUfzT0tQs",
+        "duration": "8:28"
+      },
+      {
+        "index": 28,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 30: Vòng lặp For trong C++ (For statements) | HowKteam",
+        "videoId": "aL59MpOFMe0",
+        "url": "https://www.youtube.com/watch?v=aL59MpOFMe0",
+        "duration": "9:24"
+      },
+      {
+        "index": 29,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 31: Từ khóa Break and continue trong C++ | HowKteam",
+        "videoId": "ahQV8sg2HsE",
+        "url": "https://www.youtube.com/watch?v=ahQV8sg2HsE",
+        "duration": "7:36"
+      },
+      {
+        "index": 30,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 32: Phát sinh số ngẫu nhiên trong C++ | HowKteam",
+        "videoId": "faUM8Xrod-I",
+        "url": "https://www.youtube.com/watch?v=faUM8Xrod-I",
+        "duration": "13:02"
+      },
+      {
+        "index": 31,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 33: Mảng 1 chiều trong C++ (Arrays) | HowKteam",
+        "videoId": "cgKiUF98fLo",
+        "url": "https://www.youtube.com/watch?v=cgKiUF98fLo",
+        "duration": "12:07"
+      },
+      {
+        "index": 32,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 35: Mảng 2 chiều trong C++ (Two-dimensional arrays) | HowKteam",
+        "videoId": "gPzzRrQ5SfY",
+        "url": "https://www.youtube.com/watch?v=gPzzRrQ5SfY",
+        "duration": "12:21"
+      },
+      {
+        "index": 33,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 36: Các thao tác trên Mảng 2 chiều | HowKteam",
+        "videoId": "gXhS1LI2Y1k",
+        "url": "https://www.youtube.com/watch?v=gXhS1LI2Y1k",
+        "duration": "8:09"
+      },
+      {
+        "index": 34,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 38: Các thao tác trên Mảng ký tự (C-style strings) | HowKteam",
+        "videoId": "kdGweX-2Hck",
+        "url": "https://www.youtube.com/watch?v=kdGweX-2Hck",
+        "duration": "13:26"
+      },
+      {
+        "index": 35,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 39: Từ khóa auto trong C++11.(The auto keyword) | HowKteam",
+        "videoId": "5EG-acTN1JI",
+        "url": "https://www.youtube.com/watch?v=5EG-acTN1JI",
+        "duration": "17:58"
+      },
+      {
+        "index": 36,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 40: Vòng lặp for each trong C++11 (For each loops) | HowKteam",
+        "videoId": "O3hMi7dWYuw",
+        "url": "https://www.youtube.com/watch?v=O3hMi7dWYuw",
+        "duration": "17:30"
+      },
+      {
+        "index": 37,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 41: Lớp dựng sẵn Array trong C++11 | HowKteam",
+        "videoId": "J8EV0O6JdCM",
+        "url": "https://www.youtube.com/watch?v=J8EV0O6JdCM",
+        "duration": "13:45"
+      },
+      {
+        "index": 38,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 42: Con trỏ cơ bản trong C++ | HowKteam",
+        "videoId": "ubPxYhz1wvU",
+        "url": "https://www.youtube.com/watch?v=ubPxYhz1wvU",
+        "duration": "25:55"
+      },
+      {
+        "index": 39,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 43: Con trỏ NULL trong C++ (NULL pointers) | HowKteam",
+        "videoId": "Wts7tzAkyQo",
+        "url": "https://www.youtube.com/watch?v=Wts7tzAkyQo",
+        "duration": "12:33"
+      },
+      {
+        "index": 40,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 44: Con trỏ và mảng trong C++ (Pointers and arrays) | HowKteam",
+        "videoId": "Sn6nO4-iN5o",
+        "url": "https://www.youtube.com/watch?v=Sn6nO4-iN5o",
+        "duration": "18:16"
+      },
+      {
+        "index": 41,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 45: Các phép toán trên Con trỏ | HowKteam",
+        "videoId": "UFBa_dtZVdY",
+        "url": "https://www.youtube.com/watch?v=UFBa_dtZVdY",
+        "duration": "14:12"
+      },
+      {
+        "index": 42,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 46: Cấp phát động trong C++  | HowKteam",
+        "videoId": "_p7X49oLNsc",
+        "url": "https://www.youtube.com/watch?v=_p7X49oLNsc",
+        "duration": "15:27"
+      },
+      {
+        "index": 43,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 47:Cấp phát mảng động  | HowKteam",
+        "videoId": "vn4Q8hDz_OQ",
+        "url": "https://www.youtube.com/watch?v=vn4Q8hDz_OQ",
+        "duration": "10:07"
+      },
+      {
+        "index": 44,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 48: Con trỏ & Hằng trong C++ | HowKteam",
+        "videoId": "4u0RdM7xub8",
+        "url": "https://www.youtube.com/watch?v=4u0RdM7xub8",
+        "duration": "10:45"
+      },
+      {
+        "index": 45,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 49: Biến tham chiếu trong C++.(Reference variables) | HowKteam",
+        "videoId": "PILo1Oc7sew",
+        "url": "https://www.youtube.com/watch?v=PILo1Oc7sew",
+        "duration": "11:14"
+      },
+      {
+        "index": 46,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 50: Con trỏ void (Void pointers) | HowKteam",
+        "videoId": "LesxjuZI6Io",
+        "url": "https://www.youtube.com/watch?v=LesxjuZI6Io",
+        "duration": "8:05"
+      },
+      {
+        "index": 47,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 51: Con trỏ trỏ đến con trỏ (Pointers to pointers) | HowKteam",
+        "videoId": "aoP9y-roa_c",
+        "url": "https://www.youtube.com/watch?v=aoP9y-roa_c",
+        "duration": "11:52"
+      },
+      {
+        "index": 48,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 52: Cơ bản về lớp Vector | HowKteam",
+        "videoId": "R6KYxkvg-UQ",
+        "url": "https://www.youtube.com/watch?v=R6KYxkvg-UQ",
+        "duration": "11:30"
+      },
+      {
+        "index": 49,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 53: Truyền địa chỉ cho hàm  | HowKteam",
+        "videoId": "rMv6FDsG1P8",
+        "url": "https://www.youtube.com/watch?v=rMv6FDsG1P8",
+        "duration": "11:40"
+      },
+      {
+        "index": 50,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 54: Hàm trả về giá trị, tham chiếu và địa chỉ | HowKteam",
+        "videoId": "6ILggvfKjko",
+        "url": "https://www.youtube.com/watch?v=6ILggvfKjko",
+        "duration": "11:48"
+      },
+      {
+        "index": 51,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 55: Hàm nội tuyến (Inline functions) trong C++ | HowKteam",
+        "videoId": "clHYkvjYOAU",
+        "url": "https://www.youtube.com/watch?v=clHYkvjYOAU",
+        "duration": "10:54"
+      },
+      {
+        "index": 52,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 56: Nạp chồng hàm (Functions overloading) trong C++ | HowKteam",
+        "videoId": "i9bda3fFZi8",
+        "url": "https://www.youtube.com/watch?v=i9bda3fFZi8",
+        "duration": "10:48"
+      },
+      {
+        "index": 53,
+        "title": "[Khóa học lập trình C++ Cơ bản] - Bài 57: Hàm có đối số mặc định (Default arguments) | HowKteam",
+        "videoId": "uYUAr8G8F3w",
+        "url": "https://www.youtube.com/watch?v=uYUAr8G8F3w",
+        "duration": "12:34"
+      }
+    ]
+  },
+  "typescript": {
+    "listId": "PLncHg6Kn2JT5emvXmG6kgeGkrQjRqxsb4",
+    "title": "Tự Học TypeScript Cơ Bản Từ A đến Z Cho Người Mới Bắt Đầu | Khóa Học TS với Hỏi Dân IT",
+    "count": 42,
+    "videos": [
+      {
+        "index": 1,
+        "title": "#0 Cài Đặt Môi Trường | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "lE4DfZKlwDA",
+        "url": "https://www.youtube.com/watch?v=lE4DfZKlwDA",
+        "duration": "8:49"
+      },
+      {
+        "index": 2,
+        "title": "TypeScript Pro Course Introduction - Demo Results | Self-study TypeScript & JavaScript from zero",
+        "videoId": "FnijTmF4vas",
+        "url": "https://www.youtube.com/watch?v=FnijTmF4vas",
+        "duration": "9:31"
+      },
+      {
+        "index": 3,
+        "title": "#1 What is TypeScript - TS Là Gì  | Tự Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "sB3lhdXMYBM",
+        "url": "https://www.youtube.com/watch?v=sB3lhdXMYBM",
+        "duration": "6:00"
+      },
+      {
+        "index": 4,
+        "title": "#2 TypeScript Setup - Cài Đặt Compiler TS | Tự Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "WCn1WXK0sSI",
+        "url": "https://www.youtube.com/watch?v=WCn1WXK0sSI",
+        "duration": "6:22"
+      },
+      {
+        "index": 5,
+        "title": "#3 Hello World với TypeScript | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "4AZycDYkl6Y",
+        "url": "https://www.youtube.com/watch?v=4AZycDYkl6Y",
+        "duration": "22:50"
+      },
+      {
+        "index": 6,
+        "title": "#4 Why TypeScript - Tại Sao Lại Cần và Dùng TS | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "ao7dJoe_Rpo",
+        "url": "https://www.youtube.com/watch?v=ao7dJoe_Rpo",
+        "duration": "11:05"
+      },
+      {
+        "index": 7,
+        "title": "#5 TypeScript Types | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "F-vvxfQRdlk",
+        "url": "https://www.youtube.com/watch?v=F-vvxfQRdlk",
+        "duration": "10:25"
+      },
+      {
+        "index": 8,
+        "title": "#6 Type Annotations - Keyword Type | Basic TypeScript Course for Beginners",
+        "videoId": "xOfHINj4X8Y",
+        "url": "https://www.youtube.com/watch?v=xOfHINj4X8Y",
+        "duration": "11:05"
+      },
+      {
+        "index": 9,
+        "title": "#7 Type Inference - Tự động gán type  | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "6MJdCjOh4fE",
+        "url": "https://www.youtube.com/watch?v=6MJdCjOh4fE",
+        "duration": "12:05"
+      },
+      {
+        "index": 10,
+        "title": "#8 Number Type  | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "VwjV75IjvoQ",
+        "url": "https://www.youtube.com/watch?v=VwjV75IjvoQ",
+        "duration": "5:57"
+      },
+      {
+        "index": 11,
+        "title": "#9 String Type | TypeScript Basic Course for Beginners",
+        "videoId": "3WE54zK1QBA",
+        "url": "https://www.youtube.com/watch?v=3WE54zK1QBA",
+        "duration": "9:26"
+      },
+      {
+        "index": 12,
+        "title": "#10 Boolean Type  | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "P9wRzUysihI",
+        "url": "https://www.youtube.com/watch?v=P9wRzUysihI",
+        "duration": "5:46"
+      },
+      {
+        "index": 13,
+        "title": "#11 Object Type | Basic TypeScript Course for Beginners",
+        "videoId": "CsQWWstvYsc",
+        "url": "https://www.youtube.com/watch?v=CsQWWstvYsc",
+        "duration": "10:46"
+      },
+      {
+        "index": 14,
+        "title": "#12 Array Type | Basic TypeScript Course for Beginners",
+        "videoId": "rzKoZWRu0LY",
+        "url": "https://www.youtube.com/watch?v=rzKoZWRu0LY",
+        "duration": "9:18"
+      },
+      {
+        "index": 15,
+        "title": "#13 Tuple Types  | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "e0P2h7fwDuw",
+        "url": "https://www.youtube.com/watch?v=e0P2h7fwDuw",
+        "duration": "8:52"
+      },
+      {
+        "index": 16,
+        "title": "#14 Enum Types  | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "-d_xaMIbmkI",
+        "url": "https://www.youtube.com/watch?v=-d_xaMIbmkI",
+        "duration": "14:44"
+      },
+      {
+        "index": 17,
+        "title": "#15 TypeScript Any Type | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "mAkv4XVX6u8",
+        "url": "https://www.youtube.com/watch?v=mAkv4XVX6u8",
+        "duration": "8:02"
+      },
+      {
+        "index": 18,
+        "title": "#16 TypeScript Void Type | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "yLlwyc9Q_Tk",
+        "url": "https://www.youtube.com/watch?v=yLlwyc9Q_Tk",
+        "duration": "5:00"
+      },
+      {
+        "index": 19,
+        "title": "#17 TypeScript Data Type - Never | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "F5q3h44Au4E",
+        "url": "https://www.youtube.com/watch?v=F5q3h44Au4E",
+        "duration": "12:58"
+      },
+      {
+        "index": 20,
+        "title": "#18 TypeScript Union Type | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "eUJwlWHeS-w",
+        "url": "https://www.youtube.com/watch?v=eUJwlWHeS-w",
+        "duration": "7:37"
+      },
+      {
+        "index": 21,
+        "title": "#19 TypeScript Type Aliases | Basic TypeScript Course for Beginners",
+        "videoId": "5Is1NHDmm30",
+        "url": "https://www.youtube.com/watch?v=5Is1NHDmm30",
+        "duration": "4:50"
+      },
+      {
+        "index": 22,
+        "title": "#20 TypeScript If else  | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "_qjxcqZ5EJU",
+        "url": "https://www.youtube.com/watch?v=_qjxcqZ5EJU",
+        "duration": "11:26"
+      },
+      {
+        "index": 23,
+        "title": "#21 TypeScript switch case | Basic TypeScript Course for Beginners",
+        "videoId": "AZNfnGHDJcM",
+        "url": "https://www.youtube.com/watch?v=AZNfnGHDJcM",
+        "duration": "9:57"
+      },
+      {
+        "index": 24,
+        "title": "#22 TypeScript For Loop | Basic TypeScript Course for Beginners",
+        "videoId": "rNs_69UWtO8",
+        "url": "https://www.youtube.com/watch?v=rNs_69UWtO8",
+        "duration": "8:44"
+      },
+      {
+        "index": 25,
+        "title": "#23 TypeScript While Loop | Basic TypeScript Course for Beginners",
+        "videoId": "7kqVXDPCewo",
+        "url": "https://www.youtube.com/watch?v=7kqVXDPCewo",
+        "duration": "5:55"
+      },
+      {
+        "index": 26,
+        "title": "#24 TypeScript Do...While | Basic TypeScript Course for Beginners",
+        "videoId": "W5Z1MNbAMqY",
+        "url": "https://www.youtube.com/watch?v=W5Z1MNbAMqY",
+        "duration": "5:12"
+      },
+      {
+        "index": 27,
+        "title": "#25 TypeScript Break | Basic TypeScript Course for Beginners",
+        "videoId": "qR15SjrfBfE",
+        "url": "https://www.youtube.com/watch?v=qR15SjrfBfE",
+        "duration": "10:02"
+      },
+      {
+        "index": 28,
+        "title": "#26 TypeScript Continue | Basic TypeScript Course for Beginners",
+        "videoId": "uUdYZUdxFmc",
+        "url": "https://www.youtube.com/watch?v=uUdYZUdxFmc",
+        "duration": "6:05"
+      },
+      {
+        "index": 29,
+        "title": "#27 TypeScript Functions | Basic TypeScript Course for Beginners",
+        "videoId": "eu5zPYi666U",
+        "url": "https://www.youtube.com/watch?v=eu5zPYi666U",
+        "duration": "10:00"
+      },
+      {
+        "index": 30,
+        "title": "#28 TypeScript Function Types | Basic TypeScript Course for Beginners",
+        "videoId": "yOwUVs128BM",
+        "url": "https://www.youtube.com/watch?v=yOwUVs128BM",
+        "duration": "8:02"
+      },
+      {
+        "index": 31,
+        "title": "#29 TypeScript Optional Parameters | Basic TypeScript Course for Beginners",
+        "videoId": "_OkRz0pzfa0",
+        "url": "https://www.youtube.com/watch?v=_OkRz0pzfa0",
+        "duration": "12:33"
+      },
+      {
+        "index": 32,
+        "title": "#30 TypeScript Default Parameters | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "TPLtk3MG6II",
+        "url": "https://www.youtube.com/watch?v=TPLtk3MG6II",
+        "duration": "9:41"
+      },
+      {
+        "index": 33,
+        "title": "#31 TypeScript Rest Parameters | TypeScript Basics for Beginners Course",
+        "videoId": "QSK1COv0YNY",
+        "url": "https://www.youtube.com/watch?v=QSK1COv0YNY",
+        "duration": "15:42"
+      },
+      {
+        "index": 34,
+        "title": "#32 TypeScript Function Overloading | Basic TypeScript Course for Beginners",
+        "videoId": "aS9TCWgttqg",
+        "url": "https://www.youtube.com/watch?v=aS9TCWgttqg",
+        "duration": "13:58"
+      },
+      {
+        "index": 35,
+        "title": "#33 Classes | Basic TypeScript Course for Beginners",
+        "videoId": "wcw973COMM0",
+        "url": "https://www.youtube.com/watch?v=wcw973COMM0",
+        "duration": "12:43"
+      },
+      {
+        "index": 36,
+        "title": "#34 TypeScript Access Modifiers | TypeScript Basics for Beginners Course",
+        "videoId": "vu5dnUAuNHI",
+        "url": "https://www.youtube.com/watch?v=vu5dnUAuNHI",
+        "duration": "12:38"
+      },
+      {
+        "index": 37,
+        "title": "#35. TypeScript readonly | TypeScript Basics for Beginners Course",
+        "videoId": "MmWQXLTM8mI",
+        "url": "https://www.youtube.com/watch?v=MmWQXLTM8mI",
+        "duration": "3:56"
+      },
+      {
+        "index": 38,
+        "title": "#36 Typescript Getters and Setters  | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "Szo1AiM-QRU",
+        "url": "https://www.youtube.com/watch?v=Szo1AiM-QRU",
+        "duration": "15:37"
+      },
+      {
+        "index": 39,
+        "title": "#37 TypeScript Inheritance | Basic TypeScript Course for Beginners",
+        "videoId": "u0R0LPhFFG0",
+        "url": "https://www.youtube.com/watch?v=u0R0LPhFFG0",
+        "duration": "10:02"
+      },
+      {
+        "index": 40,
+        "title": "#38 TypeScript Static Methods and Properties | Basic TypeScript Course for Beginners",
+        "videoId": "EEpuGt05yQM",
+        "url": "https://www.youtube.com/watch?v=EEpuGt05yQM",
+        "duration": "8:02"
+      },
+      {
+        "index": 41,
+        "title": "#39 TypeScript Abstract Classes | Basic TypeScript Course for Beginners",
+        "videoId": "UmYCDweFIPM",
+        "url": "https://www.youtube.com/watch?v=UmYCDweFIPM",
+        "duration": "11:56"
+      },
+      {
+        "index": 42,
+        "title": "#40 Interfaces | Khóa Học TypeScript Cơ Bản Cho Người Mới Bắt Đầu",
+        "videoId": "oKwRxV8rGfw",
+        "url": "https://www.youtube.com/watch?v=oKwRxV8rGfw",
+        "duration": "13:28"
+      }
+    ]
+  }
+}

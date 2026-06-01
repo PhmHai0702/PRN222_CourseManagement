@@ -1,0 +1,106 @@
+@page "/subscription-error"
+@using AntDesign
+@using CourseManagement.Model.Model
+@using CourseManagement.Model.Constant
+@inject NavigationManager Navigation
+@inject IAppNotificationService _mess
+@inject IHttpClientFactory HttpClientFactory
+
+<div class="error-container">
+    @if (_order != null)
+    {
+        <Result Status="ResultStatus.Error" Title="Thanh toán thất bại!"
+            SubTitle="Đã có lỗi xảy ra trong quá trình thanh toán. Vui lòng thử lại sau.">
+            <ResultContent>
+                <div class="order-details">
+                    <h4>Chi tiết đơn hàng</h4>
+                    <p><strong>Mã đơn hàng:</strong> @_order.Id</p>
+                    <p><strong>Số tiền:</strong> @_order.TotalAmount.ToString("N0") VND</p>
+                    <p><strong>Gói VIP:</strong> @_order.PurchasedPlan</p>
+                    <p><strong>Trạng thái:</strong> @_order.Status</p>
+                </div>
+                <div class="button-container">
+                    <Button Type="ButtonType.Primary" OnClick="@(() => Navigation.NavigateTo("/subscription"))">
+                        Quay lại trang đăng ký
+                    </Button>
+                </div>
+            </ResultContent>
+        </Result>
+    }
+    else
+    {
+        <Result Status="ResultStatus.Info" Title="Đang xử lý..." SubTitle="Vui lòng đợi trong giây lát...">
+        </Result>
+    }
+</div>
+
+<style>
+    .error-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-details {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+    }
+
+    .order-details h4 {
+        margin-bottom: 15px;
+        color: #ff4d4f;
+    }
+
+    .order-details p {
+        margin: 8px 0;
+        color: #666;
+    }
+
+    .button-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>
+
+@code {
+    private Order _order;
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "orderId")]
+    public string OrderId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (string.IsNullOrEmpty(OrderId))
+        {
+            await _mess.Error("Không tìm thấy thông tin đơn hàng!");
+            Navigation.NavigateTo("/");
+            return;
+        }
+
+        try
+        {
+            var httpClient = HttpClientFactory.CreateClient("Auth");
+            var response = await httpClient.GetAsync($"/api/Order/{OrderId}");
+            if (response.IsSuccessStatusCode)
+            {
+                _order = await response.Content.ReadFromJsonAsync<Order>();
+                await _mess.Error("Thanh toán thất bại!");
+            }
+            else
+            {
+                await _mess.Error("Có lỗi xảy ra khi xử lý đơn hàng!");
+            }
+        }
+        catch (Exception ex)
+        {
+            await _mess.Error($"Lỗi: {ex.Message}");
+            Console.WriteLine($"Error details: {ex}");
+        }
+    }
+}

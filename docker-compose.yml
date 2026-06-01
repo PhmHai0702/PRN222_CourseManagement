@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: coursemanagement-sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong@Passw0rd"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000" # MinIO console
+      - "9001:9001" # MinIO admin console
+    environment:
+      MINIO_ROOT_USER: minioadmin # Default username
+      MINIO_ROOT_PASSWORD: minioadmin # Default password
+    volumes:
+      - minio_data:/data # Persistent storage
+    command: server /data --console-address ":9001"
+
+volumes:
+  sqlserver_data:
+  minio_data:
