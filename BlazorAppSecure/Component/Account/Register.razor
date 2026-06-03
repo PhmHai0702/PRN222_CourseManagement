@@ -1,110 +1,39 @@
-@page "/register"
-
+﻿@page "/register"
 @using AntDesign
 @using BlazorAppSecure.Sevices
 @using System.ComponentModel.DataAnnotations
-@using System.Text.Json
-@using System.ComponentModel;
-
 @inject IAccountManagement Acct
 @inject IAppNotificationService _message
 @inject NavigationManager Navigation
-
 @layout EmptyLayout
-
+<PageTitle>Đăng ký — EduPath</PageTitle>
+<link rel="stylesheet" href="css/auth.css" />
 <AuthorizeView>
-    <Authorized>
-        <Result Status="ResultStatus.Warning" Title="@($"You're already logged in as {context.User.Identity?.Name}.")">
-            <Extra>
-                <Button Type="ButtonType.Primary" OnClick="HandleGoToHomepage">Go To Homapage</Button>
-            </Extra>
-        </Result>
-    </Authorized>
-    <NotAuthorized>
-        <div class="register-page">
-            <Card Style="width: 500px">
-                <ChildContent>
-                    <Form Model="@registerModel"
-                          OnFinish="OnFinish"
-                          LabelColSpan="10"
-                          Context="FormContext"
-                          class="register-form">
-                        <FormItem Label="Email">
-                            <Input @bind-Value="@FormContext.Email" />
-                        </FormItem>
-                        <FormItem Label="Password">
-                            <InputPassword @bind-Value="@FormContext.Password" />
-                        </FormItem>
-                        <FormItem Label="Confirm Password">
-                            <InputPassword @bind-Value="@FormContext.ConfirmPassword" />
-                        </FormItem>
-                        <FormItem WrapperColOffset="10">
-                            <Button Type="ButtonType.Primary" HtmlType="submit">
-                                Register
-                            </Button>
-                        </FormItem>
-                        <p>
-                            Already has an account?
-                            <NavLink href="login">
-                                Login
-                            </NavLink>
-                        </p>
-                    </Form>
-                </ChildContent>
-            </Card>
-        </div>
-    </NotAuthorized>
+ <Authorized><div class="auth-done"><span><Icon Type="check" /></span><h1>Bạn đã đăng nhập</h1><p>Tài khoản hiện tại: <b>@context.User.Identity?.Name</b></p><Button Type="ButtonType.Primary" OnClick="GoHome">Về trang chủ</Button></div></Authorized>
+ <NotAuthorized>
+  <div class="auth-shell">
+   <aside class="auth-side">
+    <NavLink href="" class="auth-logo"><i><Icon Type="book" Theme="IconThemeType.Fill" /></i>Edu<b>Path</b></NavLink>
+    <div class="auth-message"><small>BẮT ĐẦU MIỄN PHÍ</small><h1>Mở khóa tiềm năng<br/><em>của chính bạn.</em></h1><p>Tham gia cộng đồng học viên đang xây dựng kỹ năng công nghệ qua những khóa học thực chiến.</p><ul><li><Icon Type="check" /> Lộ trình học rõ ràng</li><li><Icon Type="check" /> Nội dung thực tế, dễ áp dụng</li><li><Icon Type="check" /> Theo dõi tiến độ từng bài</li></ul></div>
+    <footer>Không cần thẻ thanh toán để bắt đầu.</footer>
+   </aside>
+   <main class="auth-main"><div class="auth-box register-box">
+    <NavLink href="" class="auth-logo mobile"><i><Icon Type="book" Theme="IconThemeType.Fill" /></i>Edu<b>Path</b></NavLink>
+    <header><small>TẠO TÀI KHOẢN</small><h2>Bắt đầu học ngay</h2><p>Chỉ mất một phút để tạo tài khoản miễn phí.</p></header>
+    <Form Model="@model" OnFinish="OnFinish" Context="form" class="auth-form">
+     <FormItem Label="Email"><Input @bind-Value="@form.Email" Placeholder="ban@email.com" /></FormItem>
+     <FormItem Label="Mật khẩu"><InputPassword @bind-Value="@form.Password" Placeholder="Tối thiểu 6 ký tự" /></FormItem>
+     <FormItem Label="Nhập lại mật khẩu"><InputPassword @bind-Value="@form.ConfirmPassword" Placeholder="Nhập lại mật khẩu" /></FormItem>
+     <Button Type="ButtonType.Primary" HtmlType="submit" Block Loading="@submitting" Class="auth-submit">Tạo tài khoản <Icon Type="arrow-right" /></Button>
+    </Form>
+    <p class="auth-switch">Đã có tài khoản? <NavLink href="login">Đăng nhập</NavLink></p><p class="auth-terms">Khi đăng ký, bạn đồng ý với điều khoản sử dụng và chính sách bảo mật của EduPath.</p>
+   </div></main>
+  </div>
+ </NotAuthorized>
 </AuthorizeView>
-
 @code {
-    public class RegisterModel {
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-        [Required]
-        public string Password { get; set; }
-        [Required]
-        [Compare("Password", ErrorMessage = "Passwords do not match")]
-        public string ConfirmPassword { get; set; }
-    }
-
-    private RegisterModel registerModel = new RegisterModel();
-
-    private async void OnFinish(EditContext editContext) {
-        await DoRegisterAsync();
-    }
-
-    public async Task DoRegisterAsync()
-    {
-        var result = await Acct.RegisterV1Async("Username", registerModel.Email, registerModel.Password);
-
-        if (result.Succeeded)
-        {
-            registerModel = new RegisterModel();
-            StateHasChanged();
-            await _message.Success("Register success, confirm your mail and log in");
-        }
-        else
-        {
-            result.ErrorList.ForEach(async (error) => {
-                await _message.Error(error);
-            });
-        }
-    }
-
-    public void HandleGoToHomepage() {
-        Navigation.NavigateTo("/");
-    }
+ public sealed class RegisterModel { [Required(ErrorMessage="Vui lòng nhập email"),EmailAddress(ErrorMessage="Email không đúng định dạng")] public string Email {get;set;}=""; [Required(ErrorMessage="Vui lòng nhập mật khẩu"),MinLength(6,ErrorMessage="Mật khẩu cần ít nhất 6 ký tự")] public string Password {get;set;}=""; [Required(ErrorMessage="Vui lòng nhập lại mật khẩu"),Compare(nameof(Password),ErrorMessage="Mật khẩu nhập lại không khớp")] public string ConfirmPassword {get;set;}=""; }
+ private RegisterModel model=new(); private bool submitting;
+ private async Task OnFinish(EditContext context){try{submitting=true;var result=await Acct.RegisterV1Async("Username",model.Email,model.Password);if(result.Succeeded){model=new();await _message.Success("Đăng ký thành công. Hãy kiểm tra email để xác nhận tài khoản.");Navigation.NavigateTo("/login");}else foreach(var error in result.ErrorList)await _message.Error(error);}finally{submitting=false;}}
+ private void GoHome()=>Navigation.NavigateTo("/");
 }
-
-<style>
-    .register-page {
-        padding-top: 100px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .register-form .ant-form-item-label {
-        text-align: left
-    }
-</style>
