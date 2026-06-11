@@ -80,3 +80,31 @@ Used `IQueryable<T>.Skip().Take()` pattern with:
 Tested with 10k records — response time under 200ms.
 
 Also added Swagger examples for the query parameters.
+
+
+## 2026-07-03
+
+Wrote unit tests for authentication flow:
+
+- Login with valid credentials ✅
+- Login with wrong password ❌ returns 401
+- Login with locked account ❌ returns 423
+- Token refresh flow ✅
+- Token expiry handling ✅
+
+Coverage: 92% on the AuthService.
+
+Need to add tests for the JWT middleware next.
+
+
+## 2026-07-04
+
+Code cleanup day. Ran `dotnet format` across the solution.
+
+Changes:
+- Removed 400+ trailing whitespace lines
+- Fixed inconsistent indentation (tabs vs spaces in 12 files)
+- Added file-scoped namespace declarations
+- Removed unused `using` directives
+
+Zero functional changes. CI linting rules updated.
