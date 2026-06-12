@@ -108,3 +108,29 @@ Changes:
 - Removed unused `using` directives
 
 Zero functional changes. CI linting rules updated.
+
+
+## 2026-07-05
+
+Wrote API documentation for the course management endpoints.
+
+Documented:
+- `GET /api/courses` — list with pagination
+- `GET /api/courses/{id}` — detail
+- `POST /api/courses` — create (requires Admin role)
+- `PUT /api/courses/{id}` — update
+- `DELETE /api/courses/{id}` — soft delete
+
+Added XML comments to all DTOs and controllers.
+
+
+## 2026-07-06
+
+File upload timeout was set to 30s — not enough for large PDF attachments.
+
+Increased to 5 minutes for uploads > 10MB. Also added:
+- Chunked upload support (5MB per chunk)
+- Progress tracking via SignalR
+- File type validation on server side
+
+Tested with 50MB PDF — works reliably.
