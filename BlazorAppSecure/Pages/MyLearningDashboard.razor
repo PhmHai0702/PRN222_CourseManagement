@@ -1,0 +1,217 @@
+@page "/my-learning"
+@using BlazorAppSecure.Sevices.LearningDashboard
+@using CourseManagement.Model.DTOs
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inject LearningDashboardClient DashboardClient
+@inject IAppNotificationService Notification
+@inject NavigationManager Navigation
+
+<PageTitle>Tiến độ học tập | EduPath</PageTitle>
+
+@if (Loading)
+{
+    <main class="dashboard-page">
+        <div class="hero-skeleton skeleton"></div>
+        <div class="stats-grid">
+            @for (var index = 0; index < 4; index++)
+            {
+                <div class="stat-card skeleton"></div>
+            }
+        </div>
+        <div class="course-skeleton skeleton"></div>
+        <div class="course-skeleton skeleton"></div>
+    </main>
+}
+else if (Dashboard is null)
+{
+    <main class="dashboard-page">
+        <div class="error-state">
+            <Icon Type="disconnect" />
+            <h1>Không thể tải tiến độ học tập</h1>
+            <p>Dữ liệu tạm thời chưa sẵn sàng. Bạn có thể thử tải lại.</p>
+            <button @onclick="LoadDashboardAsync">Thử lại</button>
+        </div>
+    </main>
+}
+else
+{
+    <section class="dashboard-hero">
+        <div class="dashboard-hero__inner">
+            <div class="welcome-copy">
+                <span>KHÔNG GIAN HỌC TẬP</span>
+                <h1>Chào @Dashboard.DisplayName,</h1>
+                <p>@GetMotivationMessage()</p>
+            </div>
+            <div class="overall-progress"
+                 style="@($"--progress:{Dashboard.OverallProgressPercent * 3.6}deg")">
+                <div>
+                    <strong>@Dashboard.OverallProgressPercent%</strong>
+                    <span>Tổng tiến độ</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="dashboard-page">
+        <section class="stats-grid" aria-label="Tổng quan học tập">
+            <article class="stat-card">
+                <span class="stat-icon green"><Icon Type="book" /></span>
+                <div><strong>@Dashboard.EnrolledCourses</strong><span>Khóa đã đăng ký</span></div>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon blue"><Icon Type="play-circle" /></span>
+                <div><strong>@Dashboard.CompletedLessons/@Dashboard.TotalLessons</strong><span>Bài đã hoàn thành</span></div>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon gold"><Icon Type="clock-circle" /></span>
+                <div><strong>@FormatDuration(Dashboard.LearnedMinutes)</strong><span>Thời lượng đã học</span></div>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon purple"><Icon Type="trophy" /></span>
+                <div><strong>@Dashboard.CompletedCourses</strong><span>Khóa đã hoàn thành</span></div>
+            </article>
+        </section>
+
+        <section class="learning-section">
+            <div class="section-heading">
+                <div>
+                    <span>KHÓA HỌC CỦA TÔI</span>
+                    <h2>Tiếp tục hành trình</h2>
+                    <p>@Dashboard.InProgressCourses khóa đang học · @FormatDuration(Dashboard.RemainingMinutes) còn lại</p>
+                </div>
+                <button class="filter-button @(IncludeCompleted ? "active" : null)"
+                        @onclick="ToggleCompletedAsync">
+                    <Icon Type="check-circle" />
+                    @(IncludeCompleted ? "Đang hiện khóa hoàn thành" : "Hiện khóa hoàn thành")
+                </button>
+            </div>
+
+            @if (Dashboard.Courses.Count == 0)
+            {
+                <div class="empty-learning">
+                    <span><Icon Type="read" /></span>
+                    <h3>@(IncludeCompleted ? "Bạn chưa đăng ký khóa học nào" : "Không có khóa đang học")</h3>
+                    <p>Khám phá thư viện và bắt đầu một kỹ năng mới ngay hôm nay.</p>
+                    <button @onclick="GoToCourses">Khám phá khóa học <Icon Type="arrow-right" /></button>
+                </div>
+            }
+            else
+            {
+                <div class="learning-list">
+                    @foreach (var course in Dashboard.Courses)
+                    {
+                        <article class="learning-card">
+                            <div class="course-cover">
+                                <img src="@course.PreviewImage" alt="@course.Title" loading="lazy" />
+                                @if (course.IsCompleted)
+                                {
+                                    <span class="completed-badge"><Icon Type="check" /> Hoàn thành</span>
+                                }
+                            </div>
+                            <div class="learning-card__body">
+                                <div class="course-title-row">
+                                    <div>
+                                        <span class="course-category">@course.CategoryName</span>
+                                        <h3>@course.Title</h3>
+                                    </div>
+                                    <strong>@course.ProgressPercent%</strong>
+                                </div>
+
+                                <div class="progress-track" aria-label="Tiến độ @course.ProgressPercent%">
+                                    <span style="@($"width:{course.ProgressPercent}%")"></span>
+                                </div>
+                                <div class="progress-meta">
+                                    <span>@course.CompletedLessons/@course.TotalLessons bài học</span>
+                                    <span>@FormatDuration(course.RemainingMinutes) còn lại</span>
+                                </div>
+
+                                @{
+                                    var targetLesson = course.NextLesson ?? course.LastViewedLesson;
+                                }
+                                @if (!course.IsCompleted && targetLesson is not null)
+                                {
+                                    <div class="next-lesson">
+                                        <span class="next-icon"><Icon Type="play-circle" /></span>
+                                        <div>
+                                            <small>HỌC TIẾP</small>
+                                            <strong>@targetLesson.Title</strong>
+                                            <span>@targetLesson.ModuleTitle</span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="learning-card__action">
+                                <button @onclick="() => ContinueCourse(course.CourseId)">
+                                    @(course.IsCompleted ? "Xem lại khóa học" : "Tiếp tục học")
+                                    <Icon Type="arrow-right" />
+                                </button>
+                                <small>Đăng ký @course.EnrollmentDate.ToLocalTime().ToString("dd/MM/yyyy")</small>
+                            </div>
+                        </article>
+                    }
+                </div>
+            }
+        </section>
+    </main>
+}
+
+@code {
+    private LearningDashboardResponse? Dashboard;
+    private bool Loading = true;
+    private bool IncludeCompleted = true;
+
+    protected override Task OnInitializedAsync() => LoadDashboardAsync();
+
+    private async Task LoadDashboardAsync()
+    {
+        Loading = true;
+        try
+        {
+            Dashboard = await DashboardClient.GetAsync(IncludeCompleted, 20);
+        }
+        catch (Exception exception)
+        {
+            Dashboard = null;
+            await Notification.Error(exception.Message);
+        }
+        finally
+        {
+            Loading = false;
+        }
+    }
+
+    private async Task ToggleCompletedAsync()
+    {
+        IncludeCompleted = !IncludeCompleted;
+        await LoadDashboardAsync();
+    }
+
+    private string GetMotivationMessage()
+    {
+        if (Dashboard is null || Dashboard.EnrolledCourses == 0)
+            return "Một hành trình mới đang chờ bạn bắt đầu.";
+        if (Dashboard.OverallProgressPercent >= 80)
+            return "Bạn đang rất gần đích. Hãy hoàn thành chặng cuối!";
+        if (Dashboard.OverallProgressPercent >= 40)
+            return "Nhịp học rất tốt. Tiếp tục giữ vững sự nhất quán!";
+        return "Mỗi bài học hoàn thành là một bước gần hơn tới mục tiêu.";
+    }
+
+    private void ContinueCourse(Guid courseId) =>
+        Navigation.NavigateTo($"/learning/{courseId}");
+
+    private void GoToCourses() => Navigation.NavigateTo("/");
+
+    private static string FormatDuration(int minutes)
+    {
+        if (minutes <= 0)
+            return "0 phút";
+        if (minutes < 60)
+            return $"{minutes} phút";
+
+        var hours = minutes / 60;
+        var remaining = minutes % 60;
+        return remaining == 0 ? $"{hours} giờ" : $"{hours}g {remaining}p";
+    }
+}

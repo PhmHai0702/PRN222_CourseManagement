@@ -4,6 +4,7 @@ using BlazorAppSecure.Sevices;
 using BlazorAppSecure.Sevices.Blog;
 using BlazorAppSecure.Sevices.Category;
 using BlazorAppSecure.Sevices.CourseComparison;
+using BlazorAppSecure.Sevices.LearningDashboard;
 using BlazorAppSecure.Sevices.Profile;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -30,6 +31,7 @@ builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<CourseComparisonClient>();
+builder.Services.AddScoped<LearningDashboardClient>();
 builder.Services.AddScoped(sp => (IAccountManagement)sp.GetRequiredService<AuthenticationStateProvider>());
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = 
