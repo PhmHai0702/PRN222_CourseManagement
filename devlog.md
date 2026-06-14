@@ -184,3 +184,27 @@ different formats depending on the server's locale.
 
 Fix: use `DateTime.Now.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)`
 to ensure consistent ISO 8601 format across all environments.
+
+
+## 2026-07-11
+
+Added CSV export for grade reports.
+
+Usage: `GET /api/grades/export?format=csv`
+
+Uses `CsvHelper` library. Streams the file directly to the response to avoid
+loading the entire dataset in memory.
+
+Tested with 50k records — exported in ~3s with ~5MB file size.
+
+
+## 2026-07-12
+
+Database query optimization — the enrollment listing page was running 8 separate
+queries due to lazy loading.
+
+Fix: added `.Include(x => x.Course).Include(x => x.Student)` to the query,
+reducing to a single round trip. Also added a composite index on
+`Enrollment(CourseId, StudentId)`.
+
+Page load time: 4.2s → 0.3s
