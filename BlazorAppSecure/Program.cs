@@ -1,6 +1,7 @@
 using BlazorAppSecure;
 using BlazorAppSecure.Services.Blog;
 using BlazorAppSecure.Sevices;
+using BlazorAppSecure.Sevices.AdminAnalytics;
 using BlazorAppSecure.Sevices.Blog;
 using BlazorAppSecure.Sevices.Category;
 using BlazorAppSecure.Sevices.CourseComparison;
@@ -25,6 +26,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped<IAppNotificationService, AppNotificationService>();
+builder.Services.AddScoped<AdminAnalyticsClient>();
 builder.Services.AddTransient<CutomHttpHandler>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 builder.Services.AddScoped<IBlogService, BlogService>();

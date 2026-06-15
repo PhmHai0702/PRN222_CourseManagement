@@ -1,0 +1,277 @@
+@page "/admin/analytics"
+@using BlazorAppSecure.Sevices.AdminAnalytics
+@using CourseManagement.Model.DTOs
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Admin")]
+@inject AdminAnalyticsClient AnalyticsClient
+@inject IAppNotificationService Notification
+@inject NavigationManager Navigation
+
+<PageTitle>Phân tích hệ thống | EduPath Admin</PageTitle>
+
+<section class="analytics-header">
+    <div>
+        <span class="eyebrow">ADMIN WORKSPACE</span>
+        <h1>Tổng quan vận hành</h1>
+        <p>Theo dõi tăng trưởng học viên, đăng ký khóa học và doanh thu.</p>
+    </div>
+    <div class="date-filter">
+        <label>
+            <span>Từ ngày</span>
+            <input type="date" @bind="FromDate" @bind:format="yyyy-MM-dd" />
+        </label>
+        <span class="date-arrow"><Icon Type="arrow-right" /></span>
+        <label>
+            <span>Đến ngày</span>
+            <input type="date" @bind="ToDate" @bind:format="yyyy-MM-dd" />
+        </label>
+        <button class="apply-button" disabled="@Loading" @onclick="LoadAsync">
+            @if (Loading)
+            {
+                <Icon Type="loading" />
+            }
+            else
+            {
+                <Icon Type="filter" />
+            }
+            Áp dụng
+        </button>
+    </div>
+</section>
+
+<main class="analytics-page">
+    <div class="quick-ranges">
+        <span>Khoảng nhanh:</span>
+        <button @onclick="() => SetRangeAsync(7)">7 ngày</button>
+        <button @onclick="() => SetRangeAsync(30)">30 ngày</button>
+        <button @onclick="() => SetRangeAsync(90)">90 ngày</button>
+        @if (Data is not null)
+        {
+            <small>Cập nhật @Data.GeneratedAtUtc.ToLocalTime().ToString("HH:mm dd/MM/yyyy")</small>
+        }
+    </div>
+
+    @if (Loading && Data is null)
+    {
+        <div class="kpi-grid">
+            @for (var index = 0; index < 6; index++)
+            {
+                <div class="kpi-card skeleton"></div>
+            }
+        </div>
+        <div class="panel chart-skeleton skeleton"></div>
+    }
+    else if (Data is null)
+    {
+        <div class="error-state">
+            <Icon Type="warning" />
+            <h2>Chưa thể tải dữ liệu phân tích</h2>
+            <p>Kiểm tra kết nối API hoặc thử lại sau.</p>
+            <button @onclick="LoadAsync">Tải lại</button>
+        </div>
+    }
+    else
+    {
+        <section class="kpi-grid">
+            @KpiCard("user", "Người dùng", Data.Overview.TotalUsers.ToString("N0"),
+                $"{Data.Overview.ActiveVipUsers:N0} tài khoản VIP", "green")
+            @KpiCard("book", "Khóa xuất bản", Data.Overview.PublishedCourses.ToString("N0"),
+                $"{Data.Overview.TotalEnrollments:N0} tổng lượt đăng ký", "blue")
+            @KpiCard("user-add", "Đăng ký mới", Data.Overview.NewEnrollments.ToString("N0"),
+                $"{RangeDays} ngày đang chọn", "purple")
+            @KpiCard("shopping-cart", "Đơn hàng", Data.Overview.OrdersInPeriod.ToString("N0"),
+                $"{Data.Revenue.CompletedOrders:N0} đã hoàn thành", "gold")
+            @KpiCard("dollar", "Doanh thu", FormatMoney(Data.Revenue.CompletedRevenue),
+                $"TB {FormatMoney(Data.Revenue.AverageCompletedOrderValue)}/đơn", "coral")
+            @KpiCard("rise", "Tỷ lệ hoàn tất", $"{Data.Revenue.CompletionRatePercent:N1}%",
+                $"{Data.Revenue.PendingOrders:N0} đơn đang chờ", "teal")
+        </section>
+
+        <section class="dashboard-grid">
+            <article class="panel trend-panel">
+                <div class="panel-heading">
+                    <div>
+                        <span>HIỆU SUẤT THEO NGÀY</span>
+                        <h2>Doanh thu và đăng ký</h2>
+                    </div>
+                    <div class="legend">
+                        <span><i class="revenue-dot"></i> Doanh thu</span>
+                        <span><i class="enrollment-dot"></i> Đăng ký</span>
+                    </div>
+                </div>
+
+                @if (Data.DailyTrend.Count == 0)
+                {
+                    <div class="panel-empty">Không có dữ liệu trong khoảng đã chọn.</div>
+                }
+                else
+                {
+                    <div class="chart-scroll">
+                        <div class="bar-chart">
+                            @foreach (var day in DisplayTrend)
+                            {
+                                <div class="bar-column"
+                                     title="@($"{day.Date:dd/MM}: {FormatMoney(day.Revenue)}, {day.Enrollments} đăng ký")">
+                                    <div class="bars">
+                                        <span class="revenue-bar"
+                                              style="@($"height:{RevenueHeight(day.Revenue)}%")"></span>
+                                        <span class="enrollment-bar"
+                                              style="@($"height:{EnrollmentHeight(day.Enrollments)}%")"></span>
+                                    </div>
+                                    <small>@day.Date.ToString(DisplayDateFormat)</small>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </article>
+
+            <article class="panel order-panel">
+                <div class="panel-heading">
+                    <div><span>ĐƠN HÀNG</span><h2>Trạng thái xử lý</h2></div>
+                </div>
+                <div class="completion-ring"
+                     style="@($"--completion:{Data.Revenue.CompletionRatePercent * 3.6m}deg")">
+                    <div><strong>@Data.Revenue.CompletionRatePercent.ToString("N0")%</strong><span>Hoàn tất</span></div>
+                </div>
+                <div class="order-statuses">
+                    <div><span><i class="success"></i>Hoàn thành</span><strong>@Data.Revenue.CompletedOrders</strong></div>
+                    <div><span><i class="pending"></i>Đang chờ</span><strong>@Data.Revenue.PendingOrders</strong></div>
+                    <div><span><i class="cancelled"></i>Đã hủy</span><strong>@Data.Revenue.CancelledOrders</strong></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="bottom-grid">
+            <article class="panel top-courses">
+                <div class="panel-heading">
+                    <div><span>NỘI DUNG NỔI BẬT</span><h2>Top khóa học</h2></div>
+                    <small>Theo lượt đăng ký mới</small>
+                </div>
+                @if (Data.TopCourses.Count == 0)
+                {
+                    <div class="panel-empty">Chưa có lượt đăng ký mới.</div>
+                }
+                else
+                {
+                    <ol class="ranking-list">
+                        @for (var index = 0; index < Data.TopCourses.Count; index++)
+                        {
+                            var course = Data.TopCourses[index];
+                            <li>
+                                <span class="rank">@(index + 1)</span>
+                                <div class="rank-info">
+                                    <strong>@course.Title</strong>
+                                    <span>@course.CategoryName</span>
+                                    <div><i style="@($"width:{course.SharePercent}%")"></i></div>
+                                </div>
+                                <div class="rank-value">
+                                    <strong>@course.Enrollments</strong>
+                                    <span>@course.SharePercent.ToString("N1")%</span>
+                                </div>
+                                <button title="Xem khóa học"
+                                        @onclick="() => OpenCourse(course.CourseId)">
+                                    <Icon Type="arrow-right" />
+                                </button>
+                            </li>
+                        }
+                    </ol>
+                }
+            </article>
+
+            <article class="panel categories-panel">
+                <div class="panel-heading">
+                    <div><span>PHÂN BỔ NỘI DUNG</span><h2>Danh mục</h2></div>
+                </div>
+                <div class="category-table">
+                    <div class="category-row category-head">
+                        <span>Danh mục</span><span>Khóa học</span><span>Đăng ký</span><span>Tỷ trọng</span>
+                    </div>
+                    @foreach (var category in Data.Categories.Take(8))
+                    {
+                        <div class="category-row">
+                            <strong>@category.CategoryName</strong>
+                            <span>@category.PublishedCourses</span>
+                            <span>@category.Enrollments</span>
+                            <span>@category.EnrollmentSharePercent.ToString("N1")%</span>
+                        </div>
+                    }
+                </div>
+            </article>
+        </section>
+    }
+</main>
+
+@code {
+    private AdminAnalyticsResponse? Data;
+    private DateTime FromDate = DateTime.Today.AddDays(-29);
+    private DateTime ToDate = DateTime.Today;
+    private bool Loading = true;
+
+    private int RangeDays => Math.Max(1, (ToDate.Date - FromDate.Date).Days + 1);
+    private decimal MaxRevenue => Math.Max(1, Data?.DailyTrend.Max(item => item.Revenue) ?? 1);
+    private int MaxEnrollments => Math.Max(1, Data?.DailyTrend.Max(item => item.Enrollments) ?? 1);
+    private IEnumerable<AdminDailyMetric> DisplayTrend =>
+        Data?.DailyTrend.Where((_, index) =>
+            RangeDays <= 45 || index % (int)Math.Ceiling(RangeDays / 35d) == 0)
+        ?? Enumerable.Empty<AdminDailyMetric>();
+    private string DisplayDateFormat => RangeDays > 90 ? "MM/yy" : "dd/MM";
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        if (FromDate.Date > ToDate.Date)
+        {
+            await Notification.Warning("Ngày bắt đầu phải trước ngày kết thúc.");
+            return;
+        }
+        if ((ToDate.Date - FromDate.Date).TotalDays > 366)
+        {
+            await Notification.Warning("Khoảng thống kê tối đa là 366 ngày.");
+            return;
+        }
+
+        Loading = true;
+        try
+        {
+            Data = await AnalyticsClient.GetAsync(FromDate, ToDate, 5);
+        }
+        catch (Exception exception)
+        {
+            Data = null;
+            await Notification.Error(exception.Message);
+        }
+        finally
+        {
+            Loading = false;
+        }
+    }
+
+    private async Task SetRangeAsync(int days)
+    {
+        ToDate = DateTime.Today;
+        FromDate = ToDate.AddDays(-(days - 1));
+        await LoadAsync();
+    }
+
+    private RenderFragment KpiCard(
+        string icon,
+        string label,
+        string value,
+        string detail,
+        string color) => @<article class="kpi-card">
+        <span class="kpi-icon @color"><Icon Type="@icon" /></span>
+        <div><span>@label</span><strong>@value</strong><small>@detail</small></div>
+    </article>;
+
+    private decimal RevenueHeight(decimal revenue) =>
+        Math.Max(2, Math.Round(revenue * 100 / MaxRevenue, 1));
+
+    private decimal EnrollmentHeight(int enrollments) =>
+        Math.Max(2, Math.Round(enrollments * 100m / MaxEnrollments, 1));
+
+    private void OpenCourse(Guid id) => Navigation.NavigateTo($"/preview/{id}");
+
+    private static string FormatMoney(decimal amount) => $"{amount:N0} ₫";
+}
