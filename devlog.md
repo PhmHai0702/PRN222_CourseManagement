@@ -267,3 +267,30 @@ Added `.editorconfig` to enforce:
 - indent_style: space
 - indent_size: 4
 - end_of_line: crlf
+
+
+## 2026-07-17
+
+Split the monolithic `CourseService` into focused services:
+
+- `CourseQueryService` — read operations, search, filtering
+- `CourseCommandService` — CRUD with validation
+- `CourseEnrollmentService` — enrollment logic
+
+Each service has its own interface for testability.
+
+Old file: 600+ lines. New files: ~150-200 lines each.
+
+
+## 2026-07-18
+
+Added a setup guide to README.md covering:
+
+1. Prerequisites (NET 8 SDK, SQL Server, VS 2022)
+2. Clone and restore
+3. Database setup (run migrations + seed script)
+4. Configuration (appsettings.json)
+5. Running the application
+6. Running tests
+
+Also added troubleshooting section for common issues.
