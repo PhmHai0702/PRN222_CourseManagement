@@ -29,3 +29,17 @@ The backend uses LINQ with predicate building. Results are paginated with 20 ite
 API: `GET /api/courses/search?name=&category=&page=&size=`
 
 TODO: add sorting by name or date.
+
+
+## 2026-07-01
+
+Refactored the grade calculation method in `GradeService`.
+
+The old implementation had the calculation logic mixed with database queries.
+
+Extracted it into a separate `GradeCalculator` class with pure functions:
+- `CalculateFinalGrade(homework, midterm, final)`
+- `CalculateGPA(grades)`
+- `GetLetterGrade(score)`
+
+Added unit tests covering edge cases like missing assignments.
