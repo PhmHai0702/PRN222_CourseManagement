@@ -59,3 +59,18 @@ Updated NuGet packages to latest stable versions:
 All existing tests pass. No breaking changes detected in the API surface.
 
 Also cleaned up some deprecated package references in the csproj files.
+
+
+## 2026-07-05
+
+Investigated a bug where the student dashboard crashes when a profile is incomplete.
+
+The `StudentProfile` page assumes `FullName` and `AvatarUrl` are always populated,
+but new users who haven't completed onboarding are missing these fields.
+
+Fix: added null-conditional operators and fallback values.
+
+```csharp
+var name = profile?.FullName ?? "New Student";
+var avatar = profile?.AvatarUrl ?? "/images/default-avatar.png";
+```
