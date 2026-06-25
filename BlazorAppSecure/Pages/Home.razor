@@ -37,24 +37,37 @@ future.<span class="green">unlock</span>();</pre>
 </section>
 
 <section class="category-strip">
-    <div><span>Chu de noi bat</span><a href="#free-courses">Lap trinh Web</a><a href="#free-courses">JavaScript</a><a href="#free-courses">React</a><a href="#free-courses">Backend</a><a href="/listBlog">Kinh nghiem nghe nghiep</a></div>
+    <div><span>Chủ đề nổi bật</span><a href="#free-courses">Lập trình Web</a><a href="#free-courses">JavaScript</a><a href="#free-courses">React</a><a href="#free-courses">Backend</a><a href="/listBlog">Kinh nghiệm nghề nghiệp</a></div>
 </section>
 
 <main class="home-content">
+    <section class="value-section" aria-label="Giá trị của EduPath">
+        <article><span><Icon Type="compass" /></span><div><h3>Lộ trình rõ ràng</h3><p>Biết nên học gì tiếp theo, không còn lan man giữa quá nhiều tài liệu.</p></div></article>
+        <article><span><Icon Type="code" /></span><div><h3>Thực hành sát thực tế</h3><p>Kiến thức đi cùng ví dụ và dự án để bạn áp dụng ngay sau mỗi bài.</p></div></article>
+        <article><span><Icon Type="rise" /></span><div><h3>Nhìn thấy tiến bộ</h3><p>Lưu tiến độ và tiếp tục chính xác từ bài học gần nhất của bạn.</p></div></article>
+    </section>
+
     <section id="pro-courses" class="course-section">
         <div class="section-heading"><div><span class="section-kicker">HỌC SÂU HƠN VỚI PRO</span><h2>Khóa học được yêu thích</h2><p>Nội dung chuyên sâu, đi từ nền tảng đến dự án hoàn chỉnh.</p></div><NavLink href="vip-subscription">Tìm hiểu gói Pro <Icon Type="arrow-right" /></NavLink></div>
         <div class="course-grid">
-            @if (LoadingCourseProList) { <div class="loading-state">Đang tải khóa học...</div> }
-            else if (ListCoursePro != null) { @foreach (var course in ListCoursePro) { @CourseTile(course, true) } }
+            @if (LoadingCourseProList) { @LoadingCards() }
+            else if (ListCoursePro?.Count > 0) { @foreach (var course in ListCoursePro) { @CourseTile(course, true) } }
+            else { @EmptyCourses("Khóa học Pro đang được cập nhật", "Quay lại sớm để khám phá nội dung chuyên sâu mới.") }
         </div>
     </section>
 
     <section id="free-courses" class="course-section free-section">
         <div class="section-heading"><div><span class="section-kicker free">BẮT ĐẦU MIỄN PHÍ</span><h2>Xây nền tảng thật vững</h2><p>Học thử ngay hôm nay, không cần thanh toán.</p></div></div>
         <div class="course-grid">
-            @if (LoadingCourseFreeList) { <div class="loading-state">Đang tải khóa học...</div> }
-            else if (ListCourseFree != null) { @foreach (var course in ListCourseFree) { @CourseTile(course, false) } }
+            @if (LoadingCourseFreeList) { @LoadingCards() }
+            else if (ListCourseFree?.Count > 0) { @foreach (var course in ListCourseFree) { @CourseTile(course, false) } }
+            else { @EmptyCourses("Chưa có khóa học miễn phí", "Nội dung mới đang được chuẩn bị cho bạn.") }
         </div>
+    </section>
+
+    <section class="join-banner">
+        <div><span>BẮT ĐẦU HÔM NAY</span><h2>Một kỹ năng mới có thể mở ra<br/>một con đường hoàn toàn mới.</h2><p>Tạo tài khoản miễn phí để lưu tiến độ và bắt đầu lộ trình đầu tiên.</p></div>
+        <NavLink href="register">Tham gia EduPath <Icon Type="arrow-right" /></NavLink>
     </section>
 </main>
 
@@ -82,8 +95,14 @@ future.<span class="green">unlock</span>();</pre>
 }
 
 @code {
+    RenderFragment LoadingCards() => @<div class="skeleton-row" aria-label="Đang tải khóa học">
+        @for (var i = 0; i < 3; i++) { <div class="course-skeleton"><i></i><span></span><b></b><small></small></div> }
+    </div>;
+    RenderFragment EmptyCourses(string title, string description) => @<div class="empty-courses">
+        <span><Icon Type="read" /></span><h3>@title</h3><p>@description</p>
+    </div>;
     RenderFragment CourseTile(SearchCourseResponse Course, bool IsPro) => @<article class="course-tile" @onclick="() => OpenCourse(Course.Id)">
-        <div class="tile-image"><img src="@Course.PreviewImage" alt="@Course.Title" loading="lazy"/><span class="level">@Course.LevelName</span>@if(IsPro){<span class="pro-badge"><Icon Type="crown"/> PRO</span>}<button aria-label="Xem khóa học"><Icon Type="arrow-right" /></button></div>
+        <div class="tile-image">@if (!string.IsNullOrWhiteSpace(Course.PreviewImage)) { <img src="@Course.PreviewImage" alt="@Course.Title" loading="lazy"/> } else { <div class="image-placeholder"><Icon Type="code" /><small>EduPath</small></div> }<span class="level">@Course.LevelName</span>@if(IsPro){<span class="pro-badge"><Icon Type="crown"/> PRO</span>}<button type="button" aria-label="Xem khóa học @Course.Title"><Icon Type="arrow-right" /></button></div>
         <div class="tile-body"><div class="tile-category">@Course.CategoryName</div><h3>@Course.Title</h3><p>@Course.Description</p><div class="tile-meta"><span><Icon Type="play-circle"/> @Course.TotalLesson bài</span><span><Icon Type="clock-circle"/> @FormatDuration(Course.TotalTime)</span><span><Icon Type="user"/> @Course.TotalEnrolled</span></div></div>
     </article>;
     void OpenCourse(string id) => _nav.NavigateTo($"/preview/{id}");
@@ -92,5 +111,27 @@ future.<span class="green">unlock</span>();</pre>
 
 <style>
     .hero{background:#f3f1e9;overflow:hidden}.hero-inner{max-width:1280px;min-height:520px;margin:auto;padding:68px 42px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:70px}.eyebrow{display:flex;align-items:center;gap:9px;color:#405048;font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase}.eyebrow i{width:8px;height:8px;border-radius:50%;background:#df6947;box-shadow:0 0 0 5px rgba(223,105,71,.12)}.hero h1{margin:20px 0 22px;font-size:64px;line-height:1.02;letter-spacing:-3.5px;font-weight:800;color:#17211b}.hero h1 em{color:#176b45;font-family:Georgia,serif;font-weight:500}.hero-copy>p{max-width:580px;color:#5d6861;font-size:18px;line-height:1.7}.hero-actions{display:flex;gap:12px;margin-top:30px}.hero-actions a{display:inline-flex;align-items:center;gap:10px;padding:13px 19px;border-radius:8px;font-weight:700;text-decoration:none;transition:.2s ease}.primary-cta{background:#176b45;color:#fff!important}.primary-cta:hover{background:#0e4e32;transform:translateY(-2px);box-shadow:0 10px 25px rgba(23,107,69,.18)}.secondary-cta{border:1px solid #cbd0ca;color:#253129!important;background:rgba(255,255,255,.45)}.trust-row{display:flex;gap:25px;margin-top:34px;color:#68736c;font-size:12px}.trust-row b{color:#26342c}.hero-visual{position:relative}.code-window{border:1px solid #34433a;border-radius:14px;background:#17211b;box-shadow:0 28px 60px rgba(19,32,24,.23);transform:rotate(1.5deg);animation:enter .7s ease both}.window-bar{height:46px;padding:0 16px;display:flex;align-items:center;gap:7px;border-bottom:1px solid #304037}.window-bar span{width:9px;height:9px;border-radius:50%;background:#df6947}.window-bar span:nth-child(2){background:#dda94e}.window-bar span:nth-child(3){background:#55aa77}.window-bar small{margin-left:auto;color:#87948c}.code-window pre{min-height:245px;margin:0;padding:38px 34px;color:#d9e1dc;font:15px/1.9 Consolas,monospace}.purple{color:#c9a6ff}.blue{color:#75b9ff}.orange{color:#e8b581}.green{color:#7ed5a2}.floating-card{position:absolute;right:-20px;bottom:-30px;display:flex;align-items:center;gap:12px;padding:14px 18px;background:white;border-radius:10px;box-shadow:0 14px 35px rgba(22,45,31,.17);animation:float 4s ease-in-out infinite}.floating-card>.anticon{color:#23a565;font-size:22px}.floating-card div{display:flex;flex-direction:column}.floating-card small{color:#77837b}.category-strip{border-bottom:1px solid #e6e9e6}.category-strip>div{max-width:1200px;margin:auto;padding:22px 28px;display:flex;align-items:center;justify-content:center;gap:35px;overflow:auto;white-space:nowrap}.category-strip span{font-size:11px;font-weight:800;color:#8b958e;text-transform:uppercase;letter-spacing:1px}.category-strip a{color:#344139;font-size:13px;font-weight:650;text-decoration:none}.category-strip a:hover{color:#176b45}.home-content{max-width:1220px;margin:auto;padding:76px 28px}.course-section{scroll-margin-top:90px}.course-section+.course-section{margin-top:92px}.section-heading{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px}.section-kicker{color:#b6583f;font-size:11px;font-weight:850;letter-spacing:1.4px}.section-kicker.free{color:#176b45}.section-heading h2{margin:7px 0 6px;font-size:34px;letter-spacing:-1.2px;color:#17211b}.section-heading p{margin:0;color:#748078}.section-heading>a{color:#176b45;font-weight:700;text-decoration:none}.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}.course-tile{border:1px solid #e1e5e1;border-radius:12px;background:white;overflow:hidden;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,border-color .25s}.course-tile:hover{transform:translateY(-5px);border-color:#c7d4cb;box-shadow:0 16px 38px rgba(20,45,29,.1)}.tile-image{position:relative;aspect-ratio:16/9;background:#e9ece9;overflow:hidden}.tile-image img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}.course-tile:hover .tile-image img{transform:scale(1.045)}.tile-image:after{content:"";position:absolute;inset:55% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.55))}.tile-image button{position:absolute;right:14px;bottom:14px;z-index:2;width:38px;height:38px;border:0;border-radius:50%;background:white;color:#17211b;opacity:0;transform:translateX(-5px);transition:.25s}.course-tile:hover .tile-image button{opacity:1;transform:none}.pro-badge,.level{position:absolute;z-index:2;top:13px;padding:5px 9px;border-radius:5px;font-size:10px;font-weight:850;letter-spacing:.5px}.level{left:13px;background:rgba(23,33,27,.82);color:white}.pro-badge{right:13px;background:#f1cc71;color:#4e3811}.tile-body{padding:19px}.tile-category{color:#176b45;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.7px}.tile-body h3{margin:8px 0;font-size:18px;line-height:1.35;color:#1c2821}.tile-body p{height:42px;margin:0;color:#717c75;font-size:13px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.tile-meta{display:flex;gap:14px;margin-top:17px;padding-top:14px;border-top:1px solid #edf0ed;color:#7b867f;font-size:11px}.loading-state{grid-column:1/-1;padding:60px;text-align:center;color:#7b867f}@@keyframes enter{from{opacity:0;transform:translateY(20px) rotate(1.5deg)}to{opacity:1;transform:rotate(1.5deg)}}@@keyframes float{50%{transform:translateY(-7px)}}@@media(max-width:950px){.hero-inner{grid-template-columns:1fr;padding:60px 28px}.hero-visual{display:none}.course-grid{grid-template-columns:repeat(2,1fr)}}@@media(max-width:620px){.hero-inner{min-height:500px;padding:55px 20px}.hero h1{font-size:45px;letter-spacing:-2.5px}.hero-copy>p{font-size:16px}.hero-actions,.trust-row{flex-wrap:wrap}.category-strip>div{justify-content:flex-start}.home-content{padding:55px 18px}.section-heading{align-items:flex-start}.section-heading>a{display:none}.section-heading h2{font-size:28px}.course-grid{grid-template-columns:1fr}.course-section+.course-section{margin-top:65px}}
+    .home-content{padding-top:54px}
+    .value-section{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-bottom:78px;border:1px solid #e2e7e3;border-radius:12px;overflow:hidden;background:#e2e7e3}
+    .value-section article{display:flex;gap:15px;padding:24px;background:#fff}
+    .value-section article>span{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border-radius:10px;background:#edf5f0;color:#176b45;font-size:19px}
+    .value-section h3{margin:1px 0 6px;font-size:15px}.value-section p{margin:0;color:#748078;font-size:12px;line-height:1.55}
+    .image-placeholder{width:100%;height:100%;display:grid;place-items:center;align-content:center;gap:5px;background:linear-gradient(135deg,#dae9df,#eff2e8);color:#176b45;font-size:30px}
+    .image-placeholder small{font-size:11px;font-weight:800;letter-spacing:1px}
+    .skeleton-row{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+    .course-skeleton{padding-bottom:20px;border:1px solid #e7eae7;border-radius:12px;overflow:hidden}
+    .course-skeleton>*{display:block;background:linear-gradient(90deg,#eef0ee 25%,#f8f9f8 50%,#eef0ee 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+    .course-skeleton i{height:180px}.course-skeleton span{width:28%;height:9px;margin:19px 18px 12px}.course-skeleton b{width:75%;height:18px;margin:0 18px 12px}.course-skeleton small{width:55%;height:10px;margin:0 18px}
+    .empty-courses{grid-column:1/-1;padding:52px 20px;text-align:center;border:1px dashed #ced8d1;border-radius:12px;background:#fafbf9}
+    .empty-courses>span{width:48px;height:48px;margin:auto;display:grid;place-items:center;border-radius:50%;background:#eaf3ed;color:#176b45;font-size:21px}
+    .empty-courses h3{margin:14px 0 5px;font-size:17px}.empty-courses p{margin:0;color:#78837c;font-size:13px}
+    .join-banner{margin-top:92px;padding:48px 54px;display:flex;align-items:center;justify-content:space-between;gap:35px;border-radius:14px;background:#176b45;color:#fff;overflow:hidden;position:relative}
+    .join-banner:after{content:"";position:absolute;width:260px;height:260px;right:-70px;top:-120px;border:50px solid rgba(255,255,255,.06);border-radius:50%}
+    .join-banner div{position:relative;z-index:1}.join-banner span{color:#b7e0c8;font-size:10px;font-weight:850;letter-spacing:1.5px}
+    .join-banner h2{margin:9px 0 10px;color:#fff;font-size:30px;line-height:1.2;letter-spacing:-.8px}.join-banner p{margin:0;color:#c5dfd0}
+    .join-banner>a{position:relative;z-index:1;display:flex;align-items:center;gap:10px;padding:13px 18px;border-radius:8px;background:#fff;color:#155c3c!important;font-weight:750;text-decoration:none;white-space:nowrap}
+    @@keyframes shimmer{to{background-position:-200% 0}}
+    @@media(max-width:950px){.value-section{grid-template-columns:1fr}.skeleton-row{grid-template-columns:repeat(2,1fr)}.course-skeleton:last-child{display:none}}
+    @@media(max-width:620px){.home-content{padding-top:42px}.value-section{margin-bottom:58px}.skeleton-row{grid-template-columns:1fr}.course-skeleton:nth-child(n+2){display:none}.join-banner{margin-top:65px;padding:37px 26px;align-items:flex-start;flex-direction:column}.join-banner h2{font-size:25px}.join-banner br{display:none}}
     @@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
