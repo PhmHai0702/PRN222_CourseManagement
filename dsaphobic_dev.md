@@ -89,3 +89,18 @@ Added:
 - Page number display
 
 Load time reduced from 3.2s to 0.4s for a student with 200 grades.
+
+
+## 2026-07-10
+
+Wrote unit tests for the authentication flow:
+
+- `Login_ValidCredentials_ReturnsToken` ✅
+- `Login_InvalidPassword_Returns401` ✅
+- `Login_LockedAccount_Returns423` ✅
+- `RefreshToken_Valid_ReturnsNewToken` ✅
+- `RefreshToken_Expired_Returns401` ✅
+
+Coverage: 88% on `AuthService`. Used Moq for mocking `UserManager<T>`.
+
+Need to add integration tests with `WebApplicationFactory` next sprint.
