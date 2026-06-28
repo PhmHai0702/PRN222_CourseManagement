@@ -104,3 +104,16 @@ Wrote unit tests for the authentication flow:
 Coverage: 88% on `AuthService`. Used Moq for mocking `UserManager<T>`.
 
 Need to add integration tests with `WebApplicationFactory` next sprint.
+
+
+## 2026-07-12
+
+Applied code formatting across the solution using `.editorconfig` rules.
+
+Changes made:
+- Converted tabs to spaces in 15 files
+- Removed trailing whitespace
+- Added file-scoped namespace declarations where missing
+- Sorted import statements
+
+Zero functional changes. Build still passes. CI linting step now enforces these rules.
