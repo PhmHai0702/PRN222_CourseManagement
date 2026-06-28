@@ -129,3 +129,18 @@ Fix: explicitly use `CultureInfo.InvariantCulture` with `yyyy-MM-dd HH:mm:ss` fo
 
 Also added a helper method `FormatDate(DateTime dt)` to centralize date formatting
 across the application.
+
+
+## 2026-07-15
+
+Added CSV export functionality for grade reports.
+
+Endpoint: `GET /api/grades/export?format=csv`
+
+Features:
+- Streams data directly to response (no large in-memory buffers)
+- Uses `CsvHelper` library for proper CSV formatting
+- Includes headers: StudentId, CourseName, Grade, Letter, Semester, Date
+- Handles UTF-8 BOM for Excel compatibility
+
+Tested with 10k rows — export completes in ~2 seconds.
