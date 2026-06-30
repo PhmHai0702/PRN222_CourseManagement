@@ -21,7 +21,7 @@
             Trang chủ
         </BreadcrumbItem>
         <BreadcrumbItem Href="/listBlog">
-            Thế giới lập trình
+            Danh sách blog
         </BreadcrumbItem>
         <BreadcrumbItem>
             @blog?.Title
@@ -45,7 +45,7 @@ else
         <!-- Blog Content -->
         <div class="blog-content">
             <h1 class="blog-title">@blog.Title</h1>
-            <!-- Hiển thị hình ảnh nếu có -->
+            <!-- Hiển thị hình ảnh nếu có. -->
             @if (!string.IsNullOrEmpty(blog.UrlImage))
             {
                 <div class="blog-image">
@@ -87,7 +87,7 @@ else
                 @((MarkupString)blog.Content)
             </div>
             <div class="comments-section">
-                <!-- Ô nhập bình luận -->
+                <!-- Ô nhập bình luận. -->
                 <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
                     <Avatar Icon="user" />
                     <TextArea @bind-Value="newComment"
@@ -101,7 +101,7 @@ else
                 </div>
                 <Divider />
 
-                <!-- Danh sách bình luận -->
+                <!-- Danh sách bình luận. -->
                 <div class="comments-list">
                     @foreach (var comment in comments)
                     {
@@ -138,11 +138,11 @@ else
             blog = await BlogService.GetBlogById(blogId);
 
             if (blog != null) {
-                // T?o timer v?i th?i gian d?c du?c tính toán
-                var readingTimeInMilliseconds = CalculateReadingTime(blog.Content) * 60 * 1000; // Chuy?n phút thành milliseconds
+                // Tạo bộ đếm theo thời gian đọc ước tính.
+                var readingTimeInMilliseconds = CalculateReadingTime(blog.Content) * 60 * 1000; // Chuyển phút thành milliseconds.
                 readingTimer = new System.Timers.Timer(readingTimeInMilliseconds);
                 readingTimer.Elapsed += async (sender, e) => await OnReadingTimeCompleted();
-                readingTimer.AutoReset = false; // Ch? ch?y m?t l?n
+                readingTimer.AutoReset = false; // Chỉ chạy một lần.
                 readingTimer.Start();
             }
             await LoadComments();
@@ -215,7 +215,7 @@ else
 
 
     private async Task OnReadingTimeCompleted() {
-        // Ð?m b?o ch? tang view m?t l?n
+        // Đảm bảo chỉ tăng lượt xem một lần.
         if (!hasIncrementedView && blog != null) {
             try {
                 var newViewCount = await BlogService.IncrementViewCount(blogId);
@@ -231,7 +231,7 @@ else
     }
 
     public void Dispose() {
-        // Cleanup timer khi component b? dispose
+        // Giải phóng bộ đếm khi component bị hủy.
         if (readingTimer != null) {
             readingTimer.Dispose();
         }
@@ -241,7 +241,7 @@ else
     {
         if (string.IsNullOrEmpty(content)) return 0;
         var wordCount = content.Split(new[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length;
-        return (int)Math.Ceiling(wordCount / 200.0); // Gi? d?nh 200 t?/phút
+        return (int)Math.Ceiling(wordCount / 200.0); // Giả định tốc độ đọc 200 từ/phút.
     }
     private async Task SubmitComment()
     {

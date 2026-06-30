@@ -175,7 +175,7 @@ public class CourseDetailBase : ComponentBase {
             try {
                 var response = JsonSerializer.Deserialize<Dictionary<string, string>>(fileInfo.File.Response);
                 if (response != null && response.ContainsKey("fileName")) {
-                    // Ch? c?p nh?t UI, không g?i API document
+                    // Ch? c?p nh?t UI, khÃ´ng g?i API document
                     var existingFile = CurrentLessonFiles.FirstOrDefault(f => f.FileName == fileInfo.File.FileName);
                     if (existingFile != null && existingFile != fileInfo.File) {
                         CurrentLessonFiles.Remove(existingFile);
@@ -667,7 +667,7 @@ public class CourseDetailBase : ComponentBase {
         try {
             AddNewLessonModel.Duration = await GetYouTubeDuration(AddNewLessonModel.UrlVideo);
 
-            // Thêm thông tin documents vào request
+            // ThÃªm thÃ´ng tin documents vÃ o request
             AddNewLessonModel.Documents = CurrentLessonFiles
                 .Where(f => f.State == UploadState.Success)
                 .Select(f => {
@@ -689,7 +689,7 @@ public class CourseDetailBase : ComponentBase {
                 CurrentLessonFiles.Clear();
                 await _mess.Success("Lesson added successfully");
             } else {
-                // Xóa các files dã upload n?u t?o lesson th?t b?i
+                // XÃ³a cÃ¡c files dÃ£ upload n?u t?o lesson th?t b?i
                 foreach (var file in CurrentLessonFiles.Where(f => f.State == UploadState.Success)) {
                     try {
                         var fileResponse = JsonSerializer.Deserialize<Dictionary<string, string>>(file.Response);
@@ -856,7 +856,7 @@ public class CourseDetailBase : ComponentBase {
             string apiKey = Configuration["YouTube:ApiKey"];
             string apiUrl = $"https://www.googleapis.com/youtube/v3/videos?id={videoId}&part=contentDetails&key={apiKey}";
 
-            // T?o HttpClient m?i không có authentication header
+            // T?o HttpClient m?i khÃ´ng cÃ³ authentication header
             using (var client = new HttpClient()) {
                 var response = await client.GetAsync(apiUrl);
                 if (response.IsSuccessStatusCode) {
@@ -924,7 +924,7 @@ public class CourseDetailBase : ComponentBase {
         using var package = new ExcelPackage();
         var worksheet = package.Workbook.Worksheets.Add("Lessons");
 
-        // Tiêu d? c?t
+        // TiÃªu d? c?t
         worksheet.Cells[1, 1].Value = "Module Title";
         worksheet.Cells[1, 2].Value = "Lesson Title";
         worksheet.Cells[1, 3].Value = "Video URL";
@@ -936,13 +936,13 @@ public class CourseDetailBase : ComponentBase {
             range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
         }
 
-        int row = 2; // B?t d?u ghi d? li?u t? dòng 2
+        int row = 2; // B?t d?u ghi d? li?u t? dÃ²ng 2
         foreach (var module in CourseDetailModel.Modules)
         {
             int startRow = row;
             if (module.Lessons != null && module.Lessons.Any())
             {
-                // Ghi t?t c? bài h?c c?a module
+                // Ghi t?t c? bÃ i h?c c?a module
                 foreach (var lesson in module.Lessons)
                 {
                     worksheet.Cells[row, 1].Value = module.Title;
@@ -953,14 +953,14 @@ public class CourseDetailBase : ComponentBase {
             }
             else
             {
-                // Module không có bài h?c
+                // Module khÃ´ng cÃ³ bÃ i h?c
                 worksheet.Cells[row, 1].Value = module.Title;
-                worksheet.Cells[row, 2].Value = "Không có lesson";
+                worksheet.Cells[row, 2].Value = "KhÃ´ng cÃ³ bÃ i há»c";
                 worksheet.Cells[row, 3].Value = "";
                 row++;
             }
 
-            // Merge các ô trong c?t Module Title n?u có nhi?u dòng
+            // Merge cÃ¡c Ã´ trong c?t Module Title n?u cÃ³ nhi?u dÃ²ng
             if (row - startRow > 1)
             {
                 worksheet.Cells[startRow, 1, row - 1, 1].Merge = true;

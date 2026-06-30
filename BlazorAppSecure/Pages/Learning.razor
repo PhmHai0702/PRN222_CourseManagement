@@ -118,7 +118,7 @@
                                 <Tag Color="TagColor.Blue">@CourseDetail.Modules.Count module</Tag>
                                 <Tag Color="TagColor.Blue">@GetTotalLessons() lesson</Tag>
                                 <Tag Color="TagColor.Blue">@GetTotalDuration()</Tag>
-                                @* <Text>@CourseDetail.Modules.Count module ï @GetTotalLessons() lesson ï @GetTotalDuration()</Text> *@
+                                @* <Text>@CourseDetail.Modules.Count module ‚Ä¢ @GetTotalLessons() lesson ‚Ä¢ @GetTotalDuration()</Text> *@
                             </div>
                         </div>
                         <div class="progress-circle">
@@ -172,7 +172,7 @@ Title='("Comments")'
 Width="500"
 OnClose="@CloseQnA">
     <div class="comments-section">
-        <!-- ‘ nh?p comment -->
+        <!-- √î nh?p comment -->
         <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
             <Avatar Icon="user" />
             <TextArea @bind-Value="newComment"
@@ -186,7 +186,7 @@ OnClose="@CloseQnA">
         </div>
         <Divider />
 
-        <!-- Danh s·ch comment -->
+        <!-- Danh s√°ch comment -->
         <div class="comments-list">
             @foreach (var comment in comments)
             {
@@ -546,7 +546,7 @@ OnClose="@CloseQnA">
     private async Task ToggleLessonComplete(LearnCourseResponse.Lesson lesson) {
         try {
             if (IsLessonCompleted(lesson.Id)) {
-                // G?i API d? d·nh d?u lesson chua ho‡n th‡nh
+                // G?i API d? d√°nh d?u lesson chua ho√†n th√†nh
                 var response = await httpClient.GetAsync($"/api/Lesson/lesson-not-completed?LessonId={lesson.Id}");
                 if (response.IsSuccessStatusCode) {
                     completedLessons.Remove(lesson.Id);
@@ -556,7 +556,7 @@ OnClose="@CloseQnA">
                     _mess.Error($"Failed to update lesson status: {error}");
                 }
             } else {
-                // G?i API d? d·nh d?u lesson d„ ho‡n th‡nh
+                // G?i API d? d√°nh d?u lesson d√£ ho√†n th√†nh
                 var response = await httpClient.GetAsync($"/api/Lesson/lesson-completed?LessonId={lesson.Id}");
                 if (response.IsSuccessStatusCode) {
                     completedLessons.Add(lesson.Id);
