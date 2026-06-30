@@ -15,3 +15,17 @@ if (course.Instructor == null)
 ```
 
 Next: need to verify the fix on the staging environment.
+
+
+## 2026-06-30
+
+Added a basic search filter for the course list page. Users can now filter by:
+- Course name (partial match)
+- Category (dropdown)
+- Status (active/inactive)
+
+The backend uses LINQ with predicate building. Results are paginated with 20 items per page.
+
+API: `GET /api/courses/search?name=&category=&page=&size=`
+
+TODO: add sorting by name or date.
