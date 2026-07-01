@@ -50,3 +50,33 @@ Updated dependencies across the solution:
 | Serilog | 2.12.0 | 2.13.1 |
 
 All tests passing. No breaking changes detected.
+
+
+## 2026-07-01
+
+Debugging null reference in `StudentProfile` — the issue occurs when a new user
+registers but the profile creation callback fires before the user claim is set in the
+HTTP context.
+
+Fix: added null check and fallback to fetch user from DB directly.
+
+```csharp
+if (userId == null)
+{
+    userId = await _userManager.GetUserIdAsync(user);
+}
+```
+
+
+## 2026-07-02
+
+Implemented pagination for the course listing endpoint.
+
+Used `IQueryable<T>.Skip().Take()` pattern with:
+- Default page size: 20
+- Max page size: 100
+- Returns `X-Total-Count` header
+
+Tested with 10k records — response time under 200ms.
+
+Also added Swagger examples for the query parameters.
