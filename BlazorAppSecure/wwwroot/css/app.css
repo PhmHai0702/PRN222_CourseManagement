@@ -5,18 +5,32 @@
     text-rendering: optimizeLegibility;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #fff;
+}
+
+::selection {
+    color: #fff;
+    background: #176b45;
+}
+
 h1:focus {
     outline: none;
 }
 
 a, .btn-link {
-    color: #0071c1;
+    color: #176b45;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: #176b45;
+    border-color: #176b45;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -128,25 +142,25 @@ code {
 
 /* Áp dụng cho tất cả thanh cuộn */
 ::-webkit-scrollbar {
-    width: 3px; /* Độ rộng của scrollbar dọc */
-    height: 10px; /* Độ cao của scrollbar ngang */
+    width: 8px;
+    height: 8px;
 }
 
 /* Màu nền của thanh cuộn */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #eef1ee;
     border-radius: 10px;
 }
 
 /* Màu của thanh cuộn */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #9aaa9f;
     border-radius: 10px;
 }
 
 /* Hover vào thanh cuộn */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #176b45;
 }
 
 .ant-btn-edit {
