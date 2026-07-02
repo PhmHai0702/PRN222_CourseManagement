@@ -1,11 +1,12 @@
 {
-  "name": "BlazorAppSecure",
-  "short_name": "BlazorAppSecure",
+  "name": "EduPath — Học kỹ năng, mở tương lai",
+  "short_name": "EduPath",
+  "description": "Nền tảng học lập trình theo lộ trình thực chiến.",
   "id": "./",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#03173d",
+  "theme_color": "#176b45",
   "prefer_related_applications": false,
   "icons": [
     {
