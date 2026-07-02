@@ -66,3 +66,17 @@ if (userId == null)
     userId = await _userManager.GetUserIdAsync(user);
 }
 ```
+
+
+## 2026-07-02
+
+Implemented pagination for the course listing endpoint.
+
+Used `IQueryable<T>.Skip().Take()` pattern with:
+- Default page size: 20
+- Max page size: 100
+- Returns `X-Total-Count` header
+
+Tested with 10k records — response time under 200ms.
+
+Also added Swagger examples for the query parameters.
