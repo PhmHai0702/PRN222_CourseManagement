@@ -80,3 +80,18 @@ Used `IQueryable<T>.Skip().Take()` pattern with:
 Tested with 10k records — response time under 200ms.
 
 Also added Swagger examples for the query parameters.
+
+
+## 2026-07-03
+
+Wrote unit tests for authentication flow:
+
+- Login with valid credentials ✅
+- Login with wrong password ❌ returns 401
+- Login with locked account ❌ returns 423
+- Token refresh flow ✅
+- Token expiry handling ✅
+
+Coverage: 92% on the AuthService.
+
+Need to add tests for the JWT middleware next.
