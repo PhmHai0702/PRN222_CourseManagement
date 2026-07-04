@@ -95,3 +95,16 @@ Wrote unit tests for authentication flow:
 Coverage: 92% on the AuthService.
 
 Need to add tests for the JWT middleware next.
+
+
+## 2026-07-04
+
+Code cleanup day. Ran `dotnet format` across the solution.
+
+Changes:
+- Removed 400+ trailing whitespace lines
+- Fixed inconsistent indentation (tabs vs spaces in 12 files)
+- Added file-scoped namespace declarations
+- Removed unused `using` directives
+
+Zero functional changes. CI linting rules updated.
