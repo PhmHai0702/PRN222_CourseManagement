@@ -43,3 +43,19 @@ Extracted it into a separate `GradeCalculator` class with pure functions:
 - `GetLetterGrade(score)`
 
 Added unit tests covering edge cases like missing assignments.
+
+
+## 2026-07-04
+
+Updated NuGet packages to latest stable versions:
+
+| Package | Version |
+|---------|---------|
+| Microsoft.EntityFrameworkCore | 8.0.4 |
+| AutoMapper | 13.0.1 |
+| Serilog.AspNetCore | 8.0.0 |
+| Swashbuckle.AspNetCore | 6.5.0 |
+
+All existing tests pass. No breaking changes detected in the API surface.
+
+Also cleaned up some deprecated package references in the csproj files.
