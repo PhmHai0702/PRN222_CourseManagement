@@ -108,3 +108,17 @@ Changes:
 - Removed unused `using` directives
 
 Zero functional changes. CI linting rules updated.
+
+
+## 2026-07-05
+
+Wrote API documentation for the course management endpoints.
+
+Documented:
+- `GET /api/courses` — list with pagination
+- `GET /api/courses/{id}` — detail
+- `POST /api/courses` — create (requires Admin role)
+- `PUT /api/courses/{id}` — update
+- `DELETE /api/courses/{id}` — soft delete
+
+Added XML comments to all DTOs and controllers.
