@@ -10,3 +10,17 @@ Root cause: missing index on `Enrollment.StudentId`. Added migration to fix.
 **Next:**
 - Write integration test for concurrent enrollment
 - Verify fix on staging
+
+
+## 2026-06-10
+
+Began implementing course search endpoint. Initial design:
+
+```
+GET /api/courses/search?q=&category=&page=&size=
+```
+
+Supports full-text search on title and description, filtered by optional category.
+Pagination uses offset-based strategy with max page size of 50.
+
+TODO: add sorting by relevance score.
