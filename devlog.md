@@ -122,3 +122,15 @@ Documented:
 - `DELETE /api/courses/{id}` — soft delete
 
 Added XML comments to all DTOs and controllers.
+
+
+## 2026-07-06
+
+File upload timeout was set to 30s — not enough for large PDF attachments.
+
+Increased to 5 minutes for uploads > 10MB. Also added:
+- Chunked upload support (5MB per chunk)
+- Progress tracking via SignalR
+- File type validation on server side
+
+Tested with 50MB PDF — works reliably.
