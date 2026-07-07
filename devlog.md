@@ -134,3 +134,31 @@ Increased to 5 minutes for uploads > 10MB. Also added:
 - File type validation on server side
 
 Tested with 50MB PDF — works reliably.
+
+
+## 2026-07-07
+
+Designed the student dashboard widget layout:
+
+```
++------------------+------------------+
+| Enrollment Stats  | Upcoming Deadlines|
++------------------+------------------+
+| Recent Grades    | Announcements    |
++------------------+------------------+
+```
+
+Each widget is an independent Blazor component with its own data loading.
+Implemented lazy loading to avoid blocking the initial render.
+
+
+## 2026-07-08
+
+Simplified the enrollment workflow:
+
+Before: Student selects course → adds to cart → checks out → admin approves
+After: Student selects course → enroll immediately (auto-approved for eligible)
+
+Reduced the flow from 4 steps to 2. Removed the `PendingEnrollment` table entirely.
+
+Caveat: courses with prerequisites still require manual approval.
