@@ -37,3 +37,16 @@ New structure:
 - `GradeController` — thin HTTP layer
 
 Reduced controller to 40 lines. Added unit tests.
+
+
+## 2026-06-15
+
+Updated dependencies across the solution:
+
+| Package | From | To |
+|---------|------|-----|
+| EntityFrameworkCore | 6.0.12 | 6.0.18 |
+| AutoMapper | 12.0.0 | 12.0.1 |
+| Serilog | 2.12.0 | 2.13.1 |
+
+All tests passing. No breaking changes detected.
