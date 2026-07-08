@@ -50,3 +50,19 @@ Updated dependencies across the solution:
 | Serilog | 2.12.0 | 2.13.1 |
 
 All tests passing. No breaking changes detected.
+
+
+## 2026-06-16
+
+Debugging null reference in `StudentProfile` — the issue occurs when a new user
+registers but the profile creation callback fires before the user claim is set in the
+HTTP context.
+
+Fix: added null check and fallback to fetch user from DB directly.
+
+```csharp
+if (userId == null)
+{
+    userId = await _userManager.GetUserIdAsync(user);
+}
+```
