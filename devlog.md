@@ -173,3 +173,14 @@ Removed dead code found via `dotnet tool run dead-code`:
 - `CourseMergeService.cs` — feature was dropped
 
 Saved ~1500 lines of dead code. Solution builds 2s faster.
+
+
+## 2026-07-10
+
+Date formatting bug in the reports module:
+
+The `ReportGenerator` was using `DateTime.Now.ToShortDateString()` which outputs
+different formats depending on the server's locale.
+
+Fix: use `DateTime.Now.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)`
+to ensure consistent ISO 8601 format across all environments.
