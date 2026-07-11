@@ -184,3 +184,15 @@ different formats depending on the server's locale.
 
 Fix: use `DateTime.Now.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)`
 to ensure consistent ISO 8601 format across all environments.
+
+
+## 2026-07-11
+
+Added CSV export for grade reports.
+
+Usage: `GET /api/grades/export?format=csv`
+
+Uses `CsvHelper` library. Streams the file directly to the response to avoid
+loading the entire dataset in memory.
+
+Tested with 50k records — exported in ~3s with ~5MB file size.
