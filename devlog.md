@@ -208,3 +208,16 @@ reducing to a single round trip. Also added a composite index on
 `Enrollment(CourseId, StudentId)`.
 
 Page load time: 4.2s → 0.3s
+
+
+## 2026-07-13
+
+Wrote integration tests for the grade management API:
+
+- Create grade with valid data ✅
+- Create grade for nonexistent student ❌ 404
+- Update grade with invalid value ❌ 400
+- Delete grade (authorized) ✅
+- Delete grade (unauthorized) ❌ 403
+
+Uses `WebApplicationFactory<T>` with in-memory database.
