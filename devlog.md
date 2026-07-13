@@ -208,3 +208,30 @@ reducing to a single round trip. Also added a composite index on
 `Enrollment(CourseId, StudentId)`.
 
 Page load time: 4.2s → 0.3s
+
+
+## 2026-07-13
+
+Wrote integration tests for the grade management API:
+
+- Create grade with valid data ✅
+- Create grade for nonexistent student ❌ 404
+- Update grade with invalid value ❌ 400
+- Delete grade (authorized) ✅
+- Delete grade (unauthorized) ❌ 403
+
+Uses `WebApplicationFactory<T>` with in-memory database.
+
+
+## 2026-07-14
+
+Found a bug: students could register for the same course twice.
+
+The unique constraint on `Enrollment(StudentId, CourseId)` was missing.
+
+Added the constraint via EF migration and added a check in the service layer
+to return a friendly error instead of a raw SQL exception.
+
+```sql
+CREATE UNIQUE INDEX IX_Enrollment_StudentCourse ON Enrollment(StudentId, CourseId);
+```
