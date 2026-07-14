@@ -117,3 +117,15 @@ Changes made:
 - Sorted import statements
 
 Zero functional changes. Build still passes. CI linting step now enforces these rules.
+
+
+## 2026-07-14
+
+Date formatting bug on the report export page. The `ReportGenerator` was using the
+server's culture settings, which caused inconsistent date formats between development
+and production environments.
+
+Fix: explicitly use `CultureInfo.InvariantCulture` with `yyyy-MM-dd HH:mm:ss` format.
+
+Also added a helper method `FormatDate(DateTime dt)` to centralize date formatting
+across the application.
