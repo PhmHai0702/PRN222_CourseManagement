@@ -235,3 +235,21 @@ to return a friendly error instead of a raw SQL exception.
 ```sql
 CREATE UNIQUE INDEX IX_Enrollment_StudentCourse ON Enrollment(StudentId, CourseId);
 ```
+
+
+## 2026-07-15
+
+Started implementing role-based access control (RBAC).
+
+Roles:
+- `Admin` — full access
+- `Instructor` — manage courses, view grades
+- `Student` — enroll, view own grades
+
+Added policy-based authorization:
+```csharp
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdmin", p => p.RequireRole("Admin"));
+});
+```
