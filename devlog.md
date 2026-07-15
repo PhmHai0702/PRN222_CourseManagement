@@ -235,3 +235,35 @@ to return a friendly error instead of a raw SQL exception.
 ```sql
 CREATE UNIQUE INDEX IX_Enrollment_StudentCourse ON Enrollment(StudentId, CourseId);
 ```
+
+
+## 2026-07-15
+
+Started implementing role-based access control (RBAC).
+
+Roles:
+- `Admin` — full access
+- `Instructor` — manage courses, view grades
+- `Student` — enroll, view own grades
+
+Added policy-based authorization:
+```csharp
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdmin", p => p.RequireRole("Admin"));
+});
+```
+
+
+## 2026-07-16
+
+Ran `dotnet format whitespace` across the entire solution.
+
+Fixed inconsistent indentation in 20+ files. Mostly tabs vs spaces in
+`.razor` files and old `.cs` files that predated the editorconfig.
+
+Added `.editorconfig` to enforce:
+- charset: utf-8
+- indent_style: space
+- indent_size: 4
+- end_of_line: crlf
