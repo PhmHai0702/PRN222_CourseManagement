@@ -253,3 +253,17 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RequireAdmin", p => p.RequireRole("Admin"));
 });
 ```
+
+
+## 2026-07-16
+
+Ran `dotnet format whitespace` across the entire solution.
+
+Fixed inconsistent indentation in 20+ files. Mostly tabs vs spaces in
+`.razor` files and old `.cs` files that predated the editorconfig.
+
+Added `.editorconfig` to enforce:
+- charset: utf-8
+- indent_style: space
+- indent_size: 4
+- end_of_line: crlf
