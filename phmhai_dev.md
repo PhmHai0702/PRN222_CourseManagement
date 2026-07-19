@@ -134,3 +134,19 @@ Increased to 5 minutes for uploads > 10MB. Also added:
 - File type validation on server side
 
 Tested with 50MB PDF — works reliably.
+
+
+## 2026-06-28
+
+Designed the student dashboard widget layout:
+
+```
++------------------+------------------+
+| Enrollment Stats  | Upcoming Deadlines|
++------------------+------------------+
+| Recent Grades    | Announcements    |
++------------------+------------------+
+```
+
+Each widget is an independent Blazor component with its own data loading.
+Implemented lazy loading to avoid blocking the initial render.
