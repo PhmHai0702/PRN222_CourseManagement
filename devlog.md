@@ -311,3 +311,17 @@ if (course.Deadline.HasValue && course.Deadline.Value.Date == today)
 ```
 
 Added null-conditional operator throughout the scheduler.
+
+
+## 2026-07-20
+
+Added notification preferences page.
+
+Users can now configure:
+- Email notifications (on/off)
+- Push notifications (on/off)
+- Notification types: grade changes, enrollment updates, announcements
+
+Preferences stored in `AspNetUserClaims` table. Defaults are all enabled.
+
+API endpoint: `PUT /api/users/notifications`
