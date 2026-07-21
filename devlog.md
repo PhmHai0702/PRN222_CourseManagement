@@ -325,3 +325,32 @@ Users can now configure:
 Preferences stored in `AspNetUserClaims` table. Defaults are all enabled.
 
 API endpoint: `PUT /api/users/notifications`
+
+
+## 2026-07-21
+
+Set up the CI/CD pipeline with GitHub Actions.
+
+Workflow:
+1. Build solution (`dotnet build --configuration Release`)
+2. Run tests (`dotnet test`)
+3. Run linter (`dotnet format --verify-no-changes`)
+4. Deploy to staging (on push to `develop`)
+5. Deploy to production (on push to `main`)
+
+Pipeline takes ~4 minutes to complete.
+
+
+## 2026-07-22
+
+Fixed the sort order in the grade table — students were seeing grades sorted
+by `CreatedAt` ascending (oldest first).
+
+Changed to descending order so the most recent grade appears at the top.
+
+```csharp
+return await _context.Grades
+    .Where(g => g.StudentId == id)
+    .OrderByDescending(g => g.CreatedAt)
+    .ToListAsync();
+```
