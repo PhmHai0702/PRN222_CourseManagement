@@ -162,3 +162,14 @@ After: Student selects course → enroll immediately (auto-approved for eligible
 Reduced the flow from 4 steps to 2. Removed the `PendingEnrollment` table entirely.
 
 Caveat: courses with prerequisites still require manual approval.
+
+
+## 2026-07-05
+
+Removed dead code found via `dotnet tool run dead-code`:
+
+- `LegacyGradeConverter.cs` — unused since v2 migration
+- `XmlReportExporter.cs` — replaced by CSV/PDF exporters
+- `CourseMergeService.cs` — feature was dropped
+
+Saved ~1500 lines of dead code. Solution builds 2s faster.
