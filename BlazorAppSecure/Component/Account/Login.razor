@@ -1,108 +1,39 @@
-@page "/login"
-
+﻿@page "/login"
 @using AntDesign
 @using BlazorAppSecure.Sevices
-@using System.ComponentModel.DataAnnotations;
-@using System.Text.Json;
-
+@using System.ComponentModel.DataAnnotations
 @inject IAccountManagement Acct
 @inject NavigationManager Navigation
 @inject IAppNotificationService _message
-
 @layout EmptyLayout
-
+<PageTitle>Đăng nhập — EduPath</PageTitle>
+<link rel="stylesheet" href="css/auth.css" />
 <AuthorizeView>
-    <Authorized>
-        <Result Status="ResultStatus.Warning" Title="@($"You're already logged in as {context.User.Identity?.Name}.")">
-            <Extra>
-                <Button Type="ButtonType.Primary" OnClick="HandleGoToHomepage">Go To Homapage</Button>
-            </Extra>
-        </Result>
-    </Authorized>
-    <NotAuthorized>
-        <div class="login-page">
-            <Card Style="width: 500px">
-                <ChildContent>
-                    <Form Model="@loginModel" OnFinish="OnFinish" LabelColSpan="10" Context="formContext" class="login-form">
-                        <FormItem Label="Email">
-                            <Input @bind-Value="@formContext.Email" />
-                        </FormItem>
-                        <FormItem Label="Password">
-                            <InputPassword @bind-Value="@formContext.Password" />
-                        </FormItem>
-                        <FormItem WrapperColOffset="10">
-                            <Button Type="ButtonType.Primary" HtmlType="submit">
-                                Login
-                            </Button>
-                        </FormItem>
-                        <p>
-                            Not has an account?
-                            <NavLink href="register">
-                                Register
-                            </NavLink>
-                        </p>
-                        <p>
-                            <Button Type="ButtonType.Link" OnClick="HandleForgotPassword">
-                                Forgot Password?
-                            </Button>
-                        </p>
-                    </Form>
-                </ChildContent>
-            </Card>
-        </div>
-    </NotAuthorized>
+ <Authorized><div class="auth-done"><span><Icon Type="check" /></span><h1>Bạn đã đăng nhập</h1><p>Tài khoản hiện tại: <b>@context.User.Identity?.Name</b></p><Button Type="ButtonType.Primary" OnClick="GoHome">Về trang chủ</Button></div></Authorized>
+ <NotAuthorized>
+  <div class="auth-shell">
+   <aside class="auth-side">
+    <NavLink href="" class="auth-logo"><i><Icon Type="book" Theme="IconThemeType.Fill" /></i>Edu<b>Path</b></NavLink>
+    <div class="auth-message"><small>HỌC MỖI NGÀY</small><h1>Tiếp tục hành trình<br/><em>của bạn.</em></h1><p>Mỗi bài học hoàn thành hôm nay là một bước gần hơn tới công việc bạn mong muốn.</p><div class="streak-card"><div><span>Tiến độ tuần này</span><b>4/5 bài học</b></div><i><u></u></i><small><Icon Type="fire" Theme="IconThemeType.Fill" /> Chuỗi học tập 7 ngày</small></div></div>
+    <footer>Học thực tế. Tiến bộ thật.</footer>
+   </aside>
+   <main class="auth-main"><div class="auth-box">
+    <NavLink href="" class="auth-logo mobile"><i><Icon Type="book" Theme="IconThemeType.Fill" /></i>Edu<b>Path</b></NavLink>
+    <header><small>CHÀO MỪNG TRỞ LẠI</small><h2>Đăng nhập</h2><p>Nhập thông tin tài khoản để tiếp tục học.</p></header>
+    <Form Model="@model" OnFinish="OnFinish" Context="form" class="auth-form">
+     <FormItem Label="Email"><Input @bind-Value="@form.Email" Placeholder="ban@email.com" /></FormItem>
+     <div class="password-label"><label>Mật khẩu</label><NavLink href="forgot-password">Quên mật khẩu?</NavLink></div>
+     <FormItem><InputPassword @bind-Value="@form.Password" Placeholder="Nhập mật khẩu" /></FormItem>
+     <Button Type="ButtonType.Primary" HtmlType="submit" Block Loading="@submitting" Class="auth-submit">Đăng nhập <Icon Type="arrow-right" /></Button>
+    </Form>
+    <p class="auth-switch">Chưa có tài khoản? <NavLink href="register">Đăng ký miễn phí</NavLink></p><p class="auth-terms">Bằng cách tiếp tục, bạn đồng ý với điều khoản sử dụng của EduPath.</p>
+   </div></main>
+  </div>
+ </NotAuthorized>
 </AuthorizeView>
 @code {
-    public class LoginModel {
-        [Required]
-        public string Email { get; set; }
-        [Required]
-        public string Password { get; set; }
-    }
-
-    private LoginModel loginModel = new LoginModel();
-
-    private async void OnFinish() {
-        await DoLoginAsync();
-    }
-
-
-    public async Task DoLoginAsync()
-    {
-
-        var result = await Acct.LoginAsync(loginModel.Email, loginModel.Password);
-
-        if (result.Succeeded)
-        {
-            loginModel = new LoginModel();
-            Navigation.NavigateTo("/");
-        }
-        else
-        {
-            result.ErrorList.ForEach((err) => {
-                _message.Error(err);
-            });
-            
-        }
-    }
-
-    public void HandleGoToHomepage() {
-        Navigation.NavigateTo("/");
-    }
-    public void HandleForgotPassword()
-    {
-        Navigation.NavigateTo("/forgot-password");
-    }
+ public sealed class LoginModel { [Required(ErrorMessage="Vui lòng nhập email"), EmailAddress(ErrorMessage="Email không đúng định dạng")] public string Email {get;set;}=""; [Required(ErrorMessage="Vui lòng nhập mật khẩu")] public string Password {get;set;}=""; }
+ private LoginModel model=new(); private bool submitting;
+ private async Task OnFinish(){try{submitting=true;var result=await Acct.LoginAsync(model.Email,model.Password);if(result.Succeeded){model=new();Navigation.NavigateTo("/");}else foreach(var error in result.ErrorList)await _message.Error(error);}finally{submitting=false;}}
+ private void GoHome()=>Navigation.NavigateTo("/");
 }
-
-<style>
-    .login-page {
-        padding-top: 100px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .login-form .ant-form-item-label {
-        text-align: left
-    }
-</style>
