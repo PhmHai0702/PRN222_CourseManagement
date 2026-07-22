@@ -1,0 +1,243 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+
+<Layout Class="layout">
+    <Header>
+        <div class="app-header">
+            <div class="d-flex align-items-center">
+                <div class="logo">
+                    <img src="https://media.istockphoto.com/id/607929972/vi/vec-to/logo-e-learning-vector.jpg?s=612x612&w=0&k=20&c=8IDWTGo2MIYYTyoUAXE6BugCPLhUamMlQT64R-39bEw=" alt="ELearning" />
+                    <span>ELearning</span>
+                </div>
+            </div>
+
+            <div class="menu-container">
+                <Menu Mode="MenuMode.Horizontal" Theme="MenuTheme.Light" Class="main-menu">
+                    <MenuItem OnClick="@(() => Navigation.NavigateTo("/"))">
+                        <Icon Type="graduation-cap" Theme="IconThemeType.Outline" />
+                        Khóa học
+                    </MenuItem>
+                    <MenuItem OnClick="@(() => Navigation.NavigateTo("/listBlog"))">
+                        <Icon Type="read" Theme="IconThemeType.Outline" />
+                        Thế giới lập trình
+                    </MenuItem>
+                    <MenuItem OnClick="@(() => Navigation.NavigateTo("/vip-subscription"))">
+                        <Icon Type="crown" Theme="IconThemeType.Outline" />
+                        Gói đăng ký
+                    </MenuItem>
+                    <MenuItem>
+                        <Icon Type="phone" Theme="IconThemeType.Outline" />
+                        Liên hệ
+                    </MenuItem>
+                </Menu>
+            </div>
+
+            <AuthorizeView>
+                <Authorized>
+                    <div class="d-flex align-items-center gap-2">
+                        <span>@context.User.Identity?.Name</span>
+                        <Dropdown Trigger="@(new Trigger[] { Trigger.Click })">
+                            <Overlay>
+                                <Menu>
+                                    <MenuItem>
+                                        <NavLink href="manage/profile">
+                                            My Profile
+                                        </NavLink>
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <NavLink href="logout">
+                                            Logout
+                                        </NavLink>
+                                    </MenuItem>
+                                </Menu>
+                            </Overlay>
+                            <ChildContent>
+                                <Avatar Icon="user" />
+                            </ChildContent>
+                        </Dropdown>
+                    </div>
+                </Authorized>
+                <NotAuthorized>
+                    <div class="d-flex align-items-center gap-2">
+                        <NavLink href="register">
+                            Register
+                        </NavLink>
+                        <NavLink href="login">
+                            Login
+                        </NavLink>
+                    </div>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+    </Header>
+    <Sider Width="230" Class="site-layout-background">
+        <Menu Mode="MenuMode.Inline"
+              DefaultSelectedKeys=@(new[] {"1"})
+              Style="height: 100%; border-right: 0;">
+            <MenuItem Key="1">
+                <Icon Type="@IconType.Outline.Home" />
+                <NavLink href="" Match="NavLinkMatch.All">
+                    Home
+                </NavLink>
+            </MenuItem>
+            <AuthorizeView Roles="Admin">
+                <Authorized>
+                    <MenuItem Key="4">
+                        <Icon Type="@IconType.Outline.User" />
+                        <NavLink href="users">
+                            Users & Roles Management
+                        </NavLink>
+                    </MenuItem>
+                    <MenuItem Key="5">
+                        <Icon Type="@IconType.Outline.Book" />
+                        <NavLink href="courses">
+                            Courses Management
+                        </NavLink>
+                    </MenuItem>
+                    @* <MenuItem Key="5">
+                        <Icon Type="@IconType.Outline.Cloud" />
+                        <NavLink href="addroles">
+                            Role Management
+                        </NavLink>
+                    </MenuItem> *@
+                    <MenuItem Key="6">
+                        <Icon Type="@IconType.Outline.FileText" />  
+                        <NavLink href="blogs">
+                            Blogs Management
+                        </NavLink>
+                    </MenuItem>
+                    <MenuItem Key="7">
+                        <Icon Type="@IconType.Outline.OrderedList" />
+                        <span>Orders</span>
+                        <NavLink href="orders">
+                            Orders Management
+                        </NavLink>
+                    </MenuItem>
+                </Authorized>
+            </AuthorizeView>
+        </Menu>
+    </Sider>
+    <Content Class="site-layout-background" Style=" padding: 8px; margin: 0; min-height: 280px;">
+        @Body
+    </Content>
+</Layout>
+
+<style>
+    .menu-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        height: 50px; /* Thêm chiều cao cố định */
+        overflow: hidden; /* Thêm overflow hidden */
+        align-items: center;
+    }
+
+    .main-menu {
+        font-size: 1.1rem;
+        line-height: 50px;
+    }
+
+    :deep(.ant-menu-horizontal) {
+        border-bottom: none;
+        line-height: 48px; /* Giảm line-height một chút */
+        height: 50px; /* Thêm chiều cao cố định */
+    }
+
+    :deep(.ant-menu-item) {
+        padding: 0 25px;
+        margin: 0 5px !important;
+        height: 50px; /* Thêm chiều cao cố định */
+        line-height: 50px;
+    }
+
+    :deep(.ant-menu-item:hover) {
+        color: #1890ff;
+        border-bottom: 2px solid #1890ff !important;
+    }
+
+    :deep(.ant-menu-item::after) {
+        display: none !important; /* Loại bỏ border mặc định */
+    }
+
+    :deep(.anticon) {
+        margin-right: 8px;
+        font-size: 1.2rem;
+        vertical-align: middle; /* Căn chỉnh icon */
+    }
+
+    .ant-layout-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        height: 50px;
+        background: white;
+        padding: 0;
+        overflow: hidden; /* Thêm overflow hidden */
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo img {
+        height: 45px;
+        margin-right: 12px;
+        transition: transform 0.3s ease;
+    }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+    .logo span {
+        font-weight: bold;
+        font-size: 1.6rem;
+        color: #1890ff;
+        letter-spacing: 0.5px;
+    }
+
+    .ant-layout-has-sider {
+        padding-top: 50px;
+        min-height: 100vh
+    }
+
+    .ant-layout {
+        height: auto
+    }
+
+    .ant-layout-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        height: 50px;
+        background: white;
+        padding: 0;
+    }
+
+    .menu-end {
+        display: flex;
+        justify-content: flex-end
+    }
+
+    .menu-start {
+        display: flex;
+        justify-content: flex-start
+    }
+
+    .app-header {
+        display: flex;
+        padding-left: 24px;
+        padding-right: 24px;
+        height: 100%;
+        justify-content: space-between
+    }
+
+    .ant-menu-item {
+        margin: 0 !important
+    }
+</style>

@@ -1,0 +1,1277 @@
+@page "/courses"
+@using System.ComponentModel.DataAnnotations
+@using System.Text.Json
+@using AntDesign.TableModels
+@using BlazorAppSecure.Model
+@using System.ComponentModel
+@using CourseManagement.Model.Constant
+@using CourseManagement.Model.DTOs
+
+@inject IHttpClientFactory HttpClientFactory
+@inject IAppNotificationService _mess
+@inject ModalService ModelService
+@inject NavigationManager _nav
+@inject IJSRuntime JS
+
+<div class="mb-2">
+    <Breadcrumb>
+        <BreadcrumbItem Href="">
+            Home
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+            Courses Management
+        </BreadcrumbItem>
+    </Breadcrumb>
+</div>
+
+<div>
+    <Form Model="@courseSearchModel" OnFinish="SubmitNewCategory">
+        <Row Gutter="16">
+            <AntDesign.Col Span="6">
+                <Text>Title</Text>
+                <FormItem>
+                    <Input Placeholder="Please enter name" TValue="string" @bind-Value="@context.Title"></Input>
+                </FormItem>
+            </AntDesign.Col>
+            <AntDesign.Col Span="6">
+                <Text>Level</Text>
+                <FormItem>
+                    <Select Mode="SelectMode.Multiple"
+                    Placeholder="Please select level"
+                    @bind-Values="@context.Levels"
+                    TItemValue="int"
+                    TItem="string"
+                    EnableSearch
+                    AllowClear>
+                        <SelectOptions>
+                            @foreach (var level in Enum.GetValues(typeof(CourseLevel))) {
+                                <SelectOption TItemValue="int" TItem="string" Value="@((int)level)" Label="@level.ToString()" />
+                            }
+                        </SelectOptions>
+                    </Select>
+                </FormItem>
+            </AntDesign.Col>
+            <AntDesign.Col Span="6">
+                <Text>Status</Text>
+                <FormItem>
+                    <Select Mode="SelectMode.Multiple"
+                    Placeholder="Please select status"
+                    @bind-Values="@context.Statuss"
+                    TItemValue="int"
+                    TItem="string"
+                    EnableSearch
+                    AllowClear>
+                        <SelectOptions>
+                            @foreach (var status in Enum.GetValues(typeof(CourseStatus))) {
+                                <SelectOption TItemValue="int" TItem="string" Value="@((int)status)" Label="@status.ToString()" />
+                            }
+                        </SelectOptions>
+                    </Select>
+                </FormItem>
+            </AntDesign.Col>
+            <AntDesign.Col Span="6">
+                <Text>Status</Text>
+                <FormItem>
+                    <Select Mode="SelectMode.Multiple"
+                    Placeholder="Please select course type"
+                    @bind-Values="@context.CourseTypes"
+                    TItemValue="int"
+                    TItem="string"
+                    EnableSearch
+                    AllowClear>
+                        <SelectOptions>
+                            @foreach (var type in Enum.GetValues(typeof(CourseType))) {
+                                if ((int) type == 0) {
+                                    <SelectOption TItemValue="int" TItem="string" Value="@((int)type)" Label="Free Course" />
+                                } else if ((int) type == 1) {
+                                    <SelectOption TItemValue="int" TItem="string" Value="@((int)type)" Label="Pro Course" />
+                                }
+                            }
+                        </SelectOptions>
+                    </Select>
+                </FormItem>
+            </AntDesign.Col>
+            <AntDesign.Col Span="6">
+                <Text>Category</Text>
+                <FormItem>
+                    <Select Mode="SelectMode.Multiple"
+                    Placeholder="Please select category"
+                    @bind-Values="@context.CategoryIds"
+                    TItemValue="int"
+                    TItem="string"
+                    EnableSearch
+                    AllowClear>
+                        <SelectOptions>
+                            @if (categoryList != null) {
+                                @foreach (var c in categoryList) {
+                                    <SelectOption TItemValue="int" TItem="string" Value="@c.Id" Label="@c.Name" />
+                                }
+                            }
+                        </SelectOptions>
+                    </Select>
+                </FormItem>
+            </AntDesign.Col>
+            <AntDesign.Col Span="18">
+                <div style="margin-top: 22px">
+                    <Button Icon="@IconType.Outline.Clear" @onclick="HandleResetSearchForm">Clear</Button>
+                    <Button Type="ButtonType.Primary" Icon="@IconType.Outline.Search" @onclick="HandleSearchCourse">Search</Button>
+                </div>
+            </AntDesign.Col>
+        </Row>
+    </Form>
+</div>
+
+<div class="d-flex justify-content-between align-items-center">
+    <div class="total-course">
+        <h6>Total course: @courseList?.Count()</h6>
+    </div>
+    <div class="mb-2">
+        <Button Icon="@IconType.Outline.Download" OnClick="ExportToExcel">Export to Excel</Button>
+        <Tooltip Title="Reload course data" Placement="Placement.Left">
+            <Button Icon="@IconType.Outline.Reload" @onclick="FetchListCourse" />
+        </Tooltip>
+        <Button Icon="@IconType.Outline.PlusCircle" @onclick="_=>open()">Add New Course</Button>
+    </div>
+</div>
+
+<Table DataSource="courseList" 
+PageSize="12" 
+ScrollX="1000" 
+AutoHeight 
+Loading="loadingCourseList" 
+Bordered 
+Striped="false"
+class="table-list-course">
+    <ColumnDefinitions>
+        <PropertyColumn Property="c=>c.Index"
+        Title="#"
+        Width="50"
+        Fixed="ColumnFixPlacement.Left"
+        Align="ColumnAlign.Center" 
+        class="index-col"
+        >
+            @(context.Index + 1)
+        </PropertyColumn>
+        <PropertyColumn Property="c=>c.Title"
+        Title="Title"
+        Width="270"
+        Fixed="ColumnFixPlacement.Left" 
+        class="title-col"
+        />
+        <PropertyColumn Property="u=>u.PreviewImage" Width="250" Title="Preview Image">
+            <Image Src="@(string.IsNullOrEmpty(context.PreviewImage) ? previewImageUrl : context.PreviewImage)"
+            Fallback="@errorImageUrl" />
+        </PropertyColumn>
+        <PropertyColumn Property="c=>c.Description" Width="350" Title="Description">
+            @context.Description
+        </PropertyColumn>
+        <PropertyColumn Property="c=>c.CourseType" Width="200" Title="Course Type">
+            @if (context.CourseType == 0) {
+                <Tag>Free Course</Tag>
+            } else if ((int) context.CourseType == 1) {
+                <Tag Color="TagColor.Gold">Pro Course</Tag>
+            } else {
+                <Tag>@context.TypeName</Tag>
+            }
+        </PropertyColumn>
+        <PropertyColumn Property="c=>c.CategoryName" Width="200" Title="Category">
+            <Tag>@context.CategoryName</Tag>
+        </PropertyColumn>
+        <PropertyColumn Property="c=>c.Level" Width="200" Title="Level">
+            <Tag>@context.LevelName</Tag>
+        </PropertyColumn>
+        <PropertyColumn Property="c=>c.Status" Width="200" Title="Status">
+            @if (context.Status == 0) {
+                <Tag Color="TagColor.Red">Un Available</Tag>
+            } else if ((int) context.Status == 2) {
+                <Tag Color="TagColor.Gold">In Progress</Tag>
+            } else {
+                <Tag>@context.StatusName</Tag>
+            }
+        </PropertyColumn>
+        <PropertyColumn Property="c=>c.Level" Title="Total Enrolled" Width="150" Align="ColumnAlign.Center">
+            @context.TotalEnrolled
+        </PropertyColumn>
+        <ActionColumn Title="Action" Width="140" Align="ColumnAlign.Center" Fixed="ColumnFixPlacement.Right">
+            <CellRender Context="cellData">
+                <Button Type="ButtonType.Text" Icon="@IconType.Outline.Eye" @onclick="@(() => HandleNavigateToDetail(context))"></Button>
+                <Button Type="ButtonType.Text" Icon="@IconType.Outline.Edit" class="ant-btn-edit" OnClick="() => OpenUpdateCourseDrawer(context.Id)"></Button>
+                @if (context.Status != CourseStatus.Publish) {
+                    <Popconfirm Title="Are you sure you want to publish this course?"
+                    OnConfirm="() => HandlePublishCourse(context.Id)"
+                    OkText="Yes"
+                    CancelText="No">
+                        <Button Type="ButtonType.Text" Icon="@IconType.Outline.Upload"></Button>
+                    </Popconfirm>
+                }
+
+                @if (context.Status == CourseStatus.Publish) {
+                    <Popconfirm Title="Are you sure you want to unpublish this course?"
+                    OnConfirm="() => HandleUnpublishCourse(context.Id)"
+                    OkText="Yes"
+                    CancelText="No">
+                        <Button Type="ButtonType.Text" Icon="@IconType.Outline.Download"></Button>
+                    </Popconfirm>
+                }
+            </CellRender>
+        </ActionColumn>
+    </ColumnDefinitions>
+</Table>
+
+<Drawer Closable="true" 
+@bind-Visible="visibleAddNewCourseDrawer" 
+Placement="DrawerPlacement.Right" 
+Title='("Add new course")'
+Width="500"
+>
+    <Form Model="@courseModel" OnFinish="SubmitNewCourse">
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Title</Text>
+                <FormItem>
+                    <Input Placeholder="Please enter title" TValue="string" @bind-Value="@context.Title"></Input>
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Preview Image</Text>
+                <FormItem>
+                    <div class="preview-image-input">
+                        <Tabs>
+                            <TabPane Key="1" Tab="URL">
+                                <Input Placeholder="Enter image URL"
+                                TValue="string"
+                                @bind-Value="@context.PreviewImage"
+                                OnChange="@(async (e) => await PreviewImageUrlChanged(e.ToString()))" />
+                            </TabPane>
+                            <TabPane Key="2" Tab="Upload">
+                                <Upload Action="https://localhost:7239/api/File/upload"
+                                Accept="image/*"
+                                OnSingleCompleted="OnImageUploadCompleted"
+                                OnRemove="OnImageRemoved"
+                                OnChange="HandleUploadChange"
+                                Multiple="false"
+                                Name="file"
+                                FileList="fileList">
+                                    <Button Icon="@IconType.Outline.Upload">
+                                        Click to Upload
+                                    </Button>
+                                </Upload>
+                            </TabPane>
+                        </Tabs>
+                        @if (!string.IsNullOrEmpty(previewImageSrc)) {
+                            <div class="mt-2">
+                                <Image Src="@previewImageSrc"
+                                Fallback="@errorImageUrl"
+                                PreviewSrc="@previewImageSrc" />
+                            </div>
+                        }
+                    </div>
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Preview Video URL</Text>
+                <FormItem>
+                    <Input Placeholder="Please enter preview video url" TValue="string" @bind-Value="@context.PreviewVideoUrl"></Input>
+                    @if (!string.IsNullOrEmpty(context.PreviewVideoUrl)) {
+                        <div class="mt-2" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                            src="@GetYouTubeEmbedUrl(context.PreviewVideoUrl)"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                            </iframe>
+                        </div>
+                    }
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Level</Text>
+                <FormItem>
+                    <Segmented @bind-Value="context.Level">
+                        <SegmentedItem Label="Beginner" Value=@(CourseLevel.Beginner) />
+                        <SegmentedItem Label="Intermediate" Value=@(CourseLevel.Intermediate) />
+                        <SegmentedItem Label="Advanced" Value=@(CourseLevel.Advanced) />
+                        <SegmentedItem Label="Expert" Value=@(CourseLevel.Expert) />
+                    </Segmented>
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Description</Text>
+                <FormItem>
+                    <TextArea Placeholder="Please enter description" AutoSize="true" @bind-Value="@context.Description" />
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Category</Text>
+                <FormItem>
+                    <div class="d-flex gap-1">
+                        <Select DataSource="@categoryList"
+                        @bind-Value="@context.CategoryId"
+                        ItemValue="p=>p.Id"
+                        ItemLabel="p=>p.Name"
+                        Placeholder="Select a category"
+                        EnableSearch
+                        AutoClearSearchValue="false"
+                        Loading="loadingListCategory">
+                        </Select>
+                        <Tooltip Title="Add new category">
+                            <Button Icon="@IconType.Outline.PlusCircle" @onclick="HandleOpenAddCategoryModel" />
+                        </Tooltip>
+                        <Tooltip Title="Reload list category">
+                            <Button Icon="@IconType.Outline.Reload" @onclick="FetchListCategory" Loading="loadingListCategory" />
+                        </Tooltip>
+                    </div>
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Course Status</Text>
+                <FormItem>
+                    <Segmented @bind-Value="context.IsProCourse" Size="SegmentedSize.Large">
+                        <SegmentedItem Value="true" Label="Pro Course" />
+                        <SegmentedItem Value="false" Label="Free Course" />
+                    </Segmented>
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>What You'll Learn</Text>
+                <FormItem>
+                    <div class="d-flex gap-2 mb-2">
+                        <Input @bind-Value="newOutcome" Placeholder="Enter a learning outcome" />
+                        <Button Type="ButtonType.Primary" OnClick="AddLearningOutcome">Add</Button>
+                    </div>
+                    @if (context.LearningOutcomes.Any()) {
+                        <ul class="learning-outcomes-list">
+                            @foreach (var outcome in context.LearningOutcomes) {
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span>@outcome</span>
+                                    <Button Type="ButtonType.Link" Danger OnClick="() => RemoveLearningOutcome(outcome)">
+                                        <Icon Type="delete" />
+                                    </Button>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Class="mt-3">
+            <Col Span="24" Class="d-flex justify-content-end gap-2">
+                <Button Type="ButtonType.Default" @onclick="close">Cancel</Button>
+                <Button Type="ButtonType.Primary" HtmlType="HtmlType.Submit">Submit</Button>
+            </Col>
+        </Row>
+    </Form>
+</Drawer>
+
+<Drawer Closable="true"
+@bind-Visible="visibleUpdateCourse"
+Placement="DrawerPlacement.Right"
+Title='("Update course")'
+Width="500">
+    <Form Model="@updateCourseModel" OnFinish="UpdateCourse">
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Title</Text>
+                <FormItem>
+                    <Input Placeholder="Please enter title" TValue="string" @bind-Value="@context.Title"></Input>
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Preview Image</Text>
+                @* <FormItem>
+                    <Input Placeholder="Please enter preview image url" TValue="string" @bind-Value="@context.PreviewImage"></Input>
+                    @if (!string.IsNullOrEmpty(context.PreviewImage)) {
+                        <Image class="mt-2" Src="@(string.IsNullOrEmpty(context.PreviewImage) ? previewImageUrl : context.PreviewImage)"
+                        Fallback="@errorImageUrl" />
+                    }
+                </FormItem> *@
+                <FormItem>
+                    <div class="preview-image-input">
+                        <Tabs>
+                            <TabPane Key="1" Tab="URL">
+                                <Input Placeholder="Enter image URL"
+                                       TValue="string"
+                                       @bind-Value="@updateCourseModel.PreviewImage"
+                                       OnChange="@(async (e) => await UpdatePreviewImageUrlChanged(e.ToString()))" />
+                            </TabPane>
+                            <TabPane Key="2" Tab="Upload">
+                                <Upload Action="https://localhost:7239/api/File/upload"
+                                        Accept="image/*"
+                                        OnSingleCompleted="OnUpdateImageUploadCompleted"
+                                        OnRemove="OnUpdateImageRemoved"
+                                        OnChange="HandleUpdateUploadChange"
+                                        Multiple="false"
+                                        Name="file"
+                                        FileList="updateFileList">
+                                    <Button Icon="@IconType.Outline.Upload">
+                                        Click to Upload
+                                    </Button>
+                                </Upload>
+                            </TabPane>
+                        </Tabs>
+                        @if (!string.IsNullOrEmpty(updatePreviewImageSrc))
+                        {
+                            <div class="mt-2">
+                                <Image Src="@updatePreviewImageSrc"
+                                       Fallback="@errorImageUrl"
+                                       PreviewSrc="@updatePreviewImageSrc" />
+                            </div>
+                        }
+                    </div>
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Preview Video URL</Text>
+                <FormItem>
+                    <Input Placeholder="Please enter preview video url" TValue="string" @bind-Value="@context.PreviewVideoUrl"></Input>
+                    @if (!string.IsNullOrEmpty(context.PreviewVideoUrl)) {
+                        <div class="mt-2" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                            src="@GetYouTubeEmbedUrl(context.PreviewVideoUrl)"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                            </iframe>
+                        </div>
+                    }
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Level</Text>
+                <FormItem>
+                    <Segmented @bind-Value="context.Level">
+                        <SegmentedItem Label="Beginner" Value=@(CourseLevel.Beginner) />
+                        <SegmentedItem Label="Intermediate" Value=@(CourseLevel.Intermediate) />
+                        <SegmentedItem Label="Advanced" Value=@(CourseLevel.Advanced) />
+                        <SegmentedItem Label="Expert" Value=@(CourseLevel.Expert) />
+                    </Segmented>
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Description</Text>
+                <FormItem>
+                    <TextArea Placeholder="Please enter description" AutoSize="true" @bind-Value="@context.Description" />
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Category</Text>
+                <FormItem>
+                    <div class="d-flex gap-1">
+                        <Select DataSource="@categoryList"
+                        @bind-Value="@context.CategoryId"
+                        ItemValue="p=>p.Id"
+                        ItemLabel="p=>p.Name"
+                        Placeholder="Select a category"
+                        EnableSearch
+                        AutoClearSearchValue="false"
+                        Loading="loadingListCategory">
+                        </Select>
+                        <Tooltip Title="Add new category">
+                            <Button Icon="@IconType.Outline.PlusCircle" @onclick="HandleOpenAddCategoryModel" />
+                        </Tooltip>
+                        <Tooltip Title="Reload list category">
+                            <Button Icon="@IconType.Outline.Reload" @onclick="FetchListCategory" Loading="loadingListCategory" />
+                        </Tooltip>
+                    </div>
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>Course Type</Text>
+                <FormItem>
+                    <Segmented @bind-Value="context.IsProCourse" Size="SegmentedSize.Large">
+                        <SegmentedItem Value="true" Label="Pro Course" />
+                        <SegmentedItem Value="false" Label="Free Course" />
+                    </Segmented>
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Gutter="16">
+            <AntDesign.Col Span="24">
+                <Text>What You'll Learn</Text>
+                <FormItem>
+                    <div class="d-flex gap-2 mb-2">
+                        <Input @bind-Value="newUpdateOutcome" Placeholder="Enter a learning outcome" />
+                        <Button Type="ButtonType.Primary" OnClick="AddUpdateLearningOutcome">Add</Button>
+                    </div>
+                    @if (context.LearningOutcomes.Any()) {
+                        <ul class="learning-outcomes-list">
+                            @foreach (var outcome in context.LearningOutcomes) {
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span>@outcome</span>
+                                    <Button Type="ButtonType.Link" Danger OnClick="() => RemoveUpdateLearningOutcome(outcome)">
+                                        <Icon Type="delete" />
+                                    </Button>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+        <Row Class="mt-3">
+            <Col Span="24" Class="d-flex justify-content-end gap-2">
+                <Button Type="ButtonType.Default" @onclick="close">Cancel</Button>
+                <Button Type="ButtonType.Primary" HtmlType="HtmlType.Submit">Submit</Button>
+            </Col>
+        </Row>
+    </Form>
+</Drawer>
+
+@code {
+    string previewImageUrl = "https://placehold.co/1920x1080?text=Preview%20Image&font=roboto";
+    string errorImageUrl = "https://placehold.co/1920x1080?text=This%20Image%20Is%20Error&font=roboto";
+    HttpClient httpClient;
+
+    private IQueryable<SearchCourseResponse> courseList;
+    private List<CategoiesModel> categoryList = new List<CategoiesModel>();
+
+    AddCourseRequest courseModel = new();
+    CategoryModel categoryModel = new();
+    CourseSearchModel courseSearchModel = new();
+    UpdateCourseRequest updateCourseModel = new();
+
+    bool loadingCourseList = false;
+    bool loadingListCategory = false;
+
+    bool visibleAddNewCourseDrawer = false;
+    bool visibleAddNewCategoryModal = false;
+    bool visibleUpdateCourse = false;
+    bool LoadingCourseDetail = false;
+
+    private Form<CategoryModel> _form;
+    private string newOutcome = "";
+    private string newUpdateOutcome = "";
+    private string previewImageSrc = "";
+    private List<UploadFileItem> fileList = new();
+    private string updatePreviewImageSrc = "";
+    private List<UploadFileItem> updateFileList = new();
+
+    private async Task UpdatePreviewImageUrlChanged(string url)
+    {
+        if (!string.IsNullOrEmpty(url))
+        {
+            updatePreviewImageSrc = url;
+            updateCourseModel.PreviewImage = url;
+        }
+    }
+
+    private async Task OnUpdateImageUploadCompleted(UploadInfo fileInfo)
+    {
+        if (fileInfo.File != null && fileInfo.File.State == UploadState.Success)
+        {
+            var response = JsonSerializer.Deserialize<Dictionary<string, string>>(fileInfo.File.Response);
+            if (response != null && response.ContainsKey("fileName"))
+            {
+                var fileName = response["fileName"];
+                // L?y URL c?a file dã upload
+                var result = await httpClient.GetAsync($"/api/File/url/{fileName}");
+                if (result.IsSuccessStatusCode)
+                {
+                    var urlResponse = await result.Content.ReadFromJsonAsync<Dictionary<string, string>>();
+                    if (urlResponse != null && urlResponse.ContainsKey("url"))
+                    {
+                        updatePreviewImageSrc = urlResponse["url"];
+                        updateCourseModel.PreviewImage = urlResponse["url"];
+
+                        // C?p nh?t fileList sau khi có URL thành công
+                        updateFileList.Clear();
+                        updateFileList.Add(fileInfo.File);
+                        StateHasChanged();
+                    }
+                }
+            }
+        }
+    }
+
+    private async Task HandleUpdateUploadChange(UploadInfo args)
+    {
+        if (args.File.State == UploadState.Uploading)
+        {
+            // N?u dang có file cu, xóa file cu tru?c khi thêm file m?i
+            if (updateFileList.Count > 0)
+            {
+                var oldFile = updateFileList[0];
+                if (oldFile.State == UploadState.Success)
+                {
+                    try
+                    {
+                        var response = JsonSerializer.Deserialize<Dictionary<string, string>>(oldFile.Response);
+                        if (response != null && response.ContainsKey("fileName"))
+                        {
+                            var fileName = response["fileName"];
+                            // Xóa file cu kh?i server
+                            await httpClient.DeleteAsync($"/api/File/{fileName}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await _mess.Error($"Error removing old file: {ex.Message}");
+                    }
+                }
+            }
+
+            // Reset các giá tr? và c?p nh?t UI ngay l?p t?c
+            updatePreviewImageSrc = "";
+            updateCourseModel.PreviewImage = "";
+            updateFileList.Clear();
+
+            // Thêm file m?i vào list ngay khi b?t d?u upload
+            updateFileList.Add(args.File);
+            StateHasChanged();
+        }
+    }
+
+    private async Task<bool> OnUpdateImageRemoved(UploadFileItem file)
+    {
+        // Reset preview image
+        updatePreviewImageSrc = "";
+        updateCourseModel.PreviewImage = "";
+
+        // N?u file dã du?c upload thành công, xóa file kh?i server
+        if (file.State == UploadState.Success)
+        {
+            try
+            {
+                var response = JsonSerializer.Deserialize<Dictionary<string, string>>(file.Response);
+                if (response != null && response.ContainsKey("fileName"))
+                {
+                    var fileName = response["fileName"];
+                    await httpClient.DeleteAsync($"/api/File/{fileName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _mess.Error($"Error removing file: {ex.Message}");
+            }
+        }
+
+        // Xóa file kh?i list
+        updateFileList.Clear();
+
+        StateHasChanged();
+        return true;
+    }
+
+    private async Task PreviewImageUrlChanged(string url) {
+        if (!string.IsNullOrEmpty(url)) {
+            previewImageSrc = url;
+            courseModel.PreviewImage = url;
+        }
+    }
+
+    private async Task OnImageUploadCompleted(UploadInfo fileInfo) {
+        if (fileInfo.File != null && fileInfo.File.State == UploadState.Success) {
+            var response = JsonSerializer.Deserialize<Dictionary<string, string>>(fileInfo.File.Response);
+            if (response != null && response.ContainsKey("fileName")) {
+                var fileName = response["fileName"];
+                // L?y URL c?a file dã upload
+                var result = await httpClient.GetAsync($"/api/File/url/{fileName}");
+                if (result.IsSuccessStatusCode) {
+                    var urlResponse = await result.Content.ReadFromJsonAsync<Dictionary<string, string>>();
+                    if (urlResponse != null && urlResponse.ContainsKey("url")) {
+                        previewImageSrc = urlResponse["url"];
+                        courseModel.PreviewImage = urlResponse["url"];
+
+                        // C?p nh?t fileList sau khi có URL thành công
+                        fileList.Clear();
+                        fileList.Add(fileInfo.File);
+                        StateHasChanged();
+                    }
+                }
+            }
+        }
+    }
+
+    private async Task HandleUploadChange(UploadInfo args) {
+        if (args.File.State == UploadState.Uploading) {
+            // N?u dang có file cu, xóa file cu tru?c khi thêm file m?i
+            if (fileList.Count > 0) {
+                var oldFile = fileList[0];
+                if (oldFile.State == UploadState.Success) {
+                    try {
+                        var response = JsonSerializer.Deserialize<Dictionary<string, string>>(oldFile.Response);
+                        if (response != null && response.ContainsKey("fileName")) {
+                            var fileName = response["fileName"];
+                            // Xóa file cu kh?i server
+                            await httpClient.DeleteAsync($"/api/File/{fileName}");
+                        }
+                    } catch (Exception ex) {
+                        await _mess.Error($"Error removing old file: {ex.Message}");
+                    }
+                }
+            }
+
+            // Reset các giá tr? và c?p nh?t UI ngay l?p t?c
+            previewImageSrc = "";
+            courseModel.PreviewImage = "";
+            fileList.Clear();
+
+            // Thêm file m?i vào list ngay khi b?t d?u upload
+            fileList.Add(args.File);
+            StateHasChanged();
+        }
+    }
+
+
+    private async Task<bool> OnImageRemoved(UploadFileItem file) {
+        // Reset preview image
+        previewImageSrc = "";
+        courseModel.PreviewImage = "";
+
+        // N?u file dã du?c upload thành công, xóa file kh?i server
+        if (file.State == UploadState.Success) {
+            try {
+                var response = JsonSerializer.Deserialize<Dictionary<string, string>>(file.Response);
+                if (response != null && response.ContainsKey("fileName")) {
+                    var fileName = response["fileName"];
+                    await httpClient.DeleteAsync($"/api/File/{fileName}");
+                }
+            } catch (Exception ex) {
+                await _mess.Error($"Error removing file: {ex.Message}");
+            }
+        }
+
+        // Xóa file kh?i list
+        fileList.Clear();
+
+        StateHasChanged();
+        return true;
+    }
+
+    private void AddLearningOutcome() {
+        if (!string.IsNullOrWhiteSpace(newOutcome)) {
+            courseModel.LearningOutcomes.Add(newOutcome);
+            newOutcome = "";
+        }
+    }
+
+    private void RemoveLearningOutcome(string outcome) {
+        courseModel.LearningOutcomes.Remove(outcome);
+    }
+
+    private void AddUpdateLearningOutcome() {
+        if (!string.IsNullOrWhiteSpace(newUpdateOutcome)) {
+            updateCourseModel.LearningOutcomes.Add(newUpdateOutcome);
+            newUpdateOutcome = "";
+        }
+    }
+
+    private void RemoveUpdateLearningOutcome(string outcome) {
+        updateCourseModel.LearningOutcomes.Remove(outcome);
+    }
+
+    RenderFragment FormTemplate() {
+        return
+        @<Form Model="@categoryModel" OnFinish="SubmitNewCategory" @ref="@_form">
+            <Row Gutter="16">
+                <AntDesign.Col Span="24">
+                    <Text>Title</Text>
+                    <FormItem>
+                        <Input Placeholder="Please enter name" TValue="string" @bind-Value="@context.Name"></Input>
+                    </FormItem>
+                </AntDesign.Col>
+            </Row>
+            <Row Gutter="16">
+                <AntDesign.Col Span="24">
+                    <Text>Description</Text>
+                    <FormItem>
+                        <TextArea Placeholder="Please enter description" AutoSize="true" @bind-Value="@context.Description" />
+                    </FormItem>
+                </AntDesign.Col>
+            </Row>
+        </Form>
+    ;
+    }
+
+    private readonly JsonSerializerOptions jsonSerializerOptions = new() {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
+    protected override async Task OnInitializedAsync() {
+        httpClient = HttpClientFactory.CreateClient("Auth");
+
+        FetchListCourse();
+        FetchListCategory();
+        await base.OnInitializedAsync();
+    }
+
+    void open() {
+        courseModel = new();
+        previewImageSrc = "";
+        this.visibleAddNewCourseDrawer = true;
+    }
+
+    void close() {
+        this.visibleAddNewCourseDrawer = false;
+        StateHasChanged();
+    }
+
+    void HandleNavigateToDetail(SearchCourseResponse model) {
+        _nav.NavigateTo($"/courses/detail/{model.Id}");
+    }
+
+    async Task OpenUpdateCourseDrawer(string courseId) {
+        var courseDetailRes = await FetchCourseDetail(courseId);
+        if (courseDetailRes != null) {
+            updateCourseModel = new() {
+                    Id = courseDetailRes.Id,
+                    Title = courseDetailRes.Title,
+                    Description = courseDetailRes.Description,
+                    PreviewImage = courseDetailRes.PreviewImage,
+                    PreviewVideoUrl = courseDetailRes.PreviewVideoUrl,
+                    Level = (CourseLevel)courseDetailRes.Level,
+                    CategoryId = courseDetailRes.CategoryId,
+                    IsProCourse = (int)courseDetailRes.CourseType == (int)CourseType.ProCourse,
+                    LearningOutcomes = courseDetailRes.LearningOutcomes ?? new List<string>()
+                };
+            updatePreviewImageSrc = courseDetailRes.PreviewImage;
+            visibleUpdateCourse = true;
+        } else {
+            await _mess.Error($"Course with id {courseId} is not existed");
+        }
+    }
+
+    void CloseUpdateCourseDrawer()
+    {
+        updateCourseModel = new();
+        visibleUpdateCourse = false;
+        StateHasChanged();
+    }
+
+    async void FetchListCourse() {
+        loadingCourseList = true;
+        try {
+            var result = await httpClient.GetAsync("/api/Course/search");
+
+            if (result.IsSuccessStatusCode) {
+                var resposne = await result.Content.ReadAsStringAsync();
+                var values = JsonSerializer.Deserialize<SearchCourseResponse[]>(resposne, jsonSerializerOptions);
+                if (values != null) {
+                    courseList = values.ToList().AsQueryable();
+                }
+            } else {
+                await _mess.Error("Internal server error when load list course");
+            }            
+        } catch (Exception ex) {
+            await _mess.Error($"Error loading courses: {ex.Message}");
+        } finally {
+            loadingCourseList = false;
+            StateHasChanged();
+        }
+    }
+
+    async Task<DetailCourseResponse?> FetchCourseDetail(string courseId) {
+        LoadingCourseDetail = true;
+        try {
+            var result = await httpClient.GetAsync($"/api/Course/detail?CourseId={courseId}");
+
+            if (result.IsSuccessStatusCode) {
+                var response = await result.Content.ReadAsStringAsync();
+                var value = JsonSerializer
+                    .Deserialize<DetailCourseResponse>(response, jsonSerializerOptions);
+                if (value != null) {
+                    return value;
+                }
+            } else {
+                await _mess.Error(await result.Content.ReadAsStringAsync());
+            }
+        } catch (Exception ex) {
+            await _mess.Error($"Internal server error when load list course: {ex.Message}");
+            return null;
+        } finally {
+            LoadingCourseDetail = false;
+            StateHasChanged();
+        }
+        return null;
+    }
+
+    async void FetchListCategory() {
+        loadingListCategory = true;
+        try {
+            var result = await httpClient.GetAsync("/api/Category/list");
+
+            if (result.IsSuccessStatusCode) {
+                var response = await result.Content.ReadAsStringAsync();
+                var values = JsonSerializer.Deserialize<CategoiesModel[]>(response, jsonSerializerOptions);
+                if (values != null) {
+                    categoryList = values.ToList();
+                    courseModel.CategoryId = 0;
+                }
+            } else {
+                await _mess.Error("Internal server error when load list category");
+            }
+        } catch (Exception ex) {
+            await _mess.Error($"Error loading categories: {ex.Message}");
+        } finally {
+            loadingListCategory = false;
+            StateHasChanged();
+        }
+    }
+
+    async void SubmitNewCategory() {
+        try {
+            var response = await httpClient.PostAsJsonAsync("/api/Category/add", categoryModel);
+
+            if (response.IsSuccessStatusCode) {
+                FetchListCategory();
+                await _mess.Success("Category added successfully");
+            } else {
+                await _mess.Error("Failed to add category");
+            }
+        } catch (Exception ex) {
+            await _mess.Error($"Error: {ex.Message}");
+        }
+        StateHasChanged();
+    }
+
+    async void SubmitNewCourse() {
+        try {
+            Console.WriteLine($"CHECK: {previewImageSrc}");
+
+            var response = await httpClient.PostAsJsonAsync("/api/Course/add", courseModel);
+
+            if (response.IsSuccessStatusCode) {
+                close();
+                FetchListCourse();
+                await _mess.Success("Course added successfully");
+            } else {
+                await _mess.Error("Failed to add course");
+            }
+        } catch (Exception ex) {
+            await _mess.Error($"Error: {ex.Message}");
+        }
+    }
+
+    async void UpdateCourse() {
+        try {
+            var response = await httpClient.PostAsJsonAsync("/api/Course/update", updateCourseModel);
+
+            if (response.IsSuccessStatusCode) {
+
+                updateFileList.Clear();
+                updatePreviewImageSrc = "";
+                updateCourseModel.PreviewImage = "";
+                CloseUpdateCourseDrawer();
+                FetchListCourse();
+                await _mess.Success("Course updated successfully");
+            } else {
+                await _mess.Error("Failed to update course");
+            }
+        } catch (Exception ex) {
+            await _mess.Error($"Error: {ex.Message}");
+        }
+    }
+
+    async void HandleSearchCourse() {
+        loadingCourseList = true;
+        try {
+            var queryParams = new List<string>();
+
+            if (courseSearchModel != null) {
+                if (!string.IsNullOrEmpty(courseSearchModel.Title)) {
+                    queryParams.Add($"Title={Uri.EscapeDataString(courseSearchModel.Title)}");
+                }
+
+                if (courseSearchModel.Levels != null && courseSearchModel.Levels.Any()) {
+                    foreach (var level in courseSearchModel.Levels) {
+                        queryParams.Add($"Levels={level}");
+                    }
+                }
+
+                if (courseSearchModel.CourseTypes != null && courseSearchModel.CourseTypes.Any()) {
+                    foreach (var courseType in courseSearchModel.CourseTypes) {
+                        queryParams.Add($"CourseTypes={courseType}");
+                    }
+                }
+
+                if (courseSearchModel.Statuss != null && courseSearchModel.Statuss.Any()) {
+                    foreach (var status in courseSearchModel.Statuss) {
+                        queryParams.Add($"Statuss={status}");
+                    }
+                }
+
+                if (courseSearchModel.CategoryIds != null && courseSearchModel.CategoryIds.Any()) {
+                    foreach (var categoryId in courseSearchModel.CategoryIds) {
+                        queryParams.Add($"CategoryIds={categoryId}");
+                    }
+                }
+            }
+
+            var url = "/api/Course/search";
+            if (queryParams.Any()) {
+                url += "?" + string.Join("&", queryParams);
+            }
+
+            var result = await httpClient.GetAsync(url);
+
+            if (result.IsSuccessStatusCode) {
+                var response = await result.Content.ReadAsStringAsync();
+                var values = JsonSerializer.Deserialize<SearchCourseResponse[]>(response, jsonSerializerOptions);
+                if (values != null) {
+                    courseList = values.ToList().AsQueryable();
+                }
+            } else {
+                await _mess.Error("Internal server error when load list course");
+            }
+        } catch (Exception ex) {
+            await _mess.Error($"Error loading courses: {ex.Message}");
+        } finally {
+            loadingCourseList = false;
+            StateHasChanged();
+        }
+    }
+
+    void HandleOpenAddCategoryModel() {
+        ModalRef modalRef = default;
+        modalRef = ModelService.CreateModal(new() {
+            Title = "Create new cateogry",
+            Content = FormTemplate(),
+            OnOk = async e => {
+                modalRef?.SetConfirmLoading(true);
+                if (!_form.Validate()) {
+                    modalRef?.SetConfirmLoading(false);
+                    return;
+                }
+
+                _form.Submit();
+
+                await modalRef.CloseAsync();
+
+                _form.Reset();
+            },
+            OnCancel = async e => {
+                if (!_form.IsModified || await ModelService.ConfirmAsync(new() { Content = "Are you sure you want to discard the entries?" })) {
+                    await modalRef.CloseAsync();
+                    _form.Reset();
+                }
+            },
+        });
+    }
+
+    void HandleOk(MouseEventArgs e) {
+        if (!_form.Validate()) {
+            visibleAddNewCategoryModal = true;
+        }
+    }
+
+    void HandleResetSearchForm() {
+        courseSearchModel = new();
+        FetchListCourse();
+    }
+
+    private string GetYouTubeEmbedUrl(string url) {
+        if (string.IsNullOrEmpty(url)) return "";
+
+        string videoId = "";
+
+        if (url.Contains("youtube.com/watch")) {
+            var uri = new Uri(url);
+            var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+            videoId = query["v"];
+        } else if (url.Contains("youtu.be")) {
+            videoId = url.Split('/').Last();
+        } else if (url.Length == 11) {
+            videoId = url;
+        }
+
+        return $"https://www.youtube.com/embed/{videoId}";
+    }
+
+    async void ExportToExcel()
+    {
+        using var package = new OfficeOpenXml.ExcelPackage();
+        var worksheet = package.Workbook.Worksheets.Add("Courses");
+
+        // Header Row Styling
+        using (var headerRange = worksheet.Cells["A1:G1"])
+        {
+            headerRange.Style.Font.Bold = true;
+            headerRange.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+            headerRange.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightBlue);
+            headerRange.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+            headerRange.Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+            headerRange.Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Medium);
+        }
+
+        // Thêm tiêu d? c?t
+        worksheet.Cells[1, 1].Value = "Title";
+        worksheet.Cells[1, 2].Value = "Description";
+        worksheet.Cells[1, 3].Value = "Level";
+        worksheet.Cells[1, 4].Value = "Status";
+        worksheet.Cells[1, 5].Value = "Course Type";
+        worksheet.Cells[1, 6].Value = "Category";
+        worksheet.Cells[1, 7].Value = "Total Enrolled";
+
+        // Thêm d? li?u t? danh sách coursesList
+        int row = 2;
+        foreach (var course in courseList)
+        {
+            worksheet.Cells[row, 1].Value = course.Title;
+            worksheet.Cells[row, 2].Value = course.Description ?? "N/A";
+            worksheet.Cells[row, 3].Value = course.Level;
+            // Chuy?n d?i CourseStatus thành chu?i hi?n th?
+            worksheet.Cells[row, 4].Value = course.Status switch
+            {
+                CourseStatus.Publish => "Publish",
+                CourseStatus.UnAvailable => "Unavailable",
+                CourseStatus.InProgress => "In Progress",
+                _ => "Unknown"
+            };
+
+            worksheet.Cells[row, 5].Value = course.CourseType;
+            worksheet.Cells[row, 6].Value = course.CategoryName;
+            worksheet.Cells[row, 7].Value = 0;
+
+            // Alternating row colors for readability
+            if (row % 2 == 0)
+            {
+                using (var rowRange = worksheet.Cells[$"A{row}:H{row}"])
+                {
+                    rowRange.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                    rowRange.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
+                }
+            }
+
+            // Add borders to each cell
+            using (var cellRange = worksheet.Cells[$"A{row}:G{row}"])
+            {
+                cellRange.Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+            }
+
+            row++;
+        }
+
+        // AutoFit Columns
+        worksheet.Cells.AutoFitColumns();
+
+        // Xu?t file
+        var fileContent = package.GetAsByteArray();
+        var fileName = "CoursesList.xlsx";
+        if (fileContent == null || fileContent.Length == 0)
+        {
+            await _mess.Error("File generation failed!");
+            return;
+        }
+
+        var base64 = Convert.ToBase64String(fileContent);
+
+        // Convert byte[] thành Base64 d? t?i v?
+        await JS.InvokeVoidAsync("saveAsFile", fileName, base64);
+    }
+
+
+    public class CourseSearchModel {
+        public string? Title { get; set; }
+        public IEnumerable<int>? Levels { get; set; }
+        public IEnumerable<int>? Statuss { get; set; }
+        public IEnumerable<int>? CategoryIds { get; set; }
+        public IEnumerable<int>? CourseTypes { get; set; }
+    }
+
+    private async Task HandlePublishCourse(string courseId)
+    {
+        try
+        {
+            var request = new UpdateStatusRequest
+            {
+                CourseId = courseId,
+                newStatus = CourseStatus.Publish
+            };
+
+            var response = await httpClient.PostAsJsonAsync("/api/Course/update-status", request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                FetchListCourse(); // Refresh the list
+                await _mess.Success("Course published successfully");
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                await _mess.Error($"Failed to publish course: {error}");
+            }
+        }
+        catch (Exception ex)
+        {
+            await _mess.Error($"Error: {ex.Message}");
+        }
+    }
+
+    private async Task HandleUnpublishCourse(string courseId)
+    {
+        try
+        {
+            var request = new UpdateStatusRequest
+            {
+                CourseId = courseId,
+                newStatus = CourseStatus.InProgress
+            };
+
+            var response = await httpClient.PostAsJsonAsync("/api/Course/update-status", request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                FetchListCourse(); // Refresh the list
+                await _mess.Success("Course unpublished successfully");
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                await _mess.Error($"Failed to unpublish course: {error}");
+            }
+        }
+        catch (Exception ex)
+        {
+            await _mess.Error($"Error: {ex.Message}");
+        }
+    }
+}
+
+<style>
+    .total-course h6 {
+        color: darkorange
+    }
+
+    .learning-outcomes-list {
+        list-style: none;
+        padding: 0;
+    }
+
+        .learning-outcomes-list li {
+            padding: 8px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 8px;
+            border-radius: 4px;
+        }
+
+    .preview-image-input {
+        border: 1px dashed #d9d9d9;
+        border-radius: 4px;
+        padding: 16px;
+        text-align: center;
+    }
+</style>
