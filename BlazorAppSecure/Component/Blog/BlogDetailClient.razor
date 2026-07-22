@@ -13,15 +13,15 @@
 @inject IAppNotificationService _mess
 @inject HubConnection HubConnection
 
-<PageTitle>Blog Detail</PageTitle>
+<PageTitle>Chi tiết bài viết — EduPath</PageTitle>
 
 <div class="mb-2">
     <Breadcrumb>
         <BreadcrumbItem Href="">
-            Home
+            Trang chủ
         </BreadcrumbItem>
         <BreadcrumbItem Href="/listBlog">
-            Blog Management
+            Thế giới lập trình
         </BreadcrumbItem>
         <BreadcrumbItem>
             @blog?.Title
@@ -37,7 +37,7 @@
 }
 else if (blog == null)
 {
-    <div style="text-align: center; color: #888;">Blog not found.</div>
+    <div style="text-align: center; color: #888;">Không tìm thấy bài viết.</div>
 }
 else
 {
@@ -45,7 +45,7 @@ else
         <!-- Blog Content -->
         <div class="blog-content">
             <h1 class="blog-title">@blog.Title</h1>
-            <!-- Hi?n th? h�nh ?nh n?u c� -->
+            <!-- Hiển thị hình ảnh nếu có -->
             @if (!string.IsNullOrEmpty(blog.UrlImage))
             {
                 <div class="blog-image">
@@ -61,8 +61,8 @@ else
             <div class="author-info">
                 <img src="https://placehold.co/40x40?text=A" alt="Avatar" class="avatar" />
                 <div class="author-details">
-                    <span class="author-name">Admin Team � @blog.CreatedAt.ToString("dd/MM/yyyy HH:mm")</span>
-                    <span class="reading-time">@CalculateReadingTime(blog.Content) minutes read</span>
+                    <span class="author-name">Admin Team · @blog.CreatedAt.ToString("dd/MM/yyyy HH:mm")</span>
+                    <span class="reading-time">@CalculateReadingTime(blog.Content) phút đọc</span>
                 </div>
             </div>
             <div class="metrics">
@@ -80,28 +80,28 @@ else
                 }
                 else
                 {
-                    <span class="tag">No Tag</span>
+                    <span class="tag">Lập trình</span>
                 }
             </div>
             <div class="blog-body">
                 @((MarkupString)blog.Content)
             </div>
             <div class="comments-section">
-                <!-- � nh?p comment -->
+                <!-- Ô nhập bình luận -->
                 <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
                     <Avatar Icon="user" />
                     <TextArea @bind-Value="newComment"
-                              Placeholder="Write a comment..."
+                              Placeholder="Viết bình luận..."
                               Style="flex-grow: 1;" />
 
                 </div>
                 <div style="margin-top: 12px; display:flex ;justify-content:flex-end">
-                    <Button Type="ButtonType.Primary" OnClick="SubmitComment">Submit</Button>
+                    <Button Type="ButtonType.Primary" OnClick="SubmitComment">Gửi bình luận</Button>
 
                 </div>
                 <Divider />
 
-                <!-- Danh s�ch comment -->
+                <!-- Danh sách bình luận -->
                 <div class="comments-list">
                     @foreach (var comment in comments)
                     {
@@ -138,8 +138,8 @@ else
             blog = await BlogService.GetBlogById(blogId);
 
             if (blog != null) {
-                // T?o timer v?i th?i gian d?c du?c t�nh to�n
-                var readingTimeInMilliseconds = CalculateReadingTime(blog.Content) * 60 * 1000; // Chuy?n ph�t th�nh milliseconds
+                // T?o timer v?i th?i gian d?c du?c tính toán
+                var readingTimeInMilliseconds = CalculateReadingTime(blog.Content) * 60 * 1000; // Chuy?n phút thành milliseconds
                 readingTimer = new System.Timers.Timer(readingTimeInMilliseconds);
                 readingTimer.Elapsed += async (sender, e) => await OnReadingTimeCompleted();
                 readingTimer.AutoReset = false; // Ch? ch?y m?t l?n
@@ -148,8 +148,6 @@ else
             await LoadComments();
 
             await HubConnection.StartAsync();
-            await _mess.Error(HubConnection.State.ToString());
-
             if (HubConnection.State != HubConnectionState.Connected)
             {
                 await _mess.Error("SignalR is not connected.");
@@ -187,7 +185,7 @@ else
 
             
         } catch (Exception ex) {
-            await _message.Error($"Error loading blog detail: {ex.Message}");
+            await _message.Error($"Lỗi khi tải bài viết: {ex.Message}");
         } finally {
             loading = false;
             StateHasChanged();
@@ -211,13 +209,13 @@ else
         }
         catch (Exception ex)
         {
-            await _mess.Error($"Error loading comments: {ex.Message}");
+            await _mess.Error($"Lỗi khi tải bình luận: {ex.Message}");
         }
     }
 
 
     private async Task OnReadingTimeCompleted() {
-        // �?m b?o ch? tang view m?t l?n
+        // Ð?m b?o ch? tang view m?t l?n
         if (!hasIncrementedView && blog != null) {
             try {
                 var newViewCount = await BlogService.IncrementViewCount(blogId);
@@ -227,7 +225,7 @@ else
                     StateHasChanged();
                 });
             } catch (Exception ex) {
-                await InvokeAsync(() => _message.Error("Kh�ng th? c?p nh?t lu?t xem"));
+                await InvokeAsync(() => _message.Error("Không thể cập nhật lượt xem"));
             }
         }
     }
@@ -243,14 +241,14 @@ else
     {
         if (string.IsNullOrEmpty(content)) return 0;
         var wordCount = content.Split(new[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length;
-        return (int)Math.Ceiling(wordCount / 200.0); // Gi? d?nh 200 t?/ph�t
+        return (int)Math.Ceiling(wordCount / 200.0); // Gi? d?nh 200 t?/phút
     }
     private async Task SubmitComment()
     {
         if (string.IsNullOrWhiteSpace(newComment)) return;
 
         var Username = (await AuthState.GetAuthenticationStateAsync()).User.Identity.Name;
-        var comment = new CourseManagement.Model.DTOs.CommentDTO { BlogId = blogId, Content = newComment, Username = Username ?? "Anonymous" };
+        var comment = new CourseManagement.Model.DTOs.CommentDTO { BlogId = blogId, Content = newComment, Username = Username ?? "Người dùng" };
         var jsonComment = System.Text.Json.JsonSerializer.Serialize(comment);
         await httpClient.PostAsJsonAsync("/api/Comment", comment);
         newComment = "";
@@ -353,11 +351,21 @@ else
     }
 
     .blog-body {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1em;
-        line-height: 1.6;
-        color: #333;
+        font-size: 16px;
+        line-height: 1.8;
+        color: #344139;
     }
+
+    .blog-detail-container { max-width: 920px; padding: 54px 24px 90px; }
+    .blog-content { padding: 45px 55px; border: 1px solid #e2e6e3; border-radius: 12px; box-shadow: 0 15px 40px rgba(20,45,29,.07); }
+    .blog-title { margin-bottom: 24px; color: #17211b; font-family: inherit; font-size: 42px; line-height: 1.14; letter-spacing: -1.5px; }
+    .cover-image { max-height: 460px; border-radius: 9px; box-shadow: none; }
+    .author-info { padding: 18px 0; border-bottom: 1px solid #e8ece9; }
+    .author-name, .reading-time, .metrics { font-family: inherit; }
+    .tag { background: #edf3ef; color: #176b45; font-family: inherit; font-weight: 650; }
+    .comments-section { margin-top: 42px; padding-top: 28px; border-top: 1px solid #e2e6e3; }
+    .comments-section .ant-btn-primary { border-color: #176b45; background: #176b45; }
+    @@media(max-width:650px) { .blog-detail-container { padding: 30px 14px 60px; } .blog-content { padding: 27px 20px; } .blog-title { font-size: 31px; } }
 
    
 </style>
