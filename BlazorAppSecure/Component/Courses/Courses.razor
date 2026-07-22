@@ -587,7 +587,7 @@ Width="500">
             if (response != null && response.ContainsKey("fileName"))
             {
                 var fileName = response["fileName"];
-                // L?y URL c?a file d„ upload
+                // L?y URL c?a file d√£ upload
                 var result = await httpClient.GetAsync($"/api/File/url/{fileName}");
                 if (result.IsSuccessStatusCode)
                 {
@@ -597,7 +597,7 @@ Width="500">
                         updatePreviewImageSrc = urlResponse["url"];
                         updateCourseModel.PreviewImage = urlResponse["url"];
 
-                        // C?p nh?t fileList sau khi cÛ URL th‡nh cÙng
+                        // C?p nh?t fileList sau khi c√≥ URL th√†nh c√¥ng
                         updateFileList.Clear();
                         updateFileList.Add(fileInfo.File);
                         StateHasChanged();
@@ -611,7 +611,7 @@ Width="500">
     {
         if (args.File.State == UploadState.Uploading)
         {
-            // N?u dang cÛ file cu, xÛa file cu tru?c khi thÍm file m?i
+            // N?u dang c√≥ file cu, x√≥a file cu tru?c khi th√™m file m?i
             if (updateFileList.Count > 0)
             {
                 var oldFile = updateFileList[0];
@@ -623,7 +623,7 @@ Width="500">
                         if (response != null && response.ContainsKey("fileName"))
                         {
                             var fileName = response["fileName"];
-                            // XÛa file cu kh?i server
+                            // X√≥a file cu kh?i server
                             await httpClient.DeleteAsync($"/api/File/{fileName}");
                         }
                     }
@@ -634,12 +634,12 @@ Width="500">
                 }
             }
 
-            // Reset c·c gi· tr? v‡ c?p nh?t UI ngay l?p t?c
+            // Reset c√°c gi√° tr? v√† c?p nh?t UI ngay l?p t?c
             updatePreviewImageSrc = "";
             updateCourseModel.PreviewImage = "";
             updateFileList.Clear();
 
-            // ThÍm file m?i v‡o list ngay khi b?t d?u upload
+            // Th√™m file m?i v√†o list ngay khi b?t d?u upload
             updateFileList.Add(args.File);
             StateHasChanged();
         }
@@ -651,7 +651,7 @@ Width="500">
         updatePreviewImageSrc = "";
         updateCourseModel.PreviewImage = "";
 
-        // N?u file d„ du?c upload th‡nh cÙng, xÛa file kh?i server
+        // N?u file d√£ du?c upload th√†nh c√¥ng, x√≥a file kh?i server
         if (file.State == UploadState.Success)
         {
             try
@@ -669,7 +669,7 @@ Width="500">
             }
         }
 
-        // XÛa file kh?i list
+        // X√≥a file kh?i list
         updateFileList.Clear();
 
         StateHasChanged();
@@ -688,7 +688,7 @@ Width="500">
             var response = JsonSerializer.Deserialize<Dictionary<string, string>>(fileInfo.File.Response);
             if (response != null && response.ContainsKey("fileName")) {
                 var fileName = response["fileName"];
-                // L?y URL c?a file d„ upload
+                // L?y URL c?a file d√£ upload
                 var result = await httpClient.GetAsync($"/api/File/url/{fileName}");
                 if (result.IsSuccessStatusCode) {
                     var urlResponse = await result.Content.ReadFromJsonAsync<Dictionary<string, string>>();
@@ -696,7 +696,7 @@ Width="500">
                         previewImageSrc = urlResponse["url"];
                         courseModel.PreviewImage = urlResponse["url"];
 
-                        // C?p nh?t fileList sau khi cÛ URL th‡nh cÙng
+                        // C?p nh?t fileList sau khi c√≥ URL th√†nh c√¥ng
                         fileList.Clear();
                         fileList.Add(fileInfo.File);
                         StateHasChanged();
@@ -708,7 +708,7 @@ Width="500">
 
     private async Task HandleUploadChange(UploadInfo args) {
         if (args.File.State == UploadState.Uploading) {
-            // N?u dang cÛ file cu, xÛa file cu tru?c khi thÍm file m?i
+            // N?u dang c√≥ file cu, x√≥a file cu tru?c khi th√™m file m?i
             if (fileList.Count > 0) {
                 var oldFile = fileList[0];
                 if (oldFile.State == UploadState.Success) {
@@ -716,7 +716,7 @@ Width="500">
                         var response = JsonSerializer.Deserialize<Dictionary<string, string>>(oldFile.Response);
                         if (response != null && response.ContainsKey("fileName")) {
                             var fileName = response["fileName"];
-                            // XÛa file cu kh?i server
+                            // X√≥a file cu kh?i server
                             await httpClient.DeleteAsync($"/api/File/{fileName}");
                         }
                     } catch (Exception ex) {
@@ -725,12 +725,12 @@ Width="500">
                 }
             }
 
-            // Reset c·c gi· tr? v‡ c?p nh?t UI ngay l?p t?c
+            // Reset c√°c gi√° tr? v√† c?p nh?t UI ngay l?p t?c
             previewImageSrc = "";
             courseModel.PreviewImage = "";
             fileList.Clear();
 
-            // ThÍm file m?i v‡o list ngay khi b?t d?u upload
+            // Th√™m file m?i v√†o list ngay khi b?t d?u upload
             fileList.Add(args.File);
             StateHasChanged();
         }
@@ -742,7 +742,7 @@ Width="500">
         previewImageSrc = "";
         courseModel.PreviewImage = "";
 
-        // N?u file d„ du?c upload th‡nh cÙng, xÛa file kh?i server
+        // N?u file d√£ du?c upload th√†nh c√¥ng, x√≥a file kh?i server
         if (file.State == UploadState.Success) {
             try {
                 var response = JsonSerializer.Deserialize<Dictionary<string, string>>(file.Response);
@@ -755,7 +755,7 @@ Width="500">
             }
         }
 
-        // XÛa file kh?i list
+        // X√≥a file kh?i list
         fileList.Clear();
 
         StateHasChanged();
@@ -1117,7 +1117,7 @@ Width="500">
             headerRange.Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Medium);
         }
 
-        // ThÍm tiÍu d? c?t
+        // Th√™m ti√™u d? c?t
         worksheet.Cells[1, 1].Value = "Title";
         worksheet.Cells[1, 2].Value = "Description";
         worksheet.Cells[1, 3].Value = "Level";
@@ -1126,14 +1126,14 @@ Width="500">
         worksheet.Cells[1, 6].Value = "Category";
         worksheet.Cells[1, 7].Value = "Total Enrolled";
 
-        // ThÍm d? li?u t? danh s·ch coursesList
+        // Th√™m d? li?u t? danh s√°ch coursesList
         int row = 2;
         foreach (var course in courseList)
         {
             worksheet.Cells[row, 1].Value = course.Title;
             worksheet.Cells[row, 2].Value = course.Description ?? "N/A";
             worksheet.Cells[row, 3].Value = course.Level;
-            // Chuy?n d?i CourseStatus th‡nh chu?i hi?n th?
+            // Chuy?n d?i CourseStatus th√†nh chu?i hi?n th?
             worksheet.Cells[row, 4].Value = course.Status switch
             {
                 CourseStatus.Publish => "Publish",
@@ -1179,7 +1179,7 @@ Width="500">
 
         var base64 = Convert.ToBase64String(fileContent);
 
-        // Convert byte[] th‡nh Base64 d? t?i v?
+        // Convert byte[] th√†nh Base64 d? t?i v?
         await JS.InvokeVoidAsync("saveAsFile", fileName, base64);
     }
 

@@ -21,7 +21,7 @@
             Home
         </BreadcrumbItem>
         <BreadcrumbItem Href="/listBlog">
-            Blog Management
+            Danh sách blog
         </BreadcrumbItem>
         <BreadcrumbItem>
             @blog?.Title
@@ -45,7 +45,7 @@ else
         <!-- Blog Content -->
         <div class="blog-content">
             <h1 class="blog-title">@blog.Title</h1>
-            <!-- Hi?n th? h�nh ?nh n?u c� -->
+            <!-- Hiển thị hình ảnh nếu có. -->
             @if (!string.IsNullOrEmpty(blog.UrlImage))
             {
                 <div class="blog-image">
@@ -61,8 +61,8 @@ else
             <div class="author-info">
                 <img src="https://placehold.co/40x40?text=A" alt="Avatar" class="avatar" />
                 <div class="author-details">
-                    <span class="author-name">Admin Team � @blog.CreatedAt.ToString("dd/MM/yyyy HH:mm")</span>
-                    <span class="reading-time">@CalculateReadingTime(blog.Content) minutes read</span>
+                    <span class="author-name">Admin Team · @blog.CreatedAt.ToString("dd/MM/yyyy HH:mm")</span>
+                    <span class="reading-time">@CalculateReadingTime(blog.Content) phút đọc</span>
                 </div>
             </div>
             <div class="metrics">
@@ -87,21 +87,21 @@ else
                 @((MarkupString)blog.Content)
             </div>
             <div class="comments-section">
-                <!-- � nh?p comment -->
+                <!-- Ô nhập bình luận. -->
                 <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
                     <Avatar Icon="user" />
                     <TextArea @bind-Value="newComment"
-                              Placeholder="Write a comment..."
+                              Placeholder="Viết bình luận..."
                               Style="flex-grow: 1;" />
 
                 </div>
                 <div style="margin-top: 12px; display:flex ;justify-content:flex-end">
-                    <Button Type="ButtonType.Primary" OnClick="SubmitComment">Submit</Button>
+                    <Button Type="ButtonType.Primary" OnClick="SubmitComment">Gửi bình luận</Button>
 
                 </div>
                 <Divider />
 
-                <!-- Danh s�ch comment -->
+                <!-- Danh sách bình luận. -->
                 <div class="comments-list">
                     @foreach (var comment in comments)
                     {
@@ -138,11 +138,11 @@ else
             blog = await BlogService.GetBlogById(blogId);
 
             if (blog != null) {
-                // T?o timer v?i th?i gian d?c du?c t�nh to�n
-                var readingTimeInMilliseconds = CalculateReadingTime(blog.Content) * 60 * 1000; // Chuy?n ph�t th�nh milliseconds
+                // Tạo bộ đếm theo thời gian đọc ước tính.
+                var readingTimeInMilliseconds = CalculateReadingTime(blog.Content) * 60 * 1000; // Chuyển phút thành milliseconds.
                 readingTimer = new System.Timers.Timer(readingTimeInMilliseconds);
                 readingTimer.Elapsed += async (sender, e) => await OnReadingTimeCompleted();
-                readingTimer.AutoReset = false; // Ch? ch?y m?t l?n
+                readingTimer.AutoReset = false; // Chỉ chạy một lần.
                 readingTimer.Start();
             }
             await LoadComments();
@@ -217,7 +217,7 @@ else
 
 
     private async Task OnReadingTimeCompleted() {
-        // �?m b?o ch? tang view m?t l?n
+        // Đảm bảo chỉ tăng lượt xem một lần.
         if (!hasIncrementedView && blog != null) {
             try {
                 var newViewCount = await BlogService.IncrementViewCount(blogId);
@@ -227,13 +227,13 @@ else
                     StateHasChanged();
                 });
             } catch (Exception ex) {
-                await InvokeAsync(() => _message.Error("Kh�ng th? c?p nh?t lu?t xem"));
+                await InvokeAsync(() => _message.Error("Không thể cập nhật lượt xem"));
             }
         }
     }
 
     public void Dispose() {
-        // Cleanup timer khi component b? dispose
+        // Giải phóng bộ đếm khi component bị hủy.
         if (readingTimer != null) {
             readingTimer.Dispose();
         }
@@ -243,7 +243,7 @@ else
     {
         if (string.IsNullOrEmpty(content)) return 0;
         var wordCount = content.Split(new[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length;
-        return (int)Math.Ceiling(wordCount / 200.0); // Gi? d?nh 200 t?/ph�t
+        return (int)Math.Ceiling(wordCount / 200.0); // Giả định tốc độ đọc 200 từ/phút.
     }
     private async Task SubmitComment()
     {

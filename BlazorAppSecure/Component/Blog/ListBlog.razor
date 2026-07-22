@@ -7,7 +7,7 @@
 @inject IBlogService BlogService
 @inject IAppNotificationService _message
 
-<PageTitle>Danh S�ch Blog</PageTitle>
+<PageTitle>Danh sách blog</PageTitle>
 
 
 <div class="mb-2">
@@ -16,14 +16,14 @@
             <Icon Type="@IconType.Outline.Home" /> Home
         </BreadcrumbItem>
         <BreadcrumbItem>
-            List Blog
+            Danh sách blog
         </BreadcrumbItem>
     </Breadcrumb>
 </div>
 
 <div class="mb-2">
-    <h3>B�i vi?t n?i b?t</h3>
-    <span>T?ng h?p c�c b�i vi?t chia s? v? kinh nghi?m t? h?c l?p tr�nh online v� c�c k? thu?t l?p tr�nh web.</span>
+    <h3>Bài viết nổi bật</h3>
+    <span>Tổng hợp các bài viết chia sẻ về kinh nghiệm tự học lập trình trực tuyến và các kỹ thuật lập trình web.</span>
 </div>
 
 <div class="filter-section mb-4">
@@ -35,10 +35,10 @@
                 OnSelectedItemChanged="OnSortChanged"
                 Style="width: 200px;">
             <SelectOptions>
-                <SelectOption TItem="string" TItemValue="string" Value="@("newest")" Label="M?i nh?t" />
-                <SelectOption TItem="string" TItemValue="string" Value="@("oldest")" Label="Cu nh?t" />
-                <SelectOption TItem="string" TItemValue="string" Value="@("most_viewed")" Label="Xem nhi?u nh?t" />
-                <SelectOption TItem="string" TItemValue="string" Value="@("least_viewed")" Label="Xem �t nh?t" />
+                <SelectOption TItem="string" TItemValue="string" Value="@("newest")" Label="Mới nhất" />
+                <SelectOption TItem="string" TItemValue="string" Value="@("oldest")" Label="Cũ nhất" />
+                <SelectOption TItem="string" TItemValue="string" Value="@("most_viewed")" Label="Xem nhiều nhất" />
+                <SelectOption TItem="string" TItemValue="string" Value="@("least_viewed")" Label="Xem ít nhất" />
             </SelectOptions>
         </Select>
         </Col>
@@ -49,7 +49,7 @@
                 OnSelectedItemChanged="OnCategoryChanged"
                 Style="width: 200px;"
                 AllowClear
-                Placeholder="Ch?n ch? d?">
+                Placeholder="Chọn chủ đề">
             <SelectOptions>
                     @foreach (var category in categories) {
                     <SelectOption TItem="int?"
@@ -78,7 +78,7 @@ else
                 <div class="blog-card">
                     <div class="author-info">
                         <img src="https://placehold.co/40x40?text=A" alt="Avatar" class="avatar" />
-                        <span class="author-text">Admin Team � @blog.CreatedAt.ToString("dd/MM/yyyy HH:mm") � @CalculateReadingTime(blog.Content) ph�t d?c</span>
+                        <span class="author-text">Admin Team · @blog.CreatedAt.ToString("dd/MM/yyyy HH:mm") · @CalculateReadingTime(blog.Content) phút đọc</span>
                     </div>
                     <h3 @onclick="() => NavigateToDetail(blog.Id)" class="blog-title">
                         @blog.Title
@@ -101,7 +101,7 @@ else
         }
         else
         {
-            <div class="empty-message">Kh�ng c� b�i vi?t n�o d? hi?n th?.</div>
+            <div class="empty-message">Không có bài viết nào để hiển thị.</div>
         }
     </div>
 }
@@ -118,10 +118,10 @@ else
         try {
             loading = true;
             await LoadBlogs();
-            // Th�m phuong th?c d? load categories
+            // Tải danh sách chủ đề.
             categories = await BlogService.GetCategories();
         } catch (Exception ex) {
-            await _message.Error($"L?i khi t?i d? li?u: {ex.Message}");
+            await _message.Error($"Lỗi khi tải dữ liệu: {ex.Message}");
         } finally {
             loading = false;
         }
@@ -143,13 +143,13 @@ else
 
     private async Task NavigateToDetail(int blogId) {
         try {
-            // Tang lu?t xem tru?c khi chuy?n trang
+            // Tăng lượt xem trước khi chuyển trang.
             // await BlogService.IncrementViewCount(blogId);
 
-            // Sau d� chuy?n d?n trang chi ti?t
+            // Sau đó chuyển đến trang chi tiết.
             NavigationManager.NavigateTo($"/listblogs/detail/{blogId}");
         } catch (Exception ex) {
-            await _message.Error("Kh�ng th? c?p nh?t lu?t xem");
+            await _message.Error("Không thể cập nhật lượt xem");
         }
     }
 
@@ -157,7 +157,7 @@ else
     {
         if (string.IsNullOrEmpty(content)) return 0;
         var wordCount = content.Split(new[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length;
-        return (int)Math.Ceiling(wordCount / 200.0); // Gi? d?nh 200 t?/ph�t
+        return (int)Math.Ceiling(wordCount / 200.0); // Giả định tốc độ đọc 200 từ/phút.
     }
 }
 
@@ -319,8 +319,8 @@ else
         font-size: 0.85em;
         font-family: var(--primary-font);
         color: #555;
-        margin-right: 8px; /* Th�m kho?ng c�ch gi?a c�c tags */
-        display: inline-block; /* �? c�c tags n?m c�ng m?t h�ng */
-        margin-bottom: 5px; /* Th�m kho?ng c�ch du?i m?i tag khi wrap */
+        margin-right: 8px; /* Thêm khoảng cách giữa các thẻ. */
+        display: inline-block; /* Để các thẻ nằm cùng một hàng. */
+        margin-bottom: 5px; /* Thêm khoảng cách dưới mỗi thẻ khi xuống dòng. */
     }
 </style>

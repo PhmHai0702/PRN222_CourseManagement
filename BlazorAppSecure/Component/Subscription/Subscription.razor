@@ -11,7 +11,7 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IAppNotificationService _mess
 
-<PageTitle>Vip Subcription</PageTitle>
+<PageTitle>Đăng ký gói VIP</PageTitle>
 
 <div class="subscription-page">
     <div class="subscription-header">
@@ -20,11 +20,11 @@
                 Home
             </BreadcrumbItem>
             <BreadcrumbItem>
-                Subscription
+                Đăng ký VIP
             </BreadcrumbItem>
         </Breadcrumb>
-        <h1>�ang k� g�i VIP</h1>
-        <p class="subtitle">Ch?n g�i VIP ph� h?p v?i nhu c?u c?a b?n</p>
+        <h1>Đăng ký gói VIP</h1>
+        <p class="subtitle">Chọn gói VIP phù hợp với nhu cầu của bạn</p>
     </div>
 
     <div class="subscription-container">
@@ -32,14 +32,14 @@
             <div class="package-card @(_vipModel.Package == "1" ? "selected" : "")"
                 @onclick="@(() => _vipModel.Package = "1")">
                 <div class="package-header">
-                    <h3>G�i 1 th�ng</h3>
+                    <h3>Gói 1 tháng</h3>
                     <div class="price">100.000 VND</div>
                 </div>
                 <div class="package-features">
                     <ul>
-                        <li>Truy c?p kh�ng gi?i h?n</li>
-                        <li>H? tr? 24/7</li>
-                        <li>Uu ti�n x? l�</li>
+                        <li>Truy cập không giới hạn</li>
+                        <li>Hỗ trợ 24/7</li>
+                        <li>Ưu tiên xử lý</li>
                     </ul>
                 </div>
             </div>
@@ -47,14 +47,14 @@
             <div class="package-card @(_vipModel.Package == "3" ? "selected" : "")"
                 @onclick="@(() => _vipModel.Package = "3")">
                 <div class="package-header">
-                    <h3>G�i 3 th�ng</h3>
+                    <h3>Gói 3 tháng</h3>
                     <div class="price">250.000 VND</div>
                 </div>
                 <div class="package-features">
                     <ul>
-                        <li>Truy c?p kh�ng gi?i h?n</li>
-                        <li>H? tr? 24/7</li>
-                        <li>Uu ti�n x? l�</li>
+                        <li>Truy cập không giới hạn</li>
+                        <li>Hỗ trợ 24/7</li>
+                        <li>Ưu tiên xử lý</li>
                     </ul>
                 </div>
             </div>
@@ -62,14 +62,14 @@
             <div class="package-card @(_vipModel.Package == "6" ? "selected" : "")"
                 @onclick="@(() => _vipModel.Package = "6")">
                 <div class="package-header">
-                    <h3>G�i 6 th�ng</h3>
+                    <h3>Gói 6 tháng</h3>
                     <div class="price">450.000 VND</div>
                 </div>
                 <div class="package-features">
                     <ul>
-                        <li>Truy c?p kh�ng gi?i h?n</li>
-                        <li>H? tr? 24/7</li>
-                        <li>Uu ti�n x? l�</li>
+                        <li>Truy cập không giới hạn</li>
+                        <li>Hỗ trợ 24/7</li>
+                        <li>Ưu tiên xử lý</li>
                     </ul>
                 </div>
             </div>
@@ -77,14 +77,14 @@
             <div class="package-card @(_vipModel.Package == "12" ? "selected" : "")"
                 @onclick="@(() => _vipModel.Package = "12")">
                 <div class="package-header">
-                    <h3>G�i 12 th�ng</h3>
+                    <h3>Gói 12 tháng</h3>
                     <div class="price">800.000 VND</div>
                 </div>
                 <div class="package-features">
                     <ul>
-                        <li>Truy c?p kh�ng gi?i h?n</li>
-                        <li>H? tr? 24/7</li>
-                        <li>Uu ti�n x? l�</li>
+                        <li>Truy cập không giới hạn</li>
+                        <li>Hỗ trợ 24/7</li>
+                        <li>Ưu tiên xử lý</li>
                     </ul>
                 </div>
             </div>
@@ -93,7 +93,7 @@
         <div class="d-flex justify-content-center">
             <Button Type="@ButtonType.Primary" Size="ButtonSize.Large" Loading="@isProcessing"
                 OnClick="@(async () => await OnFinish(new EditContext(_vipModel)))">
-                �ang k� ngay
+                Đăng ký ngay
             </Button>
         </div>
     </div>
@@ -185,7 +185,7 @@
     }
 
     .package-features li::before {
-        content: "?";
+        content: "✓";
         color: #52c41a;
         margin-right: 0.5rem;
     }
@@ -248,7 +248,7 @@
 
                 if (authState?.User == null)
                 {
-                    await _mess.Error("Phi�n dang nh?p kh�ng h?p l?. Vui l�ng dang nh?p l?i!");
+                    await _mess.Error("Phiên đăng nhập không hợp lệ. Vui lòng đăng nhập lại!");
                     Navigation.NavigateTo("/login", forceLoad: true);
                     return;
                 }
@@ -258,7 +258,7 @@
 
                 if (string.IsNullOrEmpty(userEmail))
                 {
-                    await _mess.Error($"Kh�ng t�m th?y th�ng tin ngu?i d�ng!");
+                    await _mess.Error("Không tìm thấy thông tin người dùng!");
                     return;
                 }
 
@@ -278,7 +278,7 @@
                 if (!orderResponse.IsSuccessStatusCode)
                 {
                     var error = await orderResponse.Content.ReadAsStringAsync();
-                    await _mess.Error($"L?i khi t?o don h�ng: {error}");
+                    await _mess.Error($"Lỗi khi tạo đơn hàng: {error}");
                     return;
                 }
                 var savedOrder = await orderResponse.Content.ReadFromJsonAsync<Order>();
@@ -286,7 +286,7 @@
                 var paymentRequest = new VnPaymentRequestModel
                 {
                     OrderId = savedOrder.Id,
-                    ProductName = $"G�i VIP {_vipModel.Package} th�ng",
+                    ProductName = $"Gói VIP {_vipModel.Package} tháng",
                     Amount = (double)packageDetail.Amount,
                     Description = $"VIP-{packageDetail.Amount}-{userEmail}-{savedOrder.Id}",
 
@@ -296,7 +296,7 @@
                 if (!response.IsSuccessStatusCode)
                 {
                     var error = await response.Content.ReadAsStringAsync();
-                    await _mess.Error($"L?i khi t?o thanh to�n: {error}");
+                    await _mess.Error($"Lỗi khi tạo thanh toán: {error}");
                     return;
                 }
                 var paymentUrl = await response.Content.ReadAsStringAsync();
@@ -305,7 +305,7 @@
             }
             catch (Exception ex)
             {
-                await _mess.Error($"L?i khi t?o thanh to�n: {ex.Message}");
+                await _mess.Error($"Lỗi khi tạo thanh toán: {ex.Message}");
                 Console.WriteLine($"Error details: {ex}");
             }
             finally
@@ -315,7 +315,7 @@
         }
         else
         {
-            await _mess.Error("Vui l�ng ch?n g�i VIP!");
+            await _mess.Error("Vui lòng chọn gói VIP!");
         }
     }
 }

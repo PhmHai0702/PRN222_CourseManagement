@@ -111,7 +111,7 @@ else
             await LoadBlogDetail();
             await BlogService.IncrementViewCount(Id);
         } catch (Exception ex) {
-            await _mess.Error("C� l?i x?y ra khi t?i d? li?u");
+            await _mess.Error("Có lỗi xảy ra khi tải dữ liệu");
         }
     }
 
