@@ -339,3 +339,18 @@ Workflow:
 5. Deploy to production (on push to `main`)
 
 Pipeline takes ~4 minutes to complete.
+
+
+## 2026-07-22
+
+Fixed the sort order in the grade table — students were seeing grades sorted
+by `CreatedAt` ascending (oldest first).
+
+Changed to descending order so the most recent grade appears at the top.
+
+```csharp
+return await _context.Grades
+    .Where(g => g.StudentId == id)
+    .OrderByDescending(g => g.CreatedAt)
+    .ToListAsync();
+```
