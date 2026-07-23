@@ -354,3 +354,32 @@ return await _context.Grades
     .OrderByDescending(g => g.CreatedAt)
     .ToListAsync();
 ```
+
+
+## 2026-07-23
+
+Added search history feature — the last 10 searches are saved locally
+in `localStorage` and displayed as quick filters on the search page.
+
+Search history items include:
+- Query text
+- Applied filters (category, level)
+- Timestamp
+
+Users can clear individual items or the entire history.
+
+Data is not sent to the server for privacy.
+
+
+## 2026-07-24
+
+Used `NBomber` to write load tests for the course listing endpoint.
+
+Scenario: 100 concurrent users, each making 10 requests over 30 seconds.
+
+Results:
+- RPS: ~850
+- P95 latency: 320ms
+- Error rate: 0%
+
+Good baseline. Need to test with DB connection pooling limitations.
