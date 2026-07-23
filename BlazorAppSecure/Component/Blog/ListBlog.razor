@@ -2,325 +2,107 @@
 @using AntDesign
 @using BlazorAppSecure.Model
 @using BlazorAppSecure.Sevices.Blog
-
+@using System.Text.RegularExpressions
 @inject NavigationManager NavigationManager
 @inject IBlogService BlogService
 @inject IAppNotificationService _message
 
-<PageTitle>Danh sách blog</PageTitle>
+<PageTitle>Thế giới lập trình — EduPath</PageTitle>
 
-
-<div class="mb-2">
-    <Breadcrumb>
-        <BreadcrumbItem Href="">
-            <Icon Type="@IconType.Outline.Home" /> Home
-        </BreadcrumbItem>
-        <BreadcrumbItem>
-            Danh sách blog
-        </BreadcrumbItem>
-    </Breadcrumb>
-</div>
-
-<div class="mb-2">
-    <h3>Bài viết nổi bật</h3>
-    <span>Tổng hợp các bài viết chia sẻ về kinh nghiệm tự học lập trình trực tuyến và các kỹ thuật lập trình web.</span>
-</div>
-
-<div class="filter-section mb-4">
-    <Row>
-        <Col Span="4">
-        <Select TItem="string"
-                TItemValue="string"
-                DefaultValue="@sortBy"
-                OnSelectedItemChanged="OnSortChanged"
-                Style="width: 200px;">
-            <SelectOptions>
-                <SelectOption TItem="string" TItemValue="string" Value="@("newest")" Label="Mới nhất" />
-                <SelectOption TItem="string" TItemValue="string" Value="@("oldest")" Label="Cũ nhất" />
-                <SelectOption TItem="string" TItemValue="string" Value="@("most_viewed")" Label="Xem nhiều nhất" />
-                <SelectOption TItem="string" TItemValue="string" Value="@("least_viewed")" Label="Xem ít nhất" />
-            </SelectOptions>
-        </Select>
-        </Col>
-        <Col Span="4">
-        <Select TItem="int?"
-                TItemValue="int?"
-                DefaultValue="@selectedCategoryId"
-                OnSelectedItemChanged="OnCategoryChanged"
-                Style="width: 200px;"
-                AllowClear
-                Placeholder="Chọn chủ đề">
-            <SelectOptions>
-                    @foreach (var category in categories) {
-                    <SelectOption TItem="int?"
-                                  TItemValue="int?"
-                                  Value="@category.Id"
-                                  Label="@category.Name" />
-                    }
-            </SelectOptions>
-        </Select>
-        </Col>
-    </Row>
-</div>
-
-@if (loading)
-{
-    <div style="text-align: center;">
-        <Spin />
+<section class="journal-hero">
+    <div class="journal-hero-inner">
+        <div>
+            <span class="journal-kicker">EDUPATH JOURNAL</span>
+            <h1>Thế giới lập trình</h1>
+            <p>Góc chia sẻ kiến thức, kinh nghiệm nghề nghiệp và những câu chuyện thật trên hành trình trở thành lập trình viên.</p>
+        </div>
+        <div class="hero-symbol" aria-hidden="true"><span>&lt;/&gt;</span></div>
     </div>
-}
-else
-{
-    <div class="blog-list">
-        @if (blogList.Any())
-        {
-            @foreach (var blog in blogList) {
-                <div class="blog-card">
-                    <div class="author-info">
-                        <img src="https://placehold.co/40x40?text=A" alt="Avatar" class="avatar" />
-                        <span class="author-text">Admin Team · @blog.CreatedAt.ToString("dd/MM/yyyy HH:mm") · @CalculateReadingTime(blog.Content) phút đọc</span>
-                    </div>
-                    <h3 @onclick="() => NavigateToDetail(blog.Id)" class="blog-title">
-                        @blog.Title
-                    </h3>
-                    <div class="mb-2">
-                        @if (blog.Categories != null && blog.Categories.Any()) {
-                            @foreach (var category in blog.Categories) {
-                                <span class="tag">@category.Name</span>
-                            }
-                        } else {
-                            <span class="tag">No Tag</span>
+</section>
+
+<main class="journal-container">
+    <div class="journal-toolbar">
+        <div class="toolbar-heading"><span>Bài viết mới</span><small>@blogList.Count bài viết</small></div>
+        <div class="filters">
+            <div class="filter-control">
+                <Icon Type="swap" />
+                <Select TItem="string" TItemValue="string" DefaultValue="@sortBy" OnSelectedItemChanged="OnSortChanged" Bordered="false" Style="width: 145px;">
+                    <SelectOptions>
+                        <SelectOption TItem="string" TItemValue="string" Value="@("newest")" Label="Mới nhất" />
+                        <SelectOption TItem="string" TItemValue="string" Value="@("oldest")" Label="Cũ nhất" />
+                        <SelectOption TItem="string" TItemValue="string" Value="@("most_viewed")" Label="Xem nhiều nhất" />
+                        <SelectOption TItem="string" TItemValue="string" Value="@("least_viewed")" Label="Xem ít nhất" />
+                    </SelectOptions>
+                </Select>
+            </div>
+            <div class="filter-control">
+                <Icon Type="appstore" />
+                <Select TItem="int?" TItemValue="int?" DefaultValue="@selectedCategoryId" OnSelectedItemChanged="OnCategoryChanged"
+                        Bordered="false" Style="width: 165px;" AllowClear Placeholder="Tất cả chủ đề">
+                    <SelectOptions>
+                        @foreach (var category in categories) {
+                            <SelectOption TItem="int?" TItemValue="int?" Value="@category.Id" Label="@category.Name" />
                         }
-                    </div>
-                    <div class="metrics">
-                        <span><Icon Type="eye" /> @blog.ViewCount</span>
-                        <span><Icon Type="message" /> 0</span>
-                    </div>
-                </div>
-            }
-        }
-        else
-        {
-            <div class="empty-message">Không có bài viết nào để hiển thị.</div>
-        }
+                    </SelectOptions>
+                </Select>
+            </div>
+        </div>
     </div>
-}
+
+    @if (loading) {
+        <div class="loading-wrap"><Spin /><span>Đang tải bài viết...</span></div>
+    } else if (!blogList.Any()) {
+        <div class="empty-state"><Icon Type="file-search" /><h2>Chưa có bài viết phù hợp</h2><p>Hãy thử chọn một chủ đề hoặc cách sắp xếp khác.</p></div>
+    } else {
+        <section class="article-grid">
+            @foreach (var blog in blogList) {
+                <article class="article-card" @onclick="() => NavigateToDetail(blog.Id)">
+                    <div class="article-accent"><span>@GetCategoryLabel(blog)</span><b>@GetDecorativeNumber(blog.Id)</b></div>
+                    <div class="article-content">
+                        <div class="article-author"><span class="author-avatar">E</span><span>EduPath Team</span><i></i><time>@blog.CreatedAt.ToString("dd/MM/yyyy")</time></div>
+                        <h2>@blog.Title</h2>
+                        <p>@GetExcerpt(blog.Content)</p>
+                        <div class="article-footer">
+                            <div class="tag-list">
+                                @if (blog.Categories?.Any() == true) {
+                                    @foreach (var category in blog.Categories.Take(2)) { <span>@category.Name</span> }
+                                } else { <span>Lập trình</span> }
+                            </div>
+                            <div class="article-meta"><span><Icon Type="clock-circle" /> @CalculateReadingTime(blog.Content) phút đọc</span><span><Icon Type="eye" /> @blog.ViewCount</span></div>
+                        </div>
+                    </div>
+                    <button class="read-button" aria-label="Đọc bài viết"><Icon Type="arrow-right" /></button>
+                </article>
+            }
+        </section>
+    }
+</main>
 
 @code {
-    private List<CategoiesModel> categories = new List<CategoiesModel>();
-    private List<BlogModel> blogList = new List<BlogModel>();
-    private string filter = "latest";
+    private List<CategoiesModel> categories = new();
+    private List<BlogModel> blogList = new();
     private bool loading = true;
     private string sortBy = "newest";
     private int? selectedCategoryId;
 
     protected override async Task OnInitializedAsync() {
-        try {
-            loading = true;
-            await LoadBlogs();
-            // Tải danh sách chủ đề.
-            categories = await BlogService.GetCategories();
-        } catch (Exception ex) {
-            await _message.Error($"Lỗi khi tải dữ liệu: {ex.Message}");
-        } finally {
-            loading = false;
-        }
+        try { await Task.WhenAll(LoadBlogs(), LoadCategories()); }
+        catch (Exception ex) { await _message.Error($"Lỗi khi tải dữ liệu: {ex.Message}"); }
+        finally { loading = false; }
     }
-
-    private async Task LoadBlogs() {
-        blogList = await BlogService.GetBlogList(sortBy, selectedCategoryId) ?? new List<BlogModel>();
-    }
-
-    private async Task OnSortChanged(string value) {
-        sortBy = value;
-        await LoadBlogs();
-    }
-
-    private async Task OnCategoryChanged(int? value) {
-        selectedCategoryId = value;
-        await LoadBlogs();
-    }
-
-    private async Task NavigateToDetail(int blogId) {
-        try {
-            // Tăng lượt xem trước khi chuyển trang.
-            // await BlogService.IncrementViewCount(blogId);
-
-            // Sau đó chuyển đến trang chi tiết.
-            NavigationManager.NavigateTo($"/listblogs/detail/{blogId}");
-        } catch (Exception ex) {
-            await _message.Error("Không thể cập nhật lượt xem");
-        }
-    }
-
-    private int CalculateReadingTime(string content)
-    {
-        if (string.IsNullOrEmpty(content)) return 0;
-        var wordCount = content.Split(new[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length;
-        return (int)Math.Ceiling(wordCount / 200.0); // Giả định tốc độ đọc 200 từ/phút.
-    }
+    private async Task LoadCategories() => categories = await BlogService.GetCategories() ?? new();
+    private async Task LoadBlogs() => blogList = await BlogService.GetBlogList(sortBy, selectedCategoryId) ?? new();
+    private async Task OnSortChanged(string value) { sortBy = value; loading = true; await LoadBlogs(); loading = false; }
+    private async Task OnCategoryChanged(int? value) { selectedCategoryId = value; loading = true; await LoadBlogs(); loading = false; }
+    private void NavigateToDetail(int id) => NavigationManager.NavigateTo($"/listblogs/detail/{id}");
+    private static int CalculateReadingTime(string content) => Math.Max(1, (int)Math.Ceiling(StripHtml(content).Split(' ', StringSplitOptions.RemoveEmptyEntries).Length / 200d));
+    private static string GetExcerpt(string content) { var text = StripHtml(content); return text.Length > 145 ? text[..145].Trim() + "…" : text; }
+    private static string StripHtml(string content) => Regex.Replace(content ?? "", "<[^>]+>", " ").Replace("&nbsp;", " ").Trim();
+    private static string GetCategoryLabel(BlogModel blog) => blog.Categories?.FirstOrDefault()?.Name?.ToUpperInvariant() ?? "JOURNAL";
+    private static string GetDecorativeNumber(int id) => (id % 100).ToString("00");
 }
 
 <style>
- 
-    :root {
-        --primary-font: 'Roboto', sans-serif;
-        --secondary-font: 'Montserrat', sans-serif;
-    }
-
-    
-    .header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .header-title {
-        font-family: var(--secondary-font);
-        font-size: 2.5em;
-        font-weight: 700;
-        color: #0fb6a5; 
-        margin-bottom: 10px;
-    }
-
-    .header-subtitle {
-        font-family: var(--primary-font);
-        font-size: 1.1em;
-        font-weight: 400;
-        color: #1e90ff; 
-    }
-
-   
-    .filter-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 30px;
-    }
-
-    .filter-button {
-        font-family: var(--primary-font);
-        font-size: 1em;
-        font-weight: 500;
-        padding: 8px 20px;
-        border-radius: 20px;
-        border: none;
-        background-color: #f0f0f0;
-        color: #333;
-        transition: background-color 0.3s, color 0.3s;
-    }
-
-        .filter-button.active {
-            background-color: #0fb6a5;
-            color: white;
-        }
-
-        .filter-button.active-following,
-        .filter-button.active-bookmarked {
-            background-color: #1e90ff;
-            color: white;
-        }
-
-   
-    .blog-list {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        max-width: 800px;
-    }
-
-    .blog-card {
-        background-color: #fff5f5;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-
-    .author-info {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-
-    .avatar {
-        border-radius: 50%;
-        margin-right: 12px;
-        width: 40px;
-        height: 40px;
-    }
-
-    .author-text {
-        font-family: var(--primary-font);
-        font-size: 0.9em;
-        color: #666;
-    }
-
-    .blog-title {
-        font-family: var(--secondary-font);
-        font-size: 1.4em;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 10px;
-        cursor: pointer;
-        transition: color 0.3s;
-    }
-
-        .blog-title:hover {
-            color: #0fb6a5;
-        }
-
-    .tag {
-        background-color: #e6e6e6;
-        padding: 3px 8px;
-        border-radius: 10px;
-        font-size: 0.85em;
-        font-family: var(--primary-font);
-        color: #555;
-    }
-
-    .metrics {
-        display: flex;
-        gap: 15px;
-        font-family: var(--primary-font);
-        font-size: 0.9em;
-        color: #888;
-    }
-
-        .metrics span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-    .empty-message {
-        font-family: var(--primary-font);
-        font-size: 1.1em;
-        color: #888;
-        text-align: center;
-        margin: 40px 0;
-    }
-
-    .filter-section {
-        background-color: #f5f5f5;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-    }
-
-    .tag {
-        background-color: #e6e6e6;
-        padding: 3px 8px;
-        border-radius: 10px;
-        font-size: 0.85em;
-        font-family: var(--primary-font);
-        color: #555;
-        margin-right: 8px; /* Thêm khoảng cách giữa các thẻ. */
-        display: inline-block; /* Để các thẻ nằm cùng một hàng. */
-        margin-bottom: 5px; /* Thêm khoảng cách dưới mỗi thẻ khi xuống dòng. */
-    }
+    .journal-hero{background:#f3f1e9;border-bottom:1px solid #e2e5e1;overflow:hidden}.journal-hero-inner{position:relative;max-width:1220px;min-height:310px;margin:auto;padding:72px 28px;display:flex;align-items:center}.journal-hero-inner>div:first-child{position:relative;z-index:2;max-width:750px}.journal-kicker{color:#b6583f;font-size:11px;font-weight:850;letter-spacing:1.7px}.journal-hero h1{margin:10px 0 16px;color:#17211b;font-size:54px;line-height:1.05;letter-spacing:-2.6px;font-weight:800}.journal-hero p{max-width:680px;margin:0;color:#657169;font-size:17px;line-height:1.7}.hero-symbol{position:absolute;right:55px;top:45px;width:210px;height:210px;display:grid;place-items:center;border:1px solid rgba(23,107,69,.16);border-radius:50%;color:#176b45;transform:rotate(-8deg)}.hero-symbol:before,.hero-symbol:after{content:"";position:absolute;border:1px solid rgba(23,107,69,.09);border-radius:50%}.hero-symbol:before{inset:20px}.hero-symbol:after{inset:42px}.hero-symbol span{font:700 37px Consolas,monospace}.journal-container{max-width:1220px;margin:auto;padding:55px 28px 90px}.journal-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid #e4e8e4}.toolbar-heading{display:flex;align-items:baseline;gap:12px}.toolbar-heading>span{color:#17211b;font-size:24px;font-weight:750;letter-spacing:-.6px}.toolbar-heading small{color:#8a948e}.filters{display:flex;gap:10px}.filter-control{display:flex;align-items:center;gap:4px;padding:3px 8px 3px 12px;border:1px solid #dce2dd;border-radius:8px;background:#fff;color:#637068}.filter-control:focus-within{border-color:#176b45;box-shadow:0 0 0 3px rgba(23,107,69,.08)}.article-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.article-card{position:relative;min-height:285px;display:grid;grid-template-columns:125px 1fr;border:1px solid #e1e6e2;border-radius:12px;background:#fff;overflow:hidden;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,border-color .25s}.article-card:hover{transform:translateY(-4px);border-color:#c8d4cb;box-shadow:0 16px 38px rgba(20,45,29,.1)}.article-accent{position:relative;padding:22px 14px;background:#1c2a22;color:#dce8e0;overflow:hidden}.article-card:nth-child(4n+2) .article-accent{background:#315f49}.article-card:nth-child(4n+3) .article-accent{background:#8e5542}.article-card:nth-child(4n+4) .article-accent{background:#384952}.article-accent span{position:relative;z-index:1;font-size:9px;font-weight:800;letter-spacing:1px;writing-mode:vertical-rl}.article-accent b{position:absolute;right:-8px;bottom:-18px;color:rgba(255,255,255,.09);font-size:96px;line-height:1;font-weight:800;letter-spacing:-8px}.article-content{padding:24px 25px}.article-author{display:flex;align-items:center;gap:8px;color:#78847d;font-size:11px}.author-avatar{width:25px;height:25px;display:grid;place-items:center;border-radius:50%;background:#e6eee8;color:#176b45;font-weight:800}.article-author>span:nth-child(2){color:#46534b;font-weight:650}.article-author i{width:3px;height:3px;border-radius:50%;background:#a8b0ab}.article-content h2{margin:18px 0 10px;color:#1b2720;font-size:21px;line-height:1.35;letter-spacing:-.45px;transition:color .2s}.article-card:hover h2{color:#176b45}.article-content>p{height:60px;margin:0;color:#707c74;font-size:13px;line-height:1.55;overflow:hidden}.article-footer{margin-top:21px;padding-top:16px;border-top:1px solid #edf0ed}.tag-list{min-height:25px;display:flex;gap:6px}.tag-list span{padding:4px 8px;border-radius:5px;background:#f0f3f0;color:#56635b;font-size:10px;font-weight:650}.article-meta{display:flex;gap:16px;margin-top:11px;color:#8a948e;font-size:10px}.article-meta span{display:flex;align-items:center;gap:5px}.read-button{position:absolute;right:18px;top:18px;width:34px;height:34px;border:1px solid #e0e5e1;border-radius:50%;background:#fff;color:#176b45;opacity:0;transform:translateX(-6px);transition:.2s}.article-card:hover .read-button{opacity:1;transform:none}.loading-wrap,.empty-state{min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;color:#77837b}.empty-state>.anticon{font-size:40px;color:#a6b0aa}.empty-state h2{margin:0;color:#27342c}.empty-state p{margin:0}@@media(max-width:850px){.article-grid{grid-template-columns:1fr}.hero-symbol{opacity:.35}.journal-hero h1{font-size:45px}}@@media(max-width:600px){.journal-hero-inner{min-height:270px;padding:55px 20px}.journal-hero h1{font-size:39px}.journal-container{padding:38px 16px 65px}.journal-toolbar{align-items:flex-start;gap:16px;flex-direction:column}.filters{width:100%;overflow:auto}.article-card{grid-template-columns:78px 1fr}.article-content{padding:21px 18px}.article-content h2{font-size:18px}.article-accent b{font-size:72px}}
+    @@media(prefers-reduced-motion:reduce){.article-card,.read-button{transition:none}}
 </style>
