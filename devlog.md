@@ -354,3 +354,18 @@ return await _context.Grades
     .OrderByDescending(g => g.CreatedAt)
     .ToListAsync();
 ```
+
+
+## 2026-07-23
+
+Added search history feature — the last 10 searches are saved locally
+in `localStorage` and displayed as quick filters on the search page.
+
+Search history items include:
+- Query text
+- Applied filters (category, level)
+- Timestamp
+
+Users can clear individual items or the entire history.
+
+Data is not sent to the server for privacy.
