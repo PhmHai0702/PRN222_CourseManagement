@@ -196,3 +196,15 @@ Uses `CsvHelper` library. Streams the file directly to the response to avoid
 loading the entire dataset in memory.
 
 Tested with 50k records — exported in ~3s with ~5MB file size.
+
+
+## 2026-07-13
+
+Database query optimization — the enrollment listing page was running 8 separate
+queries due to lazy loading.
+
+Fix: added `.Include(x => x.Course).Include(x => x.Student)` to the query,
+reducing to a single round trip. Also added a composite index on
+`Enrollment(CourseId, StudentId)`.
+
+Page load time: 4.2s → 0.3s
