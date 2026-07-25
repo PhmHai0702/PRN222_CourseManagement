@@ -383,3 +383,35 @@ Results:
 - Error rate: 0%
 
 Good baseline. Need to test with DB connection pooling limitations.
+
+
+## 2026-07-25
+
+Edge case in fee calculation: when a student enrolls in multiple courses that
+share a bundle discount, the discount was applied multiple times.
+
+Fix: compute bundle discount once per unique bundle, not per course.
+
+```sql
+-- Before: discount applied per course
+-- After: discount applied once per bundle
+```
+
+Added test with 3 courses, same bundle, 1 discount expected.
+
+
+## 2026-07-26
+
+Standardized error responses across all API endpoints.
+
+Unified response format:
+```json
+{
+    "success": true/false,
+    "data": { ... },
+    "error": { "code": "VALIDATION_ERROR", "message": "...", "details": [...] }
+}
+```
+
+Added `ApiResponse<T>` wrapper class and `ExceptionMiddleware` to catch
+unhandled exceptions and return consistent errors.
