@@ -1,0 +1,330 @@
+@page "/compare-courses"
+@using BlazorAppSecure.Sevices.CourseComparison
+@using CourseManagement.Model.Constant
+@using CourseManagement.Model.DTOs
+@inject CourseComparisonClient ComparisonClient
+@inject IAppNotificationService Notification
+@inject NavigationManager Navigation
+
+<PageTitle>So sánh khóa học | EduPath</PageTitle>
+
+<section class="compare-hero">
+    <div class="compare-hero__inner">
+        <div>
+            <span class="compare-kicker">CHỌN ĐÚNG LỘ TRÌNH</span>
+            <h1>Đặt các khóa học<br /><em>lên cùng một bàn cân.</em></h1>
+            <p>So sánh nội dung, thời lượng, cấp độ và mức độ phổ biến
+                để tìm khóa học phù hợp nhất với mục tiêu của bạn.</p>
+        </div>
+        <div class="selection-summary">
+            <span>Đã chọn</span>
+            <strong>@SelectedCourseIds.Count<span>/4</span></strong>
+            <small>Cần tối thiểu 2 khóa học</small>
+        </div>
+    </div>
+</section>
+
+<main class="compare-page">
+    <section class="course-picker">
+        <div class="section-title">
+            <div>
+                <span>BƯỚC 1</span>
+                <h2>Chọn khóa học để so sánh</h2>
+            </div>
+            <div class="picker-actions">
+                <label class="search-box">
+                    <Icon Type="search" />
+                    <input type="search" placeholder="Tìm theo tên hoặc danh mục..."
+                           @bind="SearchText" @bind:event="oninput" />
+                </label>
+                @if (SelectedCourseIds.Count > 0)
+                {
+                    <button class="clear-button" @onclick="ClearSelection">
+                        Xóa lựa chọn
+                    </button>
+                }
+            </div>
+        </div>
+
+        @if (LoadingCourses)
+        {
+            <div class="course-grid">
+                @for (var index = 0; index < 6; index++)
+                {
+                    <div class="course-card skeleton"></div>
+                }
+            </div>
+        }
+        else if (!FilteredCourses.Any())
+        {
+            <div class="empty-state">
+                <Icon Type="inbox" />
+                <h3>Không tìm thấy khóa học</h3>
+                <p>Thử một từ khóa khác hoặc xóa bộ lọc tìm kiếm.</p>
+            </div>
+        }
+        else
+        {
+            <div class="course-grid">
+                @foreach (var course in FilteredCourses)
+                {
+                    var courseId = ParseCourseId(course.Id);
+                    var selectedIndex = SelectedCourseIds.IndexOf(courseId);
+                    var isSelected = selectedIndex >= 0;
+
+                    <button class="course-card @(isSelected ? "selected" : null)"
+                            disabled="@(courseId == Guid.Empty)"
+                            @onclick="() => ToggleCourseAsync(courseId)">
+                        <div class="course-image">
+                            <img src="@course.PreviewImage" alt="@course.Title" loading="lazy" />
+                            <span class="level">@course.LevelName</span>
+                            @if (isSelected)
+                            {
+                                <span class="selected-number">@(selectedIndex + 1)</span>
+                            }
+                        </div>
+                        <div class="course-info">
+                            <span class="category">@course.CategoryName</span>
+                            <h3>@course.Title</h3>
+                            <div class="course-meta">
+                                <span><Icon Type="play-circle" /> @course.TotalLesson bài</span>
+                                <span><Icon Type="user" /> @course.TotalEnrolled</span>
+                            </div>
+                        </div>
+                    </button>
+                }
+            </div>
+        }
+
+        <div class="compare-action">
+            <div>
+                @if (SelectedCourseIds.Count < 2)
+                {
+                    <span>Chọn thêm @(2 - SelectedCourseIds.Count) khóa học</span>
+                }
+                else
+                {
+                    <span>Sẵn sàng so sánh @SelectedCourseIds.Count khóa học</span>
+                }
+            </div>
+            <button class="compare-button"
+                    disabled="@(SelectedCourseIds.Count < 2 || Comparing)"
+                    @onclick="CompareAsync">
+                @if (Comparing)
+                {
+                    <Icon Type="loading" /> <span>Đang phân tích...</span>
+                }
+                else
+                {
+                    <span>So sánh ngay</span> <Icon Type="arrow-right" />
+                }
+            </button>
+        </div>
+    </section>
+
+    @if (Comparison is not null)
+    {
+        <section class="comparison-result" id="comparison-result">
+            <div class="section-title result-heading">
+                <div><span>BƯỚC 2</span><h2>Kết quả so sánh</h2></div>
+                <small>Cập nhật từ dữ liệu khóa học hiện tại</small>
+            </div>
+
+            <div class="highlight-grid">
+                @foreach (var highlight in Comparison.Summary.Highlights)
+                {
+                    <div class="highlight-card">
+                        <Icon Type="bulb" Theme="IconThemeType.Fill" />
+                        <span>@highlight</span>
+                    </div>
+                }
+            </div>
+
+            <div class="comparison-table-wrap">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="metric-heading">Tiêu chí</th>
+                            @foreach (var course in Comparison.Courses)
+                            {
+                                <th>
+                                    <img src="@course.PreviewImage" alt="" />
+                                    <strong>@course.Title</strong>
+                                    <button @onclick="() => OpenCourse(course.CourseId)">
+                                        Xem chi tiết <Icon Type="arrow-right" />
+                                    </button>
+                                </th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @ComparisonRow("Danh mục", course => course.CategoryName)
+                        @ComparisonRow("Cấp độ", course => LevelName(course.Level))
+                        @ComparisonRow("Quyền truy cập", course =>
+                            course.CourseType == CourseType.FreeCourse ? "Miễn phí" : "Gói Pro")
+                        @ComparisonRow("Số module", course => $"{course.ModuleCount} module")
+                        @ComparisonRow("Số bài học", course => $"{course.LessonCount} bài")
+                        @ComparisonRow("Thời lượng", course =>
+                            FormatMinutes(course.EstimatedDurationMinutes))
+                        @ComparisonRow("Tài liệu", course => $"{course.DocumentCount} tài liệu")
+                        @ComparisonRow("Lượt đăng ký", course =>
+                            course.EnrollmentCount.ToString("N0"))
+                        <tr>
+                            <td class="metric-name">Điểm nổi bật</td>
+                            @foreach (var course in Comparison.Courses)
+                            {
+                                <td>
+                                    <ul class="strength-list">
+                                        @foreach (var strength in course.Strengths)
+                                        {
+                                            <li><Icon Type="check-circle" /> @strength</li>
+                                        }
+                                    </ul>
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            <td class="metric-name">Chuẩn đầu ra</td>
+                            @foreach (var course in Comparison.Courses)
+                            {
+                                <td>
+                                    @if (course.LearningOutcomes.Count == 0)
+                                    {
+                                        <span class="muted">Chưa cập nhật</span>
+                                    }
+                                    else
+                                    {
+                                        <ul class="outcome-list">
+                                            @foreach (var outcome in course.LearningOutcomes.Take(4))
+                                            {
+                                                <li>@outcome</li>
+                                            }
+                                        </ul>
+                                    }
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    }
+</main>
+
+@code {
+    private IReadOnlyList<SearchCourseResponse> Courses =
+        Array.Empty<SearchCourseResponse>();
+    private readonly List<Guid> SelectedCourseIds = new();
+    private CourseComparisonResponse? Comparison;
+    private string SearchText = string.Empty;
+    private bool LoadingCourses = true;
+    private bool Comparing;
+
+    private IEnumerable<SearchCourseResponse> FilteredCourses =>
+        Courses.Where(course =>
+            string.IsNullOrWhiteSpace(SearchText) ||
+            course.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+            course.CategoryName.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Courses = await ComparisonClient.GetPublishedCoursesAsync();
+        }
+        catch (Exception exception)
+        {
+            await Notification.Error(exception.Message);
+        }
+        finally
+        {
+            LoadingCourses = false;
+        }
+    }
+
+    private async Task ToggleCourseAsync(Guid courseId)
+    {
+        if (courseId == Guid.Empty)
+            return;
+
+        if (SelectedCourseIds.Remove(courseId))
+        {
+            Comparison = null;
+            return;
+        }
+
+        if (SelectedCourseIds.Count >= 4)
+        {
+            await Notification.Warning("Bạn chỉ có thể so sánh tối đa 4 khóa học.");
+            return;
+        }
+
+        SelectedCourseIds.Add(courseId);
+        Comparison = null;
+    }
+
+    private void ClearSelection()
+    {
+        SelectedCourseIds.Clear();
+        Comparison = null;
+    }
+
+    private async Task CompareAsync()
+    {
+        if (SelectedCourseIds.Count < 2)
+            return;
+
+        Comparing = true;
+        try
+        {
+            Comparison = await ComparisonClient.CompareAsync(SelectedCourseIds);
+            await Task.Delay(50);
+            Navigation.NavigateTo("/compare-courses#comparison-result", replace: true);
+        }
+        catch (Exception exception)
+        {
+            await Notification.Error(exception.Message);
+        }
+        finally
+        {
+            Comparing = false;
+        }
+    }
+
+    private RenderFragment ComparisonRow(
+        string label,
+        Func<CourseComparisonItem, string> value) => @<tr>
+        <td class="metric-name">@label</td>
+        @foreach (var course in Comparison!.Courses)
+        {
+            <td>@value(course)</td>
+        }
+    </tr>;
+
+    private void OpenCourse(Guid courseId) =>
+        Navigation.NavigateTo($"/preview/{courseId}");
+
+    private static Guid ParseCourseId(string value) =>
+        Guid.TryParse(value, out var id) ? id : Guid.Empty;
+
+    private static string LevelName(CourseLevel level) => level switch
+    {
+        CourseLevel.Beginner => "Cơ bản",
+        CourseLevel.Intermediate => "Trung cấp",
+        CourseLevel.Advanced => "Nâng cao",
+        CourseLevel.Expert => "Chuyên gia",
+        _ => level.ToString()
+    };
+
+    private static string FormatMinutes(int minutes)
+    {
+        if (minutes <= 0)
+            return "Chưa cập nhật";
+
+        var hours = minutes / 60;
+        var remainingMinutes = minutes % 60;
+        return hours > 0
+            ? $"{hours} giờ {remainingMinutes} phút"
+            : $"{minutes} phút";
+    }
+}
