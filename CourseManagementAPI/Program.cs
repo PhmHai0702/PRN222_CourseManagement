@@ -63,6 +63,9 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IVnPayService, VnPayService>();
+builder.Services.AddScoped<ICourseRecommendationService, CourseRecommendationService>();
+builder.Services.AddScoped<ILearningDashboardService, LearningDashboardService>();
+builder.Services.AddScoped<ICourseComparisonService, CourseComparisonService>();
 builder.Services.AddHttpClient();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
