@@ -66,6 +66,7 @@ builder.Services.AddScoped<IVnPayService, VnPayService>();
 builder.Services.AddScoped<ICourseRecommendationService, CourseRecommendationService>();
 builder.Services.AddScoped<ILearningDashboardService, LearningDashboardService>();
 builder.Services.AddScoped<ICourseComparisonService, CourseComparisonService>();
+builder.Services.AddScoped<IAdminAnalyticsService, AdminAnalyticsService>();
 builder.Services.AddHttpClient();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
