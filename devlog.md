@@ -398,3 +398,20 @@ Fix: compute bundle discount once per unique bundle, not per course.
 ```
 
 Added test with 3 courses, same bundle, 1 discount expected.
+
+
+## 2026-07-26
+
+Standardized error responses across all API endpoints.
+
+Unified response format:
+```json
+{
+    "success": true/false,
+    "data": { ... },
+    "error": { "code": "VALIDATION_ERROR", "message": "...", "details": [...] }
+}
+```
+
+Added `ApiResponse<T>` wrapper class and `ExceptionMiddleware` to catch
+unhandled exceptions and return consistent errors.
